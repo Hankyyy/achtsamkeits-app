@@ -14,7 +14,7 @@ git config --global user.email "your_email@whatever.com"
 
 #### Clone Repository
 ```
-git clone https://github.com/lhrb/swec8.git
+git clone https://github.com/Hankyyy/achtsamkeits-app.git
 ```
 
 ### Wichtig niemals im master branch arbeiten!!!
