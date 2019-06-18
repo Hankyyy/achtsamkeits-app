@@ -5,6 +5,8 @@ import 'package:aaproto2/ThemeData.dart';
 
 enum GefuhlOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
 
+
+
 class GefuhlTrackerWidget extends StatefulWidget {
   GefuhlTrackerWidget({Key key}) : super(key: key);
 
@@ -14,10 +16,31 @@ class GefuhlTrackerWidget extends StatefulWidget {
 
 class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
 
+  static List<charts.Series<LinearSales, int>> _createSampleData() {
+    final data = [
+      new LinearSales(0, 0),
+      new LinearSales(1, 5),
+      new LinearSales(2, 1),
+      new LinearSales(3, 5),
+      new LinearSales(4, 4),
+      new LinearSales(5, 2),
+      new LinearSales(6, 4),
+    ];
+
+    return [
+      new charts.Series<LinearSales, int>(
+        id: 'Sales',
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (LinearSales sales, _) => sales.year,
+        measureFn: (LinearSales sales, _) => sales.sales,
+        data: data,
+      )
+    ];
+  }
 
   var gefuhlsWidgets = <Widget>[
     GefuhlFrageWidget(),
-    PointsLineChart(),
+    PointsLineChart(_createSampleData()),
   ];
 
 
@@ -91,6 +114,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             onChanged: (GefuhlOptionen value) {
               setState(() {
                 _gefuhle = value;
+                
               });
             },
           ),
@@ -173,15 +197,14 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
 }
 
 class PointsLineChart extends StatelessWidget {
-
   final List<charts.Series> seriesList;
   final bool animate;
 
-  PointsLineChart(this.seriesList, {this.animate});
+  PointsLineChart(this.seriesList,{this.animate});
 
   /// Creates a [LineChart] with sample data and no transition.
   factory PointsLineChart.withSampleData() {
-    return PointsLineChart(
+    return new PointsLineChart(
       _createSampleData(),
       // Disable animations for image tests.
       animate: false,
@@ -191,25 +214,25 @@ class PointsLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return charts.LineChart(seriesList,
+    return new charts.LineChart(seriesList,
         animate: animate,
-        defaultRenderer: charts.LineRendererConfig(includePoints: true));
+        defaultRenderer: new charts.LineRendererConfig(includePoints: true));
   }
 
   /// Create one series with sample hard coded data.
   static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
-      LinearSales(0, 5),
-      LinearSales(1, 25),
-      LinearSales(2, 100),
-      LinearSales(3, 75),
-      LinearSales(4, 75),
-      LinearSales(5, 75),
-      LinearSales(6, 75),
+      new LinearSales(0, 0),
+      new LinearSales(1, 5),
+      new LinearSales(2, 1),
+      new LinearSales(3, 5),
+      new LinearSales(4, 4),
+      new LinearSales(5, 2),
+      new LinearSales(6, 4),
     ];
 
     return [
-      charts.Series<LinearSales, int>(
+      new charts.Series<LinearSales, int>(
         id: 'Sales',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         domainFn: (LinearSales sales, _) => sales.year,

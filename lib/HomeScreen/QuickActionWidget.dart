@@ -26,7 +26,6 @@ class _QAWidgetState extends State<QAWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButton(
-                //padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
@@ -51,7 +50,6 @@ class _QAWidgetState extends State<QAWidget> {
                 splashColor: AAThemeData.primaryColor,
               ),
               MaterialButton(
-                //padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
@@ -81,7 +79,6 @@ class _QAWidgetState extends State<QAWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButton(
-                padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
@@ -122,7 +119,7 @@ class _QAWidgetState extends State<QAWidget> {
                     Text("Einstellungen")
                   ],
                 ),
-                onPressed: () => {},
+                onPressed: () => {Navigator.of(context).pushNamed('/einstellungen')},
                 splashColor: AAThemeData.primaryColor,
               ),
             ],
