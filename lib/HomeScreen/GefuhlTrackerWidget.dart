@@ -214,27 +214,27 @@ class PointsLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList,
+    return charts.LineChart(seriesList,
         animate: animate,
-        defaultRenderer: new charts.LineRendererConfig(includePoints: true));
+        defaultRenderer: charts.LineRendererConfig(includePoints: true,));
   }
 
   /// Create one series with sample hard coded data.
   static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
-      new LinearSales(0, 0),
-      new LinearSales(1, 5),
-      new LinearSales(2, 1),
-      new LinearSales(3, 5),
-      new LinearSales(4, 4),
-      new LinearSales(5, 2),
-      new LinearSales(6, 4),
+      LinearSales(0, 0),
+      LinearSales(1, 5),
+      LinearSales(2, 1),
+      LinearSales(3, 5),
+      LinearSales(4, 4),
+      LinearSales(5, 2),
+      LinearSales(6, 4),
     ];
 
     return [
-      new charts.Series<LinearSales, int>(
+      charts.Series<LinearSales, int>(
         id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
         domainFn: (LinearSales sales, _) => sales.year,
         measureFn: (LinearSales sales, _) => sales.sales,
         data: data,

@@ -32,13 +32,28 @@ class _ZielCardState extends State<ZielCard> {
         children: <Widget>[
           ListTile(
             title: Text("Klausur " + first.toString(), style: TextStyle(fontSize: 20.0),),
+            trailing: IconButton(icon: Icon(Icons.add), onPressed: () {
+              Navigator.of(context).pushNamed('/neuesZiel');
+            },),
           ),
-          Container(
-            height: 15.0,
-            width: 350.0,
-            decoration: BoxDecoration(
-                color: AAThemeData.primaryColor,
-                borderRadius: BorderRadius.all(const Radius.circular(10.0))),
+          Stack(
+            alignment: Alignment.centerLeft,
+            children: <Widget>[
+              Container(
+                height: 15.0,
+                width: 350.0,
+                decoration: BoxDecoration(
+                    color: AAThemeData.primaryColor,
+                    borderRadius: BorderRadius.all(const Radius.circular(10.0))),
+              ),
+              Container(
+                height: 17.0,
+                width: 150.0,
+                decoration: BoxDecoration(
+                    color: AAThemeData.accentColor,
+                    borderRadius: BorderRadius.all(const Radius.circular(10.0))),
+              ),
+            ],
           ),
           ListTile(
             title: Text("Übung " + second.toString(), style: TextStyle(fontSize: 15.0)),

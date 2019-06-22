@@ -1,4 +1,4 @@
-#Wed Jun 19 01:00:35 CEST 2019
+#Sat Jun 22 22:14:16 CEST 2019
 base.0=C\:\\Users\\Jakob\\IdeaProjects\\achtsamkeits-app\\achtsamkeits-app\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

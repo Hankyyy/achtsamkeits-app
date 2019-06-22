@@ -12,16 +12,17 @@ class _ZieleScreenState extends State<ZieleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Ziele', style: TextStyle(fontSize: 30.0),),
+        actions: <Widget>[
+
+        ],
+        backgroundColor: Colors.grey[50],
+        elevation: 0.0,
+      ),
       body: ListView(
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 40.0, left: 15.0, bottom: 10.0),
-            child: Text(
-              "Ziele",
-              style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
-            ),
-          ),
           ZielCard(
             1,
             1,
@@ -46,7 +47,15 @@ class _ZieleScreenState extends State<ZieleScreen> {
             6,
             8,
           ),
+          Container(padding: EdgeInsets.only(bottom: 75.0),),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed('/neuerMeilenstein');
+        },
+        child: Icon(Icons.add, size: 35.0, color: Colors.grey[200],),
+        backgroundColor: AAThemeData.accentColor,
       ),
     );
   }
