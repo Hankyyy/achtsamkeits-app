@@ -119,7 +119,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
               height: 35.0,
               width: 60.0,
               decoration: BoxDecoration(
-                  color: AAThemeData.primaryColor,
+                  color: AAThemeData.accentColor,
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
           ),
