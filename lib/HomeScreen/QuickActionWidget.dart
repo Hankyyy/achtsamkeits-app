@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:aaproto2/ThemeData.dart';
 
-
 class QAWidget extends StatefulWidget {
   @override
   _QAWidgetState createState() => _QAWidgetState();
@@ -26,12 +25,11 @@ class _QAWidgetState extends State<QAWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButton(
-                //padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: AAThemeData.accentColor,
+                color: AAThemeData.buttonColor,
                 textColor: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -48,15 +46,14 @@ class _QAWidgetState extends State<QAWidget> {
                   ],
                 ),
                 onPressed: () => {},
-                splashColor: AAThemeData.primaryColor,
+                splashColor: AAThemeData.highlightColor,
               ),
               MaterialButton(
-                //padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: AAThemeData.accentColor,
+                color: AAThemeData.buttonColor,
                 textColor: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -71,22 +68,23 @@ class _QAWidgetState extends State<QAWidget> {
                   ],
                 ),
                 onPressed: () => {},
-                splashColor: AAThemeData.primaryColor,
+                splashColor: AAThemeData.highlightColor,
               ),
             ],
           ),
-          Container(padding: EdgeInsets.only(top: 15.0),),
+          Container(
+            padding: EdgeInsets.only(top: 15.0),
+          ),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButton(
-                padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: AAThemeData.accentColor,
+                color: AAThemeData.buttonColor,
                 textColor: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -101,14 +99,14 @@ class _QAWidgetState extends State<QAWidget> {
                   ],
                 ),
                 onPressed: () => {},
-                splashColor: AAThemeData.primaryColor,
+                splashColor: AAThemeData.highlightColor,
               ),
               MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: AAThemeData.accentColor,
+                color: AAThemeData.buttonColor,
                 textColor: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -122,8 +120,9 @@ class _QAWidgetState extends State<QAWidget> {
                     Text("Einstellungen")
                   ],
                 ),
-                onPressed: () => {},
-                splashColor: AAThemeData.primaryColor,
+                onPressed: () =>
+                    {Navigator.of(context).pushNamed('/einstellungen')},
+                splashColor: AAThemeData.highlightColor,
               ),
             ],
           ),

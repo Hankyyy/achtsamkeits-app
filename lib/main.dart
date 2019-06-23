@@ -6,6 +6,9 @@ import 'package:aaproto2/HomeScreen/HomeScreen.dart';
 import 'package:aaproto2/KalenderScreen/KalenderScreen.dart';
 import 'package:aaproto2/UbungenScreen/UbungenScreen.dart';
 import 'package:aaproto2/ZieleScreen/ZieleScreen.dart';
+import 'package:aaproto2/EinstellungenScreen/EinstellungenScreen.dart';
+import 'package:aaproto2/ZieleScreen/NeuerMeilensteinScreen.dart';
+import 'package:aaproto2/ZieleScreen/NeueAufgabeScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,9 +18,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: _title,
-        home: BottomNavBarWidget(),
-        theme: AAThemeData,
+      title: _title,
+      home: BottomNavBarWidget(),
+      theme: AAThemeData,
+      routes: <String, WidgetBuilder> { //5
+        '/einstellungen': (BuildContext context) => EinstellungenScreen(),
+        '/neuerMeilenstein': (BuildContext context) => NeuerMeilensteinScreen(),//6
+        '/neuesZiel': (BuildContext context) => NeueAufgabeScreen(),
+      },
     );
   }
 }
@@ -53,6 +61,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AAThemeData.primaryColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -73,8 +82,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         ],
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: AAThemeData.primaryColor,
-        unselectedItemColor: AAThemeData.accentColor,
+        selectedItemColor: AAThemeData.backgroundColor,
+        unselectedItemColor: AAThemeData.buttonColor,
         onTap: _onItemTapped,
       ),
     );
