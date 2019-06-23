@@ -29,7 +29,7 @@ class _QAWidgetState extends State<QAWidget> {
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: AAThemeData.primaryColor,
+                color: AAThemeData.buttonColor,
                 textColor: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -46,14 +46,14 @@ class _QAWidgetState extends State<QAWidget> {
                   ],
                 ),
                 onPressed: () => {},
-                splashColor: AAThemeData.accentColor,
+                splashColor: AAThemeData.highlightColor,
               ),
               MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: AAThemeData.primaryColor,
+                color: AAThemeData.buttonColor,
                 textColor: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -68,7 +68,7 @@ class _QAWidgetState extends State<QAWidget> {
                   ],
                 ),
                 onPressed: () => {},
-                splashColor: AAThemeData.accentColor,
+                splashColor: AAThemeData.highlightColor,
               ),
             ],
           ),
@@ -84,7 +84,7 @@ class _QAWidgetState extends State<QAWidget> {
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: AAThemeData.primaryColor,
+                color: AAThemeData.buttonColor,
                 textColor: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -99,14 +99,14 @@ class _QAWidgetState extends State<QAWidget> {
                   ],
                 ),
                 onPressed: () => {},
-                splashColor: AAThemeData.accentColor,
+                splashColor: AAThemeData.highlightColor,
               ),
               MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: AAThemeData.primaryColor,
+                color: AAThemeData.buttonColor,
                 textColor: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -122,7 +122,7 @@ class _QAWidgetState extends State<QAWidget> {
                 ),
                 onPressed: () =>
                     {Navigator.of(context).pushNamed('/einstellungen')},
-                splashColor: AAThemeData.accentColor,
+                splashColor: AAThemeData.highlightColor,
               ),
             ],
           ),

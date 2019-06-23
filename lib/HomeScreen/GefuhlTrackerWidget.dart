@@ -67,7 +67,7 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
                     child: IconTheme(
                       data: IconThemeData(
                         size: 128.0,
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).highlightColor,
                       ),
                       child: TabBarView(children: gefuhlsWidgets),
                     ),

@@ -61,6 +61,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AAThemeData.primaryColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -81,8 +82,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         ],
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: AAThemeData.accentColor,
-        unselectedItemColor: AAThemeData.primaryColor,
+        selectedItemColor: AAThemeData.backgroundColor,
+        unselectedItemColor: AAThemeData.buttonColor,
         onTap: _onItemTapped,
       ),
     );
