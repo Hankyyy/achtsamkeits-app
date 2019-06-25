@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'TutorialWidget.dart';
+import 'PictureWidget.dart';
 
 
 class UbungenScreen extends StatefulWidget {
@@ -23,7 +25,8 @@ class _UbungenScreenState extends State<UbungenScreen> {
         padding: EdgeInsets.only(top: 50.0, bottom: 10.0, left: 10.0, right: 10.0),
         child: Column(
           children: <Widget>[
-
+            PTWidget(),
+            TTWidget(),
 
           ],
         ),
