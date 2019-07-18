@@ -5,15 +5,18 @@ import 'package:aaproto2/ThemeData.dart';
 import 'package:aaproto2/HomeScreen/HomeScreen.dart';
 import 'package:aaproto2/KalenderScreen/KalenderScreen.dart';
 import 'package:aaproto2/UbungenScreen/UbungenScreen.dart';
+import 'package:aaproto2/UbungenScreen/UbungenDetailScreen.dart';
 import 'package:aaproto2/ZieleScreen/ZieleScreen.dart';
 import 'package:aaproto2/EinstellungenScreen/EinstellungenScreen.dart';
 import 'package:aaproto2/ZieleScreen/NeuerMeilensteinScreen.dart';
 import 'package:aaproto2/ZieleScreen/NeueAufgabeScreen.dart';
+import 'package:aaproto2/LernTimerScreen/LernTimerScreen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  static const String _title = 'AAProto2';
+  static const String _title = 'APE - FH';
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +24,14 @@ class MyApp extends StatelessWidget {
       title: _title,
       home: BottomNavBarWidget(),
       theme: AAThemeData,
-      routes: <String, WidgetBuilder> { //5
-        '/einstellungen': (BuildContext context) => EinstellungenScreen(),
-        '/neuerMeilenstein': (BuildContext context) => NeuerMeilensteinScreen(),//6
-        '/neuesZiel': (BuildContext context) => NeueAufgabeScreen(),
+      routes: {
+        "/EinstellungenScreen" :(context) => EinstellungenScreen(),
+        "/NeuerMeilensteinScreen" : (context) => NeuerMeilensteinScreen(),
+        "/NeueAufgabeScreen" : (context) => NeueAufgabeScreen(),
+
+        "/UbungDetailScreen" : (context) => UbungenDetailScreen(),
+        "/LernTimerScreen" : (context) => LernTimerScreen(),
+
       },
     );
   }

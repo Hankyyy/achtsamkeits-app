@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:aaproto2/EinstellungenScreen/EinstellungenScreen.dart';
 import 'package:aaproto2/ThemeData.dart';
 
 class QAWidget extends StatefulWidget {
@@ -45,7 +46,9 @@ class _QAWidgetState extends State<QAWidget> {
                     )
                   ],
                 ),
-                onPressed: () => {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/LernTimerScreen");
+                },
                 splashColor: AAThemeData.highlightColor,
               ),
               MaterialButton(
@@ -67,7 +70,7 @@ class _QAWidgetState extends State<QAWidget> {
                     Text("Atem Übung")
                   ],
                 ),
-                onPressed: () => {},
+                onPressed: () {},
                 splashColor: AAThemeData.highlightColor,
               ),
             ],
@@ -98,7 +101,7 @@ class _QAWidgetState extends State<QAWidget> {
                     Text("Ratgeber")
                   ],
                 ),
-                onPressed: () => {},
+                onPressed: () {},
                 splashColor: AAThemeData.highlightColor,
               ),
               MaterialButton(
@@ -120,8 +123,9 @@ class _QAWidgetState extends State<QAWidget> {
                     Text("Einstellungen")
                   ],
                 ),
-                onPressed: () =>
-                    {Navigator.of(context).pushNamed('/einstellungen')},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/EinstellungenScreen");
+                },
                 splashColor: AAThemeData.highlightColor,
               ),
             ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'UbungenButtonWidget.dart';
+
 
 class UbungenScreen extends StatefulWidget {
   @override
@@ -20,10 +22,11 @@ class _UbungenScreenState extends State<UbungenScreen> {
         elevation: 0.0,
       ),
       body: Container(
-        padding: EdgeInsets.only(top: 50.0, bottom: 10.0, left: 10.0, right: 10.0),
-        child: Column(
+        child: ListView(
+          padding: EdgeInsets.all(10.0),
           children: <Widget>[
-
+            UBWidget(),
+            UBWidget(),
 
           ],
         ),

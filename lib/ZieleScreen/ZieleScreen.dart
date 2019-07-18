@@ -52,7 +52,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/neuerMeilenstein');
+          Navigator.pushNamed(context, "/NeuerMeilensteinScreen");
         },
         child: Icon(Icons.add, size: 35.0, color: Colors.grey[200],),
         backgroundColor: AAThemeData.accentColor,

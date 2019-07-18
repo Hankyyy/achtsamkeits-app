@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:aaproto2/ThemeData.dart';
 
 class EinstellungenScreen extends StatefulWidget {
+
   @override
   _EinstellungenScreenState createState() => _EinstellungenScreenState();
 }
@@ -12,36 +13,27 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Text(
+            'Einstellungen',
+            style: TextStyle(fontSize: 30.0),
+          ),
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+              onPressed: () {
+              Navigator.pop(context);
+          }),
+      actions: <Widget>[],
+      backgroundColor: Colors.grey[50],
+      elevation: 0.0,
+    ),
       body: ListView(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 10.0),
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(top: 40.0),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    size: 50.0,
-                  ),
-                  padding: EdgeInsets.only(right: 35.0),
-                  onPressed: () =>
-                  {
-                    Navigator.of(context).pop(true)
-                  }),
-              Text(
-                "Einstellungen",
-                style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          Container(
-              padding: EdgeInsets.only(
-                top: 30.0,
-              ),
               child: ListTile(
                 title: Text(
                   "Benachrichtigungen",

@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:aaproto2/ThemeData.dart';
 
-
 class NeueAufgabeScreen extends StatefulWidget {
   @override
   _NeueAufgabeScreenState createState() => _NeueAufgabeScreenState();
@@ -51,9 +50,9 @@ class _NeueAufgabeScreenState extends State<NeueAufgabeScreen> {
               Icons.arrow_back,
               color: Colors.black,
             ),
-            onPressed: () => {
-                  Navigator.of(context).pop(true)
-                }),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         actions: <Widget>[],
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
@@ -102,7 +101,13 @@ class _NeueAufgabeScreenState extends State<NeueAufgabeScreen> {
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value, style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400, color: Colors.black),),
+                      child: Text(
+                        value,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black),
+                      ),
                     );
                   }).toList(),
                 ),
@@ -126,7 +131,8 @@ class _NeueAufgabeScreenState extends State<NeueAufgabeScreen> {
                     "."
                         "${geplantDate.year.toString()}"),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)), color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(10.0)),
+                color: Colors.grey[100],
               ),
               SizedBox(
                 height: 20.0,
@@ -141,7 +147,8 @@ class _NeueAufgabeScreenState extends State<NeueAufgabeScreen> {
                     "."
                         "${deadlineDate.year.toString()}"),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)), color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10.0)),
+                color: Colors.grey[200],
               ),
             ],
           ),

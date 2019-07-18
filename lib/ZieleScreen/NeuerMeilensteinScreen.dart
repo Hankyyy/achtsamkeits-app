@@ -50,9 +50,9 @@ class _NeuerMeilensteinScreenState extends State<NeuerMeilensteinScreen> {
               Icons.arrow_back,
               color: Colors.black,
             ),
-            onPressed: () => {
-                  Navigator.of(context).pop(true)
-                }),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         actions: <Widget>[],
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
