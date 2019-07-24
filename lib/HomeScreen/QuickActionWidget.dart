@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:aaproto2/EinstellungenScreen/EinstellungenScreen.dart';
 import 'package:aaproto2/ThemeData.dart';
+import 'package:aaproto2/UbungenScreen/UbungenList.dart';
+import 'package:aaproto2/UbungenScreen/UbungenDetailScreen.dart';
 
 class QAWidget extends StatefulWidget {
   @override
@@ -70,7 +72,12 @@ class _QAWidgetState extends State<QAWidget> {
                     Text("Atem Übung")
                   ],
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          UbungenDetailScreen(ubung: getUbungen()[0])));
+                },
                 splashColor: AAThemeData.highlightColor,
               ),
             ],

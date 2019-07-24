@@ -19,7 +19,7 @@ List<Meilenstein> getMeilensteine() {
       deadline: DateTime.now(),
       notizen: "Dies das",
       nummer: "0000002",
-      aufgaben: getOMAufgaben(),
+      aufgaben: getMPAufgaben(),
 
     ),
     Meilenstein(
@@ -28,7 +28,7 @@ List<Meilenstein> getMeilensteine() {
       deadline: DateTime.now(),
       notizen: "Dies das",
       nummer: "0000003",
-      aufgaben: getOMAufgaben(),
+      aufgaben: getFITUAufgaben(),
 
     ),
 

@@ -35,9 +35,9 @@ class _UbungenScreenState extends State<UbungenScreen> {
       ),
       body: Container(
           child: GridView.count(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
+              padding: EdgeInsets.symmetric(horizontal: 12.5),
               crossAxisCount: 2,
-              mainAxisSpacing: 15.0,
+              mainAxisSpacing: 0.0,
               crossAxisSpacing: 20.0,
               children: List.generate(ubungen.length, (index) {
                 return Center(

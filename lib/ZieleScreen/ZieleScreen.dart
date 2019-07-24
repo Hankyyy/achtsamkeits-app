@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:aaproto2/ThemeData.dart';
 import 'package:aaproto2/ZieleScreen/ZielCardWidget.dart';
+import 'package:aaproto2/ZieleScreen/MeilensteinList.dart';
 
 class ZieleScreen extends StatefulWidget {
   @override
@@ -20,35 +21,15 @@ class _ZieleScreenState extends State<ZieleScreen> {
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
       ),
-      body: ListView(
-        padding: EdgeInsets.all(10.0),
-        children: <Widget>[
-          ZielCard(
-            1,
-            1,
-            2,
-            5,
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 10.0),
-          ),
-          ZielCard(
-            2,
-            1,
-            2,
-            1,
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 10.0),
-          ),
-          ZielCard(
-            3,
-            4,
-            6,
-            8,
-          ),
-          Container(padding: EdgeInsets.only(bottom: 75.0),),
-        ],
+      body: ListView.builder(
+        shrinkWrap: true,
+        itemCount: getMeilensteine().length,
+        itemBuilder: (context, index) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: ZielCard(getMeilensteine()[index]),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

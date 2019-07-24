@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 
 import 'package:aaproto2/ThemeData.dart';
+import 'package:aaproto2/ZieleScreen/ZielClasses.dart';
 
 class ZielCard extends StatefulWidget {
-  ZielCard(this.first, this.second, this.third, this.fourth);
+  ZielCard(this.meilenstein);
 
-  int first;
-  int second;
-  int third;
-  int fourth;
+  Meilenstein meilenstein;
 
   @override
-  _ZielCardState createState() => _ZielCardState(first, second, third, fourth);
+  _ZielCardState createState() => _ZielCardState(meilenstein);
 }
 
 class _ZielCardState extends State<ZielCard> {
-  _ZielCardState(this.first, this.second, this.third, this.fourth);
+  _ZielCardState(this.meilenstein);
 
-  int first;
-  int second;
-  int third;
-  int fourth;
+  Meilenstein meilenstein;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +24,11 @@ class _ZielCardState extends State<ZielCard> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
             title: Text(
-              "Klausur " + first.toString(),
+              meilenstein.title,
               style: TextStyle(fontSize: 20.0),
             ),
             trailing: IconButton(
@@ -46,6 +42,7 @@ class _ZielCardState extends State<ZielCard> {
             alignment: Alignment.centerLeft,
             children: <Widget>[
               Container(
+                padding: EdgeInsets.symmetric(vertical: 5.0),
                 height: 15.0,
                 width: 350.0,
                 decoration: BoxDecoration(
@@ -63,20 +60,15 @@ class _ZielCardState extends State<ZielCard> {
               ),
             ],
           ),
-          ListTile(
-            title: Text("Übung " + second.toString(),
-                style: TextStyle(fontSize: 15.0)),
-            trailing: Checkbox(value: false, onChanged: null),
-          ),
-          ListTile(
-            title: Text("Übung " + third.toString(),
-                style: TextStyle(fontSize: 15.0)),
-            trailing: Checkbox(value: false, onChanged: null),
-          ),
-          ListTile(
-            title: Text("Vorlesung " + fourth.toString(),
-                style: TextStyle(fontSize: 15.0)),
-            trailing: Checkbox(value: false, onChanged: null),
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: meilenstein.aufgaben.length,
+            itemBuilder: (context, index) {
+              return Center(
+                  child: CheckboxListTile(value: false, onChanged: null, title: Text(meilenstein.aufgaben[index].title, style: TextStyle(color: Colors.black),),)
+              );
+            },
           ),
         ],
       ),
