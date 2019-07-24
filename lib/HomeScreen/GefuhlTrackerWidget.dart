@@ -49,7 +49,10 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
     return Container(
       height: 400.0,
       child: Card(
-        //shape: ShapeBorder,
+
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         child: DefaultTabController(
           length: gefuhlsWidgets.length,
           // Use a Builder here, otherwise `DefaultTabController.of(context)` below

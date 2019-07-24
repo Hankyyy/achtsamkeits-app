@@ -1,30 +1,199 @@
 import 'package:flutter/material.dart';
 
+import 'package:aaproto2/ThemeData.dart';
 
-class UbungenDetailScreen extends StatefulWidget {
-  @override
-  _UbungenDetailScreenState createState() => _UbungenDetailScreenState();
-}
+import 'package:aaproto2/UbungenScreen/UbungenClass.dart';
 
-class _UbungenDetailScreenState extends State<UbungenDetailScreen> {
+class UbungenDetailScreen extends StatelessWidget {
+  final Ubung ubung;
+
+  UbungenDetailScreen({Key key, @required this.ubung}) : super(key: key);
+
+  var textstyletop = TextStyle(fontSize: 15.0);
+  var textstyletopbold = TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold);
+  var textstylebottom = TextStyle(fontSize: 15.0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Atem Anker', style: TextStyle(fontSize: 30.0),),
-        actions: <Widget>[
-
-        ],
+        title: Text(
+          ubung.title,
+          style: TextStyle(fontSize: 30.0),
+        ),
+        actions: <Widget>[],
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
       ),
       body: Container(
-        padding: EdgeInsets.only(top: 50.0, bottom: 10.0, left: 10.0, right: 10.0),
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           children: <Widget>[
+            Column(
+              children: <Widget>[
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 17.5, horizontal: 20.0),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "Bereich: ",
+                                    textAlign: TextAlign.start,
+                                    style: textstyletopbold,
+                                  ),
+                                  Text(
+                                    ubung.bereich,
+                                    textAlign: TextAlign.start,
+                                    style: textstyletop,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "Wiederholungen: ",
+                                    textAlign: TextAlign.end,
+                                    style: textstyletopbold,
+                                  ),
+                                  Text(
+                                    ubung.wiederholungen,
+                                    textAlign: TextAlign.end,
+                                    style: textstyletop,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "Anwendungsgebiet: ",
+                                    textAlign: TextAlign.start,
+                                    style: textstyletopbold,
+                                  ),
+                                  Text(
+                                    ubung.anwendungsgebiet,
+                                    textAlign: TextAlign.start,
+                                    style: textstyletop,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "Dauer: ",
+                                    textAlign: TextAlign.end,
+                                    style: textstyletopbold,
+                                  ),
+                                  Text(
+                                    ubung.dauer.toString() + " min",
+                                    textAlign: TextAlign.end,
+                                    style: textstyletop,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 17.5, horizontal: 20.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          ubung.erklarung,
+                          textAlign: TextAlign.start,
+                          style: textstylebottom,
+                        ),
+                        Text(
+                          ubung.einleitung,
+                          textAlign: TextAlign.start,
+                          style: textstylebottom,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
 
 
+            Container(
+              padding: EdgeInsets.only(top: 20.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Bereit?",
+                    style: textstyletopbold,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 7.5),
+                  ),
+                  MaterialButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    height: 40.0,
+                    minWidth: 70.0,
+                    color: AAThemeData.buttonColor,
+                    textColor: Colors.white,
+                    child: Column(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          "Los gehts!",
+                          textAlign: TextAlign.center,
+                          style: textstyletopbold,
+                        )
+                      ],
+                    ),
+                    onPressed: () {},
+                    splashColor: AAThemeData.highlightColor,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

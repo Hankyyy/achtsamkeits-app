@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:aaproto2/ThemeData.dart';
+import 'package:aaproto2/UbungenScreen/UbungenDetailScreen.dart';
 
 class UBWidget extends StatefulWidget {
   @override
@@ -46,7 +47,7 @@ class _UBWidgetState extends State<UBWidget> {
                   ],
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/UbungenDetailScreen");
+                  Navigator.pushNamed(context, "/AtemAnkerScreen");
                 },
                 splashColor: AAThemeData.highlightColor,
               ),

@@ -29,9 +29,8 @@ class MyApp extends StatelessWidget {
         "/NeuerMeilensteinScreen" : (context) => NeuerMeilensteinScreen(),
         "/NeueAufgabeScreen" : (context) => NeueAufgabeScreen(),
 
-        "/UbungDetailScreen" : (context) => UbungenDetailScreen(),
+        //"/UbungenDetailScreen" : (context) => UbungenDetailScreen(),
         "/LernTimerScreen" : (context) => LernTimerScreen(),
-
       },
     );
   }

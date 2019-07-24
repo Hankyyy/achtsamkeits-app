@@ -25,6 +25,9 @@ class _ZielCardState extends State<ZielCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       child: Column(
         children: <Widget>[
           ListTile(
