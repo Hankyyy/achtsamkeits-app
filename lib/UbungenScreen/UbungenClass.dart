@@ -3,7 +3,7 @@ class Ubung {
   String bereich;
   String wiederholungen;
   String anwendungsgebiet;
-  double dauer;
+  int dauer;
   String erklarung;
   String einleitung;
 

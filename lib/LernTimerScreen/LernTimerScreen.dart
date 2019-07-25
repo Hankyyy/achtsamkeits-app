@@ -7,31 +7,39 @@ class LernTimerScreen extends StatefulWidget {
   _LernTimerScreenState createState() => _LernTimerScreenState();
 }
 
-class _LernTimerScreenState extends State<LernTimerScreen> with TickerProviderStateMixin {
-
+class _LernTimerScreenState extends State<LernTimerScreen>
+    with TickerProviderStateMixin {
   AnimationController animationController;
 
   String get timerString {
     Duration duration =
         animationController.duration * animationController.value;
-    return '${duration.inMinutes}:${(duration.inSeconds % 60)
-        .toString()
-        .padLeft(2, '0')}';
+    return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   @override
   void initState() {
     super.initState();
     animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 5));
+        AnimationController(vsync: this, duration: Duration(seconds: 1200));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Lerntimer',
+          style: TextStyle(fontSize: 30.0),
+        ),
+        actions: <Widget>[],
+        backgroundColor: Colors.grey[50],
+        elevation: 0.0,
+      ),
       body: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(35.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Expanded(
               child: Align(
@@ -54,26 +62,15 @@ class _LernTimerScreenState extends State<LernTimerScreen> with TickerProviderSt
                         ),
                       ),
                       Align(
-                        alignment: FractionalOffset.center,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "Count Down",
-                              style: Theme.of(context).textTheme.subhead,
-                            ),
-                            AnimatedBuilder(
-                                animation: animationController,
-                                builder: (_, Widget child) {
-                                  return Text(
-                                    timerString,
-                                    style: Theme.of(context).textTheme.display4,
-                                  );
-                                })
-                          ],
-                        ),
-                      )
+                          alignment: FractionalOffset.center,
+                          child: AnimatedBuilder(
+                              animation: animationController,
+                              builder: (_, Widget child) {
+                                return Text(
+                                  timerString,
+                                  style: Theme.of(context).textTheme.display4,
+                                );
+                              }))
                     ],
                   ),
                 ),
@@ -125,14 +122,15 @@ class TimerPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
       ..color = backgroundColor
-      ..strokeWidth = 5.0
+      ..strokeWidth = 10.0
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
     paint.color = color;
     double progress = (1.0 - animation.value) * 2 * 3.14159265359;
-    canvas.drawArc(Offset.zero & size, 3.14159265359 * 1.5, -progress, false, paint);
+    canvas.drawArc(
+        Offset.zero & size, 3.14159265359 * 1.5, -progress, false, paint);
     // TODO: implement paint
   }
 

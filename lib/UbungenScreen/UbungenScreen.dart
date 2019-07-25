@@ -38,13 +38,13 @@ class _UbungenScreenState extends State<UbungenScreen> {
               padding: EdgeInsets.symmetric(horizontal: 12.5),
               crossAxisCount: 2,
               mainAxisSpacing: 0.0,
-              crossAxisSpacing: 20.0,
+              crossAxisSpacing: 15.0,
               children: List.generate(ubungen.length, (index) {
                 return Center(
                   child: MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    height: 140.0,
+                    height: 170.0,
                     minWidth: 170.0,
                     color: AAThemeData.buttonColor,
                     textColor: Colors.white,

@@ -9,8 +9,9 @@ class UbungenDetailScreen extends StatelessWidget {
 
   UbungenDetailScreen({Key key, @required this.ubung}) : super(key: key);
 
-  var textstyletop = TextStyle(fontSize: 15.0);
-  var textstyletopbold = TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold);
+  var textstyletop = TextStyle(fontSize: 15.0, color: Colors.white);
+  var textstyletopbold = TextStyle(
+      fontSize: 17.5, fontWeight: FontWeight.bold, color: Colors.white);
   var textstylebottom = TextStyle(fontSize: 15.0);
 
   @override
@@ -32,112 +33,87 @@ class UbungenDetailScreen extends StatelessWidget {
             Column(
               children: <Widget>[
                 Card(
+                  color: AAThemeData.accentColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 17.5, horizontal: 20.0),
-                    child: Column(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 17.5, horizontal: 20.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "Bereich: ",
-                                    textAlign: TextAlign.start,
-                                    style: textstyletopbold,
-                                  ),
-                                  Text(
-                                    ubung.bereich,
-                                    textAlign: TextAlign.start,
-                                    style: textstyletop,
-                                  ),
-                                ],
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Bereich: ",
+                                textAlign: TextAlign.start,
+                                style: textstyletopbold,
                               ),
-                            ),
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget>[
-                                  Text(
-                                    "Wiederholungen: ",
-                                    textAlign: TextAlign.end,
-                                    style: textstyletopbold,
-                                  ),
-                                  Text(
-                                    ubung.wiederholungen,
-                                    textAlign: TextAlign.end,
-                                    style: textstyletop,
-                                  ),
-                                ],
+                              Text(
+                                ubung.bereich + "\n",
+                                textAlign: TextAlign.start,
+                                style: textstyletop,
                               ),
-                            ),
-                          ],
+                              Text(
+                                "Anwendungsgebiet: ",
+                                textAlign: TextAlign.start,
+                                style: textstyletopbold,
+                              ),
+                              Text(
+                                ubung.anwendungsgebiet,
+                                textAlign: TextAlign.start,
+                                style: textstyletop,
+                              ),
+                            ],
+                          ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "Anwendungsgebiet: ",
-                                    textAlign: TextAlign.start,
-                                    style: textstyletopbold,
-                                  ),
-                                  Text(
-                                    ubung.anwendungsgebiet,
-                                    textAlign: TextAlign.start,
-                                    style: textstyletop,
-                                  ),
-                                ],
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Wiederholungen: ",
+                                textAlign: TextAlign.end,
+                                style: textstyletopbold,
                               ),
-                            ),
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget>[
-                                  Text(
-                                    "Dauer: ",
-                                    textAlign: TextAlign.end,
-                                    style: textstyletopbold,
-                                  ),
-                                  Text(
-                                    ubung.dauer.toString() + " min",
-                                    textAlign: TextAlign.end,
-                                    style: textstyletop,
-                                  ),
-                                ],
+                              Text(
+                                " " + ubung.wiederholungen + "\n",
+                                textAlign: TextAlign.end,
+                                style: textstyletop,
                               ),
-                            ),
-                          ],
+                              Text(
+                                "Dauer: ",
+                                textAlign: TextAlign.end,
+                                style: textstyletopbold,
+                              ),
+                              Text(
+                                " " + ubung.dauer.toString() + " Minuten",
+                                textAlign: TextAlign.end,
+                                style: textstyletop,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 17.5, horizontal: 20.0),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 17.5, horizontal: 20.0),
                     child: Column(
                       children: <Widget>[
                         Text(
-                          ubung.erklarung,
+                          ubung.erklarung + "\n",
                           textAlign: TextAlign.start,
                           style: textstylebottom,
                         ),
@@ -152,8 +128,6 @@ class UbungenDetailScreen extends StatelessWidget {
                 ),
               ],
             ),
-
-
             Container(
               padding: EdgeInsets.only(top: 20.0),
               child: Row(
@@ -163,7 +137,10 @@ class UbungenDetailScreen extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Bereit?",
-                    style: textstyletopbold,
+                    style: TextStyle(
+                      fontSize: 17.5,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 7.5),
@@ -176,8 +153,7 @@ class UbungenDetailScreen extends StatelessWidget {
                     color: AAThemeData.buttonColor,
                     textColor: Colors.white,
                     child: Column(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[

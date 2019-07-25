@@ -5,7 +5,7 @@ import 'package:aaproto2/ThemeData.dart';
 import 'package:aaproto2/HomeScreen/HomeScreen.dart';
 import 'package:aaproto2/KalenderScreen/KalenderScreen.dart';
 import 'package:aaproto2/UbungenScreen/UbungenScreen.dart';
-import 'package:aaproto2/UbungenScreen/UbungenDetailScreen.dart';
+import 'package:aaproto2/HomeScreen/RatgeberScreen.dart';
 import 'package:aaproto2/ZieleScreen/ZieleScreen.dart';
 import 'package:aaproto2/EinstellungenScreen/EinstellungenScreen.dart';
 import 'package:aaproto2/ZieleScreen/NeuerMeilensteinScreen.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         "/NeuerMeilensteinScreen" : (context) => NeuerMeilensteinScreen(),
         "/NeueAufgabeScreen" : (context) => NeueAufgabeScreen(),
 
-        //"/UbungenDetailScreen" : (context) => UbungenDetailScreen(),
+        "/RatgeberScreen" : (context) => RatgeberScreen(),
         "/LernTimerScreen" : (context) => LernTimerScreen(),
       },
     );
@@ -67,7 +67,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: AAThemeData.primaryColor,
+        backgroundColor: AAThemeData.backgroundColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -88,8 +88,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         ],
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: AAThemeData.backgroundColor,
-        unselectedItemColor: AAThemeData.buttonColor,
+        selectedItemColor: AAThemeData.primaryColor,
+        unselectedItemColor: Colors.green[500],
         onTap: _onItemTapped,
       ),
     );

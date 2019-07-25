@@ -108,7 +108,9 @@ class _QAWidgetState extends State<QAWidget> {
                     Text("Ratgeber")
                   ],
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/RatgeberScreen");
+                },
                 splashColor: AAThemeData.highlightColor,
               ),
               MaterialButton(

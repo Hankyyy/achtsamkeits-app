@@ -134,6 +134,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             color: AAThemeData.accentColor,
             disabledBorderColor: AAThemeData.accentColor,
             highlightedBorderColor: AAThemeData.primaryColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           ),
           OutlineButton(
             child: Text("Registrieren"),
@@ -142,6 +143,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             color: AAThemeData.accentColor,
             disabledBorderColor: AAThemeData.accentColor,
             highlightedBorderColor: AAThemeData.primaryColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           ),
         ],
       ),
