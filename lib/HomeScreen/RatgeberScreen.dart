@@ -21,7 +21,7 @@ class _RatgeberScreenState extends State<RatgeberScreen> {
         elevation: 0.0,
       ),
       body: Center(
-        child: Text("Hier kommt\n der Ratgeber hin!", style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+        child: Text("Hier kommt\nder Ratgeber hin!", style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
       ),
     );
   }

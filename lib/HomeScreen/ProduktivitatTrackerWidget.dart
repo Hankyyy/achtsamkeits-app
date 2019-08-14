@@ -7,7 +7,7 @@ import 'package:aaproto2/ThemeData.dart';
 // Für den Prototypen einfach GefuhlTrackerWidget kopiert
 
 
-enum GefuhlOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
+enum ProduktivitatOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
 
 
 
@@ -51,6 +51,7 @@ class ProduktivitatTrackerWidgetState extends State<ProduktivitatTrackerWidget> 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       height: 400.0,
       child: Card(
         shape: RoundedRectangleBorder(
@@ -67,7 +68,16 @@ class ProduktivitatTrackerWidgetState extends State<ProduktivitatTrackerWidget> 
                 children: <Widget>[
                   ListTile(
                     leading: Icon(Icons.edit, color: Colors.black, size: 37.5,),
-                    title: Text("Wie produktiv warst du Heute?", style: TextStyle(fontWeight: FontWeight.bold),),
+                    title: Text("Wie produktiv\nwarst du Heute?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+                    trailing: IconButton(
+                      icon: Icon(
+                        Icons.event,
+                        size: 25.0,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/TrackerKalenderScreen");
+                      },
+                    ),
                   ),
                   Expanded(
                     child: IconTheme(
@@ -98,16 +108,16 @@ class GefuhlFrageWidget extends StatefulWidget {
 
 class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
 
-  GefuhlOptionen _gefuhle;
+  ProduktivitatOptionen _gefuhle;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: <Widget>[
-          RadioListTile<GefuhlOptionen>(
-            title: const Text('Sehr Produktiv'),
-            value: GefuhlOptionen.sehrgut,
+          RadioListTile<ProduktivitatOptionen>(
+            title: const Text('Sehr Produktiv', style: TextStyle(fontSize: 16.0),),
+            value: ProduktivitatOptionen.sehrgut,
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
@@ -117,15 +127,15 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))
               ),
             ),
-            onChanged: (GefuhlOptionen value) {
+            onChanged: (ProduktivitatOptionen value) {
               setState(() {
                 _gefuhle = value;
               });
             },
           ),
-          RadioListTile<GefuhlOptionen>(
-            title: const Text('Produktiv'),
-            value: GefuhlOptionen.gut,
+          RadioListTile<ProduktivitatOptionen>(
+            title: const Text('Produktiv', style: TextStyle(fontSize: 16.0),),
+            value: ProduktivitatOptionen.gut,
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
@@ -135,15 +145,15 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))
               ),
             ),
-            onChanged: (GefuhlOptionen value) {
+            onChanged: (ProduktivitatOptionen value) {
               setState(() {
                 _gefuhle = value;
               });
             },
           ),
-          RadioListTile<GefuhlOptionen>(
-            title: const Text('Normal'),
-            value: GefuhlOptionen.normal,
+          RadioListTile<ProduktivitatOptionen>(
+            title: const Text('Normal', style: TextStyle(fontSize: 16.0),),
+            value: ProduktivitatOptionen.normal,
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
@@ -153,15 +163,15 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))
               ),
             ),
-            onChanged: (GefuhlOptionen value) {
+            onChanged: (ProduktivitatOptionen value) {
               setState(() {
                 _gefuhle = value;
               });
             },
           ),
-          RadioListTile<GefuhlOptionen>(
-            title: const Text('Wenig Produktiv'),
-            value: GefuhlOptionen.schlecht,
+          RadioListTile<ProduktivitatOptionen>(
+            title: const Text('Wenig Produktiv', style: TextStyle(fontSize: 16.0),),
+            value: ProduktivitatOptionen.schlecht,
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
@@ -171,15 +181,15 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))
               ),
             ),
-            onChanged: (GefuhlOptionen value) {
+            onChanged: (ProduktivitatOptionen value) {
               setState(() {
                 _gefuhle = value;
               });
             },
           ),
-          RadioListTile<GefuhlOptionen>(
-            title: const Text('Gar Nicht Produktiv'),
-            value: GefuhlOptionen.sehrschlecht,
+          RadioListTile<ProduktivitatOptionen>(
+            title: const Text('Gar Nicht Produktiv', style: TextStyle(fontSize: 16.0),),
+            value: ProduktivitatOptionen.sehrschlecht,
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
@@ -189,7 +199,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))
               ),
             ),
-            onChanged: (GefuhlOptionen value) {
+            onChanged: (ProduktivitatOptionen value) {
               setState(() {
                 _gefuhle = value;
               });

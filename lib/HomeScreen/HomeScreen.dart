@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(10.0),
+      //padding: EdgeInsets.all(10.0),
       children: <Widget>[
         QAWidget(),
         ZitatWidget(),

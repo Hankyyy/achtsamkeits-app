@@ -19,12 +19,19 @@ class _KalenderScreenState extends State<KalenderScreen> {
           'Kalender',
           style: TextStyle(fontSize: 30.0),
         ),
-        actions: <Widget>[],
+        actions: <Widget>[IconButton(
+          icon: Icon(
+            Icons.event,
+            size: 25.0,
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, "/TrackerKalenderScreen");
+          },
+        ),],
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
       ),
       body: ListView(
-        //padding: EdgeInsets.symmetric(horizontal: 10.0),
         children: <Widget>[
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -37,8 +44,11 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 availableCalendarFormats: const {
                   CalendarFormat.month: 'Month',
                 },
+                headerStyle: HeaderStyle(
+                  titleTextStyle: TextStyle(fontSize: 18.0,),
+                ),
                 daysOfWeekStyle: DaysOfWeekStyle(
-                  weekendStyle: TextStyle(color: Colors.black),
+                  weekendStyle: TextStyle(color: Colors.black, fontSize: 16.0,),
                 ),
                 calendarStyle: CalendarStyle(
                   selectedColor: AAThemeData.primaryColor,
@@ -64,9 +74,22 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 child: CheckboxListTile(
                   value: false,
                   onChanged: (bool newvalue) {},
-                  title: Text(
-                    "Online Marketing | Übung 5",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        "Online Marketing",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                      ),
+                      Text(
+                        " | ",
+                        style: TextStyle(color: Colors.black, fontSize: 20.0),
+                      ),
+                      Text(
+                        "Übung 5",
+                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                      ),
+                    ],
                   ),
                   subtitle: Text(DateTime.now().toString()),
                 )),
@@ -80,9 +103,22 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 child: CheckboxListTile(
                   value: false,
                   onChanged: (bool newvalue) {},
-                  title: Text(
-                    "Online Marketing | Praktikum 4",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        "Online Marketing",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                      ),
+                      Text(
+                        " | ",
+                        style: TextStyle(color: Colors.black, fontSize: 20.0),
+                      ),
+                      Text(
+                        "Praktikum 4",
+                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                      ),
+                    ],
                   ),
                   subtitle: Text(DateTime.now().toString()),
                 )),
@@ -96,9 +132,22 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 child: CheckboxListTile(
                   value: false,
                   onChanged: (bool newvalue) {},
-                  title: Text(
-                    "Medienproduktion | Vorlesung 9",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        "Online Marketing",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                      ),
+                      Text(
+                        " | ",
+                        style: TextStyle(color: Colors.black, fontSize: 20.0),
+                      ),
+                      Text(
+                        "Übung 5",
+                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                      ),
+                    ],
                   ),
                   subtitle: Text(DateTime.now().toString()),
                 )),
@@ -112,9 +161,51 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 child: CheckboxListTile(
                   value: false,
                   onChanged: (bool newvalue) {},
-                  title: Text(
-                    "Medienproduktion | Übung 2",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        "Medienproduktion",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                      ),
+                      Text(
+                        " | ",
+                        style: TextStyle(color: Colors.black, fontSize: 20.0),
+                      ),
+                      Text(
+                        "Vorlesung 5",
+                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                      ),
+                    ],
+                  ),
+                  subtitle: Text(DateTime.now().toString()),
+                )),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: CheckboxListTile(
+                  value: false,
+                  onChanged: (bool newvalue) {},
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        "Medienproduktion",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                      ),
+                      Text(
+                        " | ",
+                        style: TextStyle(color: Colors.black, fontSize: 20.0),
+                      ),
+                      Text(
+                        "Übung 2",
+                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                      ),
+                    ],
                   ),
                   subtitle: Text(DateTime.now().toString()),
                 )),

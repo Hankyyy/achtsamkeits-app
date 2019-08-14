@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_duration_picker/flutter_duration_picker.dart';
 import 'dart:math';
 import 'package:aaproto2/ThemeData.dart';
 
@@ -10,36 +12,77 @@ class LernTimerScreen extends StatefulWidget {
 class _LernTimerScreenState extends State<LernTimerScreen>
     with TickerProviderStateMixin {
   AnimationController animationController;
-
-  String get timerString {
-    Duration duration =
-        animationController.duration * animationController.value;
-    return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
-  }
+  Duration _duration = Duration(
+    hours: 0,
+    minutes: 45,
+  );
+  Duration _newDuration = Duration(
+    hours: 0,
+    minutes: 45,
+  );
+  bool i = true;
 
   @override
   void initState() {
     super.initState();
-    animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 1200));
+    animationController = AnimationController(vsync: this, duration: _duration);
+  }
+
+  String get timerString {
+    if (animationController.value != 0)
+      _duration = animationController.duration * animationController.value;
+    return '${_duration.inMinutes}:${(_duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Lerntimer',
-          style: TextStyle(fontSize: 30.0),
-        ),
-        actions: <Widget>[],
-        backgroundColor: Colors.grey[50],
-        elevation: 0.0,
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(35.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    Widget swapTimer(context) {
+      if (!i)
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Expanded(
+                child: DurationPicker(
+              height: 400,
+              width: 400,
+              duration: _duration,
+              onChange: (val) {
+                setState(() {
+                  _duration = val;
+                });
+              },
+              snapToMins: 5.0,
+            )),
+            Container(
+              margin: EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FloatingActionButton(
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                    ),
+
+                    onPressed: () {
+                      setState(() {
+                        animationController.duration = _duration;
+                        i = true;
+                      });
+                    },
+                    backgroundColor: AAThemeData.buttonColor,
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      else
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Expanded(
               child: Align(
@@ -56,7 +99,7 @@ class _LernTimerScreenState extends State<LernTimerScreen>
                               painter: TimerPainter(
                                   animation: animationController,
                                   backgroundColor: Colors.white,
-                                  color: Theme.of(context).accentColor),
+                                  color: AAThemeData.primaryColor),
                             );
                           },
                         ),
@@ -68,7 +111,7 @@ class _LernTimerScreenState extends State<LernTimerScreen>
                               builder: (_, Widget child) {
                                 return Text(
                                   timerString,
-                                  style: Theme.of(context).textTheme.display4,
+                                  style: TextStyle(fontSize: 60.0),
                                 );
                               }))
                     ],
@@ -82,29 +125,71 @@ class _LernTimerScreenState extends State<LernTimerScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   FloatingActionButton(
+                    heroTag: 2,
+                    backgroundColor: AAThemeData.primaryColor,
                     child: AnimatedBuilder(
                         animation: animationController,
                         builder: (_, Widget child) {
-                          return Icon(animationController.isAnimating
-                              ? Icons.pause
-                              : Icons.play_arrow);
+                          return Icon(
+                            animationController.isAnimating
+                                ? Icons.pause
+                                : Icons.play_arrow,
+                            color: Colors.white,
+                          );
                         }),
                     onPressed: () {
                       if (animationController.isAnimating) {
-                        animationController.stop();
+                        setState(() {
+                          animationController.stop();
+                        });
                       } else {
-                        animationController.reverse(
-                            from: animationController.value == 0.0
-                                ? 1.0
-                                : animationController.value);
+                        setState(() {
+                          animationController.reverse(
+                              from: animationController.value == 0.0
+                                  ? 1.0
+                                  : animationController.value);
+                        });
                       }
                     },
-                  )
+                  ),
+                  SizedBox(
+                    width: 25.0,
+                  ),
+                  FloatingActionButton(
+                    heroTag: 3,
+                    child: Icon(
+                      Icons.edit,
+                      color: AAThemeData.primaryColor,
+                    ),
+                    backgroundColor: Colors.white,
+                    onPressed: () {
+                      setState(() {
+                        //_duration = Duration(minutes: 0);
+                        i = false;
+                        animationController.reset();
+                      });
+                    },
+                  ),
                 ],
               ),
-            )
+            ),
           ],
+        );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Lerntimer',
+          style: TextStyle(fontSize: 30.0),
         ),
+        actions: <Widget>[],
+        backgroundColor: Colors.grey[50],
+        elevation: 0.0,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(60.0),
+        child: swapTimer(context),
       ),
     );
   }
@@ -122,16 +207,15 @@ class TimerPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
       ..color = backgroundColor
-      ..strokeWidth = 10.0
+      ..strokeWidth = 17.5
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
     paint.color = color;
-    double progress = (1.0 - animation.value) * 2 * 3.14159265359;
+    double progress = (1.0 - animation.value) * 2 * -3.14159265359;
     canvas.drawArc(
         Offset.zero & size, 3.14159265359 * 1.5, -progress, false, paint);
-    // TODO: implement paint
   }
 
   @override

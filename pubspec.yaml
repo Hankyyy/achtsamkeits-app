@@ -26,6 +26,8 @@ dependencies:
   charts_flutter: ^0.6.0
   animator: ^0.1.4
   table_calendar: ^1.2.5
+  flutter_duration_picker: ^1.0.4
+  percent_indicator: ^2.1.1
 
 
 dev_dependencies:

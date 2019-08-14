@@ -5,8 +5,6 @@ import 'package:aaproto2/ThemeData.dart';
 
 enum GefuhlOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
 
-
-
 class GefuhlTrackerWidget extends StatefulWidget {
   GefuhlTrackerWidget({Key key}) : super(key: key);
 
@@ -15,7 +13,6 @@ class GefuhlTrackerWidget extends StatefulWidget {
 }
 
 class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
-
   static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
       new LinearSales(0, 0),
@@ -43,13 +40,12 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
     PointsLineChart(_createSampleData()),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       height: 400.0,
       child: Card(
-
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -59,26 +55,44 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
           // returns null.
           child: Builder(
             builder: (BuildContext context) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.insert_emoticon, color: Colors.black, size: 37.5,),
-                    title: Text("Wie geht es dir Heute?", style: TextStyle(fontWeight: FontWeight.bold),),
-                  ),
-                  Expanded(
-                    child: IconTheme(
-                      data: IconThemeData(
-                        size: 128.0,
-                        color: Theme.of(context).highlightColor,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon(
+                          Icons.insert_emoticon,
+                          color: Colors.black,
+                          size: 37.5,
+                        ),
+                        title: Text(
+                          "Wie geht es dir Heute?",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(
+                            Icons.event,
+                            size: 25.0,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/TrackerKalenderScreen");
+                          },
+                        ),
                       ),
-                      child: TabBarView(children: gefuhlsWidgets),
-                    ),
+                      Expanded(
+                        child: IconTheme(
+                          data: IconThemeData(
+                            size: 128.0,
+                            color: Theme.of(context).highlightColor,
+                          ),
+                          child: TabBarView(children: gefuhlsWidgets),
+                        ),
+                      ),
+                      TabPageSelector(
+                        selectedColor: AAThemeData.primaryColor,
+                      ),
+                    ],
                   ),
-                  TabPageSelector(selectedColor: AAThemeData.primaryColor,),
-                ],
-              ),
-            ),
+                ),
           ),
         ),
       ),
@@ -94,7 +108,6 @@ class GefuhlFrageWidget extends StatefulWidget {
 }
 
 class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
-
   GefuhlOptionen _gefuhle;
 
   @override
@@ -103,7 +116,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
       child: Column(
         children: <Widget>[
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Sehr Gut'),
+            title: const Text('Sehr Gut', style: TextStyle(fontSize: 16.0),),
             value: GefuhlOptionen.sehrgut,
             groupValue: _gefuhle,
             secondary: Container(
@@ -111,18 +124,16 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 150.0,
               decoration: BoxDecoration(
                   color: Colors.green,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
               setState(() {
                 _gefuhle = value;
-                
               });
             },
           ),
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Gut'),
+            title: const Text('Gut', style: TextStyle(fontSize: 16.0),),
             value: GefuhlOptionen.gut,
             groupValue: _gefuhle,
             secondary: Container(
@@ -130,8 +141,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 150.0,
               decoration: BoxDecoration(
                   color: Colors.lightGreenAccent,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
               setState(() {
@@ -140,7 +150,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Normal'),
+            title: const Text('Normal', style: TextStyle(fontSize: 16.0),),
             value: GefuhlOptionen.normal,
             groupValue: _gefuhle,
             secondary: Container(
@@ -148,8 +158,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 150.0,
               decoration: BoxDecoration(
                   color: Colors.yellow,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
               setState(() {
@@ -158,7 +167,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Schlecht'),
+            title: const Text('Schlecht', style: TextStyle(fontSize: 16.0),),
             value: GefuhlOptionen.schlecht,
             groupValue: _gefuhle,
             secondary: Container(
@@ -166,8 +175,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 150.0,
               decoration: BoxDecoration(
                   color: Colors.orange,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
               setState(() {
@@ -176,7 +184,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Sehr Schlecht'),
+            title: const Text('Sehr Schlecht', style: TextStyle(fontSize: 16.0),),
             value: GefuhlOptionen.sehrschlecht,
             groupValue: _gefuhle,
             secondary: Container(
@@ -184,8 +192,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 150.0,
               decoration: BoxDecoration(
                   color: Colors.red,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
               setState(() {
@@ -203,7 +210,7 @@ class PointsLineChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  PointsLineChart(this.seriesList,{this.animate});
+  PointsLineChart(this.seriesList, {this.animate});
 
   /// Creates a [LineChart] with sample data and no transition.
   factory PointsLineChart.withSampleData() {
@@ -214,12 +221,13 @@ class PointsLineChart extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return charts.LineChart(seriesList,
         animate: animate,
-        defaultRenderer: charts.LineRendererConfig(includePoints: true,));
+        defaultRenderer: charts.LineRendererConfig(
+          includePoints: true,
+        ));
   }
 
   /// Create one series with sample hard coded data.

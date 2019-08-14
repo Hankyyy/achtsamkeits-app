@@ -1,5 +1,6 @@
 class Ubung {
   final String title;
+  String quickTitle;
   String bereich;
   String wiederholungen;
   String anwendungsgebiet;
@@ -11,11 +12,13 @@ class Ubung {
 
   Ubung(
       {this.title,
+      this.quickTitle,
       this.bereich,
       this.wiederholungen,
       this.anwendungsgebiet,
       this.dauer,
       this.erklarung,
       this.einleitung,
-      this.icon}) : assert(title != null);
+      this.icon})
+      : assert(title != null);
 }

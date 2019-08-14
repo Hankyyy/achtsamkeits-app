@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 import 'package:aaproto2/ThemeData.dart';
 
 import 'package:aaproto2/HomeScreen/HomeScreen.dart';
@@ -11,6 +12,7 @@ import 'package:aaproto2/EinstellungenScreen/EinstellungenScreen.dart';
 import 'package:aaproto2/ZieleScreen/NeuerMeilensteinScreen.dart';
 import 'package:aaproto2/ZieleScreen/NeueAufgabeScreen.dart';
 import 'package:aaproto2/LernTimerScreen/LernTimerScreen.dart';
+import 'package:aaproto2/HomeScreen/TrackerKalenderScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
 
         "/RatgeberScreen" : (context) => RatgeberScreen(),
         "/LernTimerScreen" : (context) => LernTimerScreen(),
+        "/TrackerKalenderScreen" : (context) => TrackerKalenderScreen(),
       },
     );
   }

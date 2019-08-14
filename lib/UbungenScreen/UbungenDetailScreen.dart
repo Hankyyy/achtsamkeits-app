@@ -33,7 +33,7 @@ class UbungenDetailScreen extends StatelessWidget {
             Column(
               children: <Widget>[
                 Card(
-                  color: AAThemeData.accentColor,
+                  color: AAThemeData.primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),

@@ -25,7 +25,7 @@ INJECTED from C:\Users\Jakob\IdeaProjects\achtsamkeits-app\achtsamkeits-app\andr
 application
 ADDED from C:\Users\Jakob\IdeaProjects\achtsamkeits-app\achtsamkeits-app\android\app\src\main\AndroidManifest.xml:9:5-32:19
 	android:label
-		ADDED from C:\Users\Jakob\IdeaProjects\achtsamkeits-app\achtsamkeits-app\android\app\src\main\AndroidManifest.xml:11:9-33
+		ADDED from C:\Users\Jakob\IdeaProjects\achtsamkeits-app\achtsamkeits-app\android\app\src\main\AndroidManifest.xml:11:9-36
 	android:icon
 		ADDED from C:\Users\Jakob\IdeaProjects\achtsamkeits-app\achtsamkeits-app\android\app\src\main\AndroidManifest.xml:12:9-43
 	android:name

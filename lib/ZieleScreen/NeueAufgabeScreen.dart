@@ -72,12 +72,36 @@ class _NeueAufgabeScreenState extends State<NeueAufgabeScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 25.0),
+            padding: EdgeInsets.only(top: 15.0),
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[],
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 15.0),
           ),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              Text('Erledigen bis:'),
+              OutlineButton(
+                onPressed: () => _geplantDate(context),
+                highlightedBorderColor: AAThemeData.primaryColor,
+                child: Text("${geplantDate.day.toString()}" +
+                    "."
+                        "${geplantDate.month.toString()}" +
+                    "."
+                        "${geplantDate.year.toString()}"),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                color: Colors.grey[100],
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
               Text('Meilenstein:'),
               Container(
                 padding: EdgeInsets.only(left: 20.0, right: 15.0),
@@ -104,51 +128,13 @@ class _NeueAufgabeScreenState extends State<NeueAufgabeScreen> {
                       child: Text(
                         value,
                         style: TextStyle(
-                            fontSize: 15.0,
+                            fontSize: 14.0,
                             fontWeight: FontWeight.w400,
                             color: Colors.black),
                       ),
                     );
                   }).toList(),
                 ),
-              ),
-            ],
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 15.0),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text('Geplant:'),
-              OutlineButton(
-                onPressed: () => _geplantDate(context),
-                highlightedBorderColor: AAThemeData.primaryColor,
-                child: Text("${geplantDate.day.toString()}" +
-                    "."
-                        "${geplantDate.month.toString()}" +
-                    "."
-                        "${geplantDate.year.toString()}"),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                color: Colors.grey[100],
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Text('Deadline:'),
-              OutlineButton(
-                onPressed: () => _deadlineDate(context),
-                highlightedBorderColor: AAThemeData.primaryColor,
-                child: Text("${deadlineDate.day.toString()}" +
-                    "."
-                        "${deadlineDate.month.toString()}" +
-                    "."
-                        "${deadlineDate.year.toString()}"),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                color: Colors.grey[200],
               ),
             ],
           ),
