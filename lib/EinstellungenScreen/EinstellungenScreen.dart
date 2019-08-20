@@ -178,18 +178,22 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
               child: Text(
                 "Abbrechen",
                 style:
-                    TextStyle(fontSize: 16.0, color: AAThemeData.primaryColor),
+                    TextStyle(fontSize: 16.0, color: getTheme().primaryColor),
               ),
               onPressed: () => Navigator.pop(context),
             ),
             RaisedButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              color: getTheme().primaryColor,
               child: Text(
                 "Bestätigen",
                 style: TextStyle(fontSize: 16.0, color: Colors.white),
               ),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                setState(() {ThemeOption;});
+                Navigator.pop(context);
+              },
             ),
           ],
         );
@@ -207,14 +211,12 @@ class _ThemeChangerState extends State<ThemeChanger> {
   ThemeOptionen _themes;
   int selectedColor = 0;
 
-  void handleChange(int i,) {
+  void handleChange(
+    int i,
+  ) {
     setState(() {
       selectedColor = i;
-
-      switch(i) {
-        case 0:
-          //AAThemeData.primaryColor = Colors.green;
-      }
+      ThemeOption = i;
     });
   }
 

@@ -9,10 +9,10 @@ class UbungenDetailScreen extends StatelessWidget {
 
   UbungenDetailScreen({Key key, @required this.ubung}) : super(key: key);
 
-  var textstyletop = TextStyle(fontSize: 15.0, color: Colors.white);
-  var textstyletopbold = TextStyle(
-      fontSize: 17.5, fontWeight: FontWeight.bold, color: Colors.white);
-  var textstylebottom = TextStyle(fontSize: 15.0);
+  var textstyletop = TextStyle(fontSize: 16.0, color: Colors.white);
+  var textstylebold = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
+  var textstylebottom = TextStyle(fontSize: 16.0);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class UbungenDetailScreen extends StatelessWidget {
                               Text(
                                 "Bereich: ",
                                 textAlign: TextAlign.start,
-                                style: textstyletopbold,
+                                style: textstylebold,
                               ),
                               Text(
                                 ubung.bereich + "\n",
@@ -62,7 +62,7 @@ class UbungenDetailScreen extends StatelessWidget {
                               Text(
                                 "Anwendungsgebiet: ",
                                 textAlign: TextAlign.start,
-                                style: textstyletopbold,
+                                style: textstylebold,
                               ),
                               Text(
                                 ubung.anwendungsgebiet,
@@ -79,7 +79,7 @@ class UbungenDetailScreen extends StatelessWidget {
                               Text(
                                 "Wiederholungen: ",
                                 textAlign: TextAlign.end,
-                                style: textstyletopbold,
+                                style: textstylebold,
                               ),
                               Text(
                                 " " + ubung.wiederholungen + "\n",
@@ -89,7 +89,7 @@ class UbungenDetailScreen extends StatelessWidget {
                               Text(
                                 "Dauer: ",
                                 textAlign: TextAlign.end,
-                                style: textstyletopbold,
+                                style: textstylebold,
                               ),
                               Text(
                                 " " + ubung.dauer.toString() + " Minuten",
@@ -160,7 +160,7 @@ class UbungenDetailScreen extends StatelessWidget {
                         Text(
                           "Los gehts!",
                           textAlign: TextAlign.center,
-                          style: textstyletopbold,
+                          style: textstylebold,
                         )
                       ],
                     ),

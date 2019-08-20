@@ -5,7 +5,6 @@ import 'package:aaproto2/ThemeData.dart';
 import 'package:aaproto2/UbungenScreen/UbungenClass.dart';
 import 'package:aaproto2/UbungenScreen/UbungenList.dart';
 import 'package:aaproto2/UbungenScreen/UbungenDetailScreen.dart';
-import 'UbungenButtonWidget.dart';
 
 class UbungenScreen extends StatefulWidget {
   @override
@@ -46,8 +45,8 @@ class _UbungenScreenState extends State<UbungenScreen> {
                         borderRadius: BorderRadius.circular(10.0)),
                     height: 170.0,
                     minWidth: 170.0,
-                    color: AAThemeData.buttonColor,
-                    textColor: Colors.white,
+                    color: Colors.white,
+                    textColor: AAThemeData.primaryColor,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,16 +57,21 @@ class _UbungenScreenState extends State<UbungenScreen> {
                           size: 75.0,
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: 5.0),
+                          padding: EdgeInsets.only(top: 10.0),
                         ),
-                        Text(ubungen[index].title, textAlign: TextAlign.center,)
+                        Text(
+                          ubungen[index].title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
+                        )
                       ],
                     ),
                     onPressed: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>
-                              UbungenDetailScreen(ubung: ubungen[index])));
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  UbungenDetailScreen(ubung: ubungen[index])));
                     },
                     splashColor: AAThemeData.highlightColor,
                   ),
@@ -76,3 +80,9 @@ class _UbungenScreenState extends State<UbungenScreen> {
     );
   }
 }
+
+/*
+
+
+
+ */

@@ -70,9 +70,11 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
                         ),
                         trailing: IconButton(
                           icon: Icon(
-                            Icons.event,
+                            Icons.assessment,
                             size: 25.0,
+                            color: Colors.black,
                           ),
+                          tooltip: "Gefühlsstatistiken",
                           onPressed: () {
                             Navigator.pushNamed(context, "/TrackerKalenderScreen");
                           },
@@ -88,7 +90,7 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
                         ),
                       ),
                       TabPageSelector(
-                        selectedColor: AAThemeData.primaryColor,
+                        selectedColor: Colors.black,
                       ),
                     ],
                   ),
@@ -121,7 +123,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
-              width: 150.0,
+              width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
@@ -138,7 +140,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
-              width: 150.0,
+              width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.lightGreenAccent,
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
@@ -155,7 +157,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
-              width: 150.0,
+              width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.yellow,
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
@@ -172,7 +174,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
-              width: 150.0,
+              width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.orange,
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
@@ -189,7 +191,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
-              width: 150.0,
+              width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),

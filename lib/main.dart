@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:aaproto2/ThemeData.dart';
 
 import 'package:aaproto2/HomeScreen/HomeScreen.dart';
 import 'package:aaproto2/KalenderScreen/KalenderScreen.dart';
 import 'package:aaproto2/UbungenScreen/UbungenScreen.dart';
-import 'package:aaproto2/HomeScreen/RatgeberScreen.dart';
+import 'package:aaproto2/RatgeberScreen/RatgeberScreen.dart';
 import 'package:aaproto2/ZieleScreen/ZieleScreen.dart';
 import 'package:aaproto2/EinstellungenScreen/EinstellungenScreen.dart';
-import 'package:aaproto2/ZieleScreen/NeuerMeilensteinScreen.dart';
-import 'package:aaproto2/ZieleScreen/NeueAufgabeScreen.dart';
 import 'package:aaproto2/LernTimerScreen/LernTimerScreen.dart';
 import 'package:aaproto2/HomeScreen/TrackerKalenderScreen.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -27,14 +25,12 @@ class MyApp extends StatelessWidget {
       home: BottomNavBarWidget(),
       theme: AAThemeData,
       routes: {
-        "/EinstellungenScreen" :(context) => EinstellungenScreen(),
-        "/NeuerMeilensteinScreen" : (context) => NeuerMeilensteinScreen(),
-        "/NeueAufgabeScreen" : (context) => NeueAufgabeScreen(),
-
-        "/RatgeberScreen" : (context) => RatgeberScreen(),
-        "/LernTimerScreen" : (context) => LernTimerScreen(),
-        "/TrackerKalenderScreen" : (context) => TrackerKalenderScreen(),
+        "/EinstellungenScreen": (context) => EinstellungenScreen(),
+        "/RatgeberScreen": (context) => RatgeberScreen(),
+        "/LernTimerScreen": (context) => LernTimerScreen(),
+        "/TrackerKalenderScreen": (context) => TrackerKalenderScreen(),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -48,8 +44,7 @@ class BottomNavBarWidget extends StatefulWidget {
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     KalenderScreen(),
@@ -91,8 +86,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         ],
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: AAThemeData.primaryColor,
-        unselectedItemColor: Colors.green[500],
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.green,
         onTap: _onItemTapped,
       ),
     );

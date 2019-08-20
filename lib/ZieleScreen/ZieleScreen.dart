@@ -45,7 +45,8 @@ class _ZieleScreenState extends State<ZieleScreen> {
           size: 35.0,
           color: Colors.grey[200],
         ),
-        backgroundColor: AAThemeData.accentColor,
+        tooltip: "Neuen Meilenstein erstellen",
+        backgroundColor: AAThemeData.primaryColor,
       ),
     );
   }

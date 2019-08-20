@@ -186,6 +186,7 @@ class _LernTimerScreenState extends State<LernTimerScreen>
         actions: <Widget>[],
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
+        leading: IconButton(icon: Icon(Icons.close), onPressed: (){Navigator.pop(context);}),
       ),
       body: Padding(
         padding: EdgeInsets.all(60.0),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:aaproto2/ThemeData.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class KalenderScreen extends StatefulWidget {
   @override
@@ -10,6 +11,20 @@ class KalenderScreen extends StatefulWidget {
 
 class _KalenderScreenState extends State<KalenderScreen> {
   int test;
+  CalendarController _calendarController;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting('de_DE');
+    _calendarController = CalendarController();
+  }
+
+  @override
+  void dispose() {
+    _calendarController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +34,21 @@ class _KalenderScreenState extends State<KalenderScreen> {
           'Kalender',
           style: TextStyle(fontSize: 30.0),
         ),
-        actions: <Widget>[IconButton(
-          icon: Icon(
-            Icons.event,
-            size: 25.0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.today,
+              size: 25.0,
+            ),
+            tooltip: "Heute",
+            onPressed: () {
+              setState(() {
+                _calendarController.setSelectedDay(DateTime.now(),
+                    runCallback: true);
+              });
+            },
           ),
-          onPressed: () {
-            Navigator.pushNamed(context, "/TrackerKalenderScreen");
-          },
-        ),],
+        ],
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
       ),
@@ -40,15 +61,22 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TableCalendar(
+                calendarController: _calendarController,
+                locale: 'de_DE',
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 availableCalendarFormats: const {
                   CalendarFormat.month: 'Month',
                 },
                 headerStyle: HeaderStyle(
-                  titleTextStyle: TextStyle(fontSize: 18.0,),
+                  titleTextStyle: TextStyle(
+                    fontSize: 18.0,
+                  ),
                 ),
                 daysOfWeekStyle: DaysOfWeekStyle(
-                  weekendStyle: TextStyle(color: Colors.black, fontSize: 16.0,),
+                  weekendStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16.0,
+                  ),
                 ),
                 calendarStyle: CalendarStyle(
                   selectedColor: AAThemeData.primaryColor,
@@ -78,20 +106,20 @@ class _KalenderScreenState extends State<KalenderScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        "Online Marketing",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                      ),
-                      Text(
-                        " | ",
-                        style: TextStyle(color: Colors.black, fontSize: 20.0),
-                      ),
-                      Text(
                         "Übung 5",
-                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                        ),
                       ),
                     ],
                   ),
-                  subtitle: Text(DateTime.now().toString()),
+                  subtitle: Text(
+                    "Online Marketing",
+                    style: TextStyle(
+                        //fontSize: 16.0
+                        ),
+                  ),
                 )),
           ),
           Container(
@@ -106,23 +134,19 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   title: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Text(
-                        "Online Marketing",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                      ),
-                      Text(
-                        " | ",
-                        style: TextStyle(color: Colors.black, fontSize: 20.0),
-                      ),
                       Text(
                         "Praktikum 4",
-                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                        style: TextStyle(color: Colors.black, fontSize: 18.0),
                       ),
                     ],
                   ),
-                  subtitle: Text(DateTime.now().toString()),
+                  subtitle: Text(
+                    "Online Marketing",
+                    //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
                 )),
           ),
+          //Text(DateTime.now().day.toString()),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Card(
@@ -135,21 +159,16 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   title: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Text(
-                        "Online Marketing",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                      ),
-                      Text(
-                        " | ",
-                        style: TextStyle(color: Colors.black, fontSize: 20.0),
-                      ),
                       Text(
                         "Übung 5",
-                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                        style: TextStyle(color: Colors.black, fontSize: 18.0),
                       ),
                     ],
                   ),
-                  subtitle: Text(DateTime.now().toString()),
+                  subtitle: Text(
+                    "Online Marketing",
+                    //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
                 )),
           ),
           Container(
@@ -164,21 +183,16 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   title: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Text(
-                        "Medienproduktion",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                      ),
-                      Text(
-                        " | ",
-                        style: TextStyle(color: Colors.black, fontSize: 20.0),
-                      ),
                       Text(
                         "Vorlesung 5",
-                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                        style: TextStyle(color: Colors.black, fontSize: 18.0),
                       ),
                     ],
                   ),
-                  subtitle: Text(DateTime.now().toString()),
+                  subtitle: Text(
+                    "Medienproduktion",
+                    //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
                 )),
           ),
           Container(
@@ -194,20 +208,15 @@ class _KalenderScreenState extends State<KalenderScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        "Medienproduktion",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                      ),
-                      Text(
-                        " | ",
-                        style: TextStyle(color: Colors.black, fontSize: 20.0),
-                      ),
-                      Text(
                         "Übung 2",
-                        style: TextStyle(color: Colors.black, fontSize: 16.0),
+                        style: TextStyle(color: Colors.black, fontSize: 18.0),
                       ),
                     ],
                   ),
-                  subtitle: Text(DateTime.now().toString()),
+                  subtitle: Text(
+                    "Medienproduktion",
+                    //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
                 )),
           ),
         ],
@@ -215,3 +224,5 @@ class _KalenderScreenState extends State<KalenderScreen> {
     );
   }
 }
+
+//Text(DateTime.now().toString()),

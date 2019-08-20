@@ -70,7 +70,8 @@ class _ZielCardState extends State<ZielCard> {
                 ],
               ),
               trailing: IconButton(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.add, size: 30.5, color:  Colors.black,),
+                tooltip: "Neue Aufgabe hinzufügen",
                 onPressed: () {
                   _addAufgabe(context);
                 },
@@ -150,7 +151,6 @@ class _ZielCardState extends State<ZielCard> {
 
   Future<void> _addAufgabe(BuildContext context) {
     DateTime selectedDate = DateTime.now();
-    String dropdownValue = 'Online Marketing';
 
     Future<Null> _selectDate(BuildContext context) async {
       final DateTime picked = await showDatePicker(
@@ -188,50 +188,6 @@ class _ZielCardState extends State<ZielCard> {
                         ),
                         //fillColor: Colors.green
                       ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 25.0),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text('Meilenstein:'),
-                        Container(
-                          padding: EdgeInsets.only(left: 20.0, right: 15.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey[350]),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                          child: DropdownButton<String>(
-                            value: dropdownValue,
-                            underline: Container(),
-                            elevation: 1,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                dropdownValue = newValue;
-                              });
-                            },
-                            items: <String>[
-                              'Online Marketing',
-                              'Medienproduktion',
-                              'Führen im IT-Umfeld',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: TextStyle(
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 25.0),

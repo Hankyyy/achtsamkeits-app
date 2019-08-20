@@ -6,7 +6,6 @@ import 'package:aaproto2/UbungenScreen/UbungenList.dart';
 import 'package:aaproto2/UbungenScreen/UbungenDetailScreen.dart';
 import 'package:aaproto2/test.dart';
 
-
 import 'package:aaproto2/UbungenScreen/UbungenClass.dart';
 import 'package:aaproto2/UbungenScreen/UbungenList.dart';
 
@@ -50,7 +49,7 @@ class _QAWidgetState extends State<QAWidget> {
                       padding: EdgeInsets.only(top: 5.0),
                     ),
                     Text(
-                      "Lern Timer",
+                      "Lern Timer", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
                     )
                   ],
                 ),
@@ -75,7 +74,7 @@ class _QAWidgetState extends State<QAWidget> {
                     Container(
                       padding: EdgeInsets.only(top: 5.0),
                     ),
-                    Text("Ratgeber")
+                    Text("Ratgeber", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),)
                   ],
                 ),
                 onPressed: () {
@@ -99,20 +98,21 @@ class _QAWidgetState extends State<QAWidget> {
                     Container(
                       padding: EdgeInsets.only(top: 5.0),
                     ),
-                    Text("Einstellungen")
+                    Text("Einstellungen", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),)
                   ],
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, "/EinstellungenScreen");
                 },
-                splashColor: AAThemeData.buttonColor
-                ,
+                splashColor: AAThemeData.buttonColor,
               ),
             ],
           ),
           Container(
-            padding: EdgeInsets.only(top: 10.0),
+            padding: EdgeInsets.only(top: 5.0),
           ),
+
+          /*
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,6 +209,8 @@ class _QAWidgetState extends State<QAWidget> {
               ),
             ],
           ),
+          */
+
         ],
       ),
     );
