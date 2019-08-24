@@ -34,9 +34,9 @@ class _UbungenScreenState extends State<UbungenScreen> {
       ),
       body: Container(
           child: GridView.count(
-              padding: EdgeInsets.symmetric(horizontal: 12.5),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               crossAxisCount: 2,
-              mainAxisSpacing: 0.0,
+              mainAxisSpacing: 2.5,
               crossAxisSpacing: 15.0,
               children: List.generate(ubungen.length, (index) {
                 return Center(
@@ -44,7 +44,6 @@ class _UbungenScreenState extends State<UbungenScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
                     height: 170.0,
-                    minWidth: 170.0,
                     color: Colors.white,
                     textColor: AAThemeData.primaryColor,
                     child: Column(

@@ -85,7 +85,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
         return AlertDialog(
           title: Text(
             "Neuer Meilenstein",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: aABlackBold,
           ),
           content: Container(
               width: 800,
@@ -111,7 +111,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('Erledigen bis:'),
+                        Text('Erledigen bis:', style: aABlackReg,),
                         SizedBox(
                           width: 20.0,
                         ),
@@ -132,7 +132,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('Deadline:'),
+                        Text('Deadline:', style: aABlackReg,),
                         SizedBox(
                           width: 20.0,
                         ),
@@ -149,9 +149,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
                         ),
                       ],
                     ),
-                    Container(
-                      padding: EdgeInsets.only(top: 25.0),
-                    ),
+                    SizedBox(height: 25,),
                     TextFormField(
                       keyboardType: TextInputType.multiline,
                       maxLines: 5,
@@ -177,7 +175,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
               child: Text(
                 "Abbrechen",
                 style:
-                    TextStyle(fontSize: 16.0, color: AAThemeData.primaryColor),
+                aABlackReg,
               ),
               onPressed: () => Navigator.pop(context),
             ),
@@ -186,8 +184,9 @@ class _ZieleScreenState extends State<ZieleScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
               child: Text(
                 "Bestätigen",
-                style: TextStyle(fontSize: 16.0, color: Colors.white),
+                style: aAWhiteReg,
               ),
+              color: AAThemeData.primaryColor,
               onPressed: () => Navigator.pop(context),
             ),
           ],

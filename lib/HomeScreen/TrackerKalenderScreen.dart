@@ -17,12 +17,14 @@ class _TrackerKalenderScreenState extends State<TrackerKalenderScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: TabBar(
+            indicatorColor: AAThemeData.highlightColor,
             tabs: [
               Tab(icon: Icon(Icons.insert_emoticon)),
               Tab(icon: Icon(Icons.edit)),
 
             ],
           ),
+
           backgroundColor: Colors.grey[50],
           elevation: 0.0,
         ),
@@ -100,7 +102,7 @@ class GefuhleScreen extends StatelessWidget {
 Color getColor(int wert){
     switch(wert){
       case 0: return Colors.green;
-      case 1: return Colors.lightGreenAccent;
+      case 1: return Colors.lightGreen[400];
       case 2: return Colors.yellow;
       case 3: return Colors.orange;
       case 4: return Colors.red;

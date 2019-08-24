@@ -17,11 +17,12 @@ class _ZitatWidgetState extends State<ZitatWidget> {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: InkWell(
+          borderRadius: BorderRadius.circular(10),
           onLongPress: () {
             i = 0;
             while (i == 0) {
               _newZitat = (getZitate()..shuffle()).first;
-              if (_zitat.name != _newZitat.name)
+              if (_zitat.inhalt != _newZitat.inhalt)
                 setState(() {
                   _zitat = _newZitat;
                   i = 1;
@@ -36,15 +37,10 @@ class _ZitatWidgetState extends State<ZitatWidget> {
             child: Container(
               padding: EdgeInsets.only(left: 5, right: 5, top: 15, bottom: 10),
               child: ListTile(
-                //contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 title: Text(
                   "„" + _zitat.inhalt + "“",
                   textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                  style: aAWhiteBold,
                 ),
                 subtitle: Text(
                   "- " + _zitat.name,

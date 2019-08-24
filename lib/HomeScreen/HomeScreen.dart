@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ZitatWidget(),
         GefuhlTrackerWidget(),
         ProduktivitatTrackerWidget(),
+        SizedBox(height: 10,),
       ],
     );
   }

@@ -14,6 +14,11 @@ class EinstellungenScreen extends StatefulWidget {
 }
 
 class _EinstellungenScreenState extends State<EinstellungenScreen> {
+  bool i = true;
+  bool j = true;
+  bool k = true;
+  bool l = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,123 +42,173 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       body: ListView(
         padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 10.0),
         children: <Widget>[
-          Container(
-              child: ListTile(
-            title: Text(
-              "Benachrichtigungen",
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
             ),
-          )),
-          ListTile(
-            title: Text(
-              "Tracker",
-              style: TextStyle(fontSize: 17.5),
-            ),
-            leading: Icon(
-              Icons.insert_emoticon,
-              color: AAThemeData.primaryColor,
-            ),
-            trailing: Switch(value: true, onChanged: null),
-          ),
-          ListTile(
-            title: Text(
-              "Termine",
-              style: TextStyle(fontSize: 17.5),
-            ),
-            leading: Icon(
-              Icons.calendar_today,
-              color: AAThemeData.primaryColor,
-            ),
-            trailing: Switch(value: true, onChanged: null),
-          ),
-          ListTile(
-            title: Text(
-              "Lernen",
-              style: TextStyle(fontSize: 17.5),
-            ),
-            leading: Icon(
-              Icons.book,
-              color: AAThemeData.primaryColor,
-            ),
-            trailing: Switch(value: true, onChanged: null),
-          ),
-          Container(
-              padding: EdgeInsets.only(
-                top: 20.0,
-              ),
-              child: ListTile(
-                title: Text(
-                  "Design",
-                  style: TextStyle(
-                    fontSize: 20.0,
+            child: Column(
+              children: <Widget>[
+                Container(
+                    child: ListTile(
+                  title: Text(
+                    "Benachrichtigungen",
+                    style: aABlackBold,
                   ),
-                ),
-              )),
-          ListTile(
-            title: Text(
-              "Darktheme",
-              style: TextStyle(fontSize: 17.5),
-            ),
-            leading: Icon(
-              Icons.brightness_3,
-              color: AAThemeData.primaryColor,
-            ),
-            trailing: Switch(value: true, onChanged: null),
-          ),
-          ListTile(
-            title: Text(
-              "Farbe",
-              style: TextStyle(fontSize: 17.5),
-            ),
-            leading: Icon(
-              Icons.color_lens,
-              color: AAThemeData.primaryColor,
-            ),
-            trailing: InkWell(
-              child: Container(
-                height: 35.0,
-                width: 60.0,
-                decoration: BoxDecoration(
+                )),
+                SwitchListTile(
+                  value: i,
+                  onChanged: (bool newValue) {
+                    setState(() {
+                      i = newValue;
+                    });
+                  },
+                  secondary: Icon(
+                    Icons.insert_emoticon,
                     color: AAThemeData.primaryColor,
-                    borderRadius:
-                        BorderRadius.all(const Radius.circular(10.0))),
+                  ),
+                  activeColor: AAThemeData.primaryColor,
+                  title: Text(
+                    "Tracker",
+                    style: aABlackReg,
+                  ),
+                ),
+                SwitchListTile(
+                  value: j,
+                  onChanged: (bool newValue) {
+                    setState(() {
+                      j = newValue;
+                    });
+                  },
+                  secondary: Icon(
+                    Icons.calendar_today,
+                    color: AAThemeData.primaryColor,
+                  ),
+                  title: Text(
+                    "Termine",
+                    style: aABlackReg,
+                  ),
+                ),
+                SwitchListTile(
+                  value: k,
+                  onChanged: (bool newValue) {
+                    setState(() {
+                      k = newValue;
+                    });
+                  },
+                  secondary: Icon(
+                    Icons.bookmark,
+                    color: AAThemeData.primaryColor,
+                  ),
+                  title: Text(
+                    "Lernen",
+                    style: aABlackReg,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    "Design",
+                    style: aABlackBold,
+                  ),
+                ),
+                SwitchListTile(
+                  value: false,
+                  onChanged: null,
+                  secondary: Icon(
+                    Icons.insert_emoticon,
+                    color: AAThemeData.primaryColor,
+                  ),
+                  title: Text(
+                    "Darktheme",
+                    style: aABlackReg,
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    "Farbe",
+                    style: aABlackReg,
+                  ),
+                  leading: Icon(
+                    Icons.color_lens,
+                    color: AAThemeData.primaryColor,
+                  ),
+                  trailing: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      height: 35.0,
+                      width: 60.0,
+                      decoration: BoxDecoration(
+                          color: AAThemeData.primaryColor,
+                          borderRadius:
+                              BorderRadius.all(const Radius.circular(10.0))),
+                    ),
+                    onTap: () => changeTheme(context),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              //minWidth: MediaQuery.of(context).size.width-40,
+              color: AAThemeData.primaryColor,
+              textColor: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    "Anmelden",
+                    textAlign: TextAlign.center,
+                    style: aAWhiteBold,
+                  )
+                ],
               ),
-              onTap: () => changeTheme(context),
+              onPressed: () {},
+              splashColor: AAThemeData.highlightColor,
             ),
           ),
           Container(
-              padding: EdgeInsets.only(
-                top: 20.0,
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              //minWidth: MediaQuery.of(context).size.width-20,
+              color: AAThemeData.buttonColor,
+              //textColor: AAThemeData.primaryColor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    "Registrieren",
+                    textAlign: TextAlign.center,
+                    style: aABlackBold,
+                  )
+                ],
               ),
-              child: ListTile(
-                title: Text(
-                  "Account",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
-                ),
-              )),
-          OutlineButton(
-            child: Text("Anmelden"),
-            padding: EdgeInsets.only(left: 30.0, right: 30.0),
-            onPressed: () => {},
-            color: AAThemeData.accentColor,
-            disabledBorderColor: AAThemeData.accentColor,
-            highlightedBorderColor: AAThemeData.primaryColor,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-          ),
-          OutlineButton(
-            child: Text("Registrieren"),
-            padding: EdgeInsets.only(left: 30.0, right: 30.0),
-            onPressed: () => {},
-            color: AAThemeData.accentColor,
-            disabledBorderColor: AAThemeData.accentColor,
-            highlightedBorderColor: AAThemeData.primaryColor,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
+              onPressed: () {},
+              splashColor: AAThemeData.highlightColor,
+            ),
           ),
         ],
       ),
@@ -191,7 +246,9 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
                 style: TextStyle(fontSize: 16.0, color: Colors.white),
               ),
               onPressed: () {
-                setState(() {ThemeOption;});
+                setState(() {
+                  ThemeOption;
+                });
                 Navigator.pop(context);
               },
             ),

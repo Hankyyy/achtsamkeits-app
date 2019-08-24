@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_duration_picker/flutter_duration_picker.dart';
-import 'dart:math';
 import 'package:aaproto2/ThemeData.dart';
 
 class LernTimerScreen extends StatefulWidget {
@@ -11,16 +10,14 @@ class LernTimerScreen extends StatefulWidget {
 
 class _LernTimerScreenState extends State<LernTimerScreen>
     with TickerProviderStateMixin {
+
   AnimationController animationController;
   Duration _duration = Duration(
     hours: 0,
     minutes: 45,
   );
-  Duration _newDuration = Duration(
-    hours: 0,
-    minutes: 45,
-  );
-  bool i = true;
+
+  bool view = true;
 
   @override
   void initState() {
@@ -37,22 +34,35 @@ class _LernTimerScreenState extends State<LernTimerScreen>
   @override
   Widget build(BuildContext context) {
     Widget swapTimer(context) {
-      if (!i)
+      if (!view)
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Expanded(
-                child: DurationPicker(
-              height: 400,
-              width: 400,
-              duration: _duration,
-              onChange: (val) {
-                setState(() {
-                  _duration = val;
-                });
-              },
-              snapToMins: 5.0,
-            )),
+              child: Padding(
+                padding: EdgeInsets.all(50),
+                child: FractionallySizedBox(
+                  widthFactor: 10,
+                  child: Card(
+                    shape: CircleBorder(
+                      side: BorderSide(color: AAThemeData.primaryColor, width: 1),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(75),
+                      child: DurationPicker(
+                        duration: _duration,
+                        onChange: (val) {
+                          setState(() {
+                            _duration = val;
+                          });
+                        },
+                        snapToMins: 5.0,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Container(
               margin: EdgeInsets.all(8.0),
               child: Row(
@@ -63,14 +73,13 @@ class _LernTimerScreenState extends State<LernTimerScreen>
                       Icons.check,
                       color: Colors.white,
                     ),
-
                     onPressed: () {
                       setState(() {
                         animationController.duration = _duration;
-                        i = true;
+                        view = true;
                       });
                     },
-                    backgroundColor: AAThemeData.buttonColor,
+                    backgroundColor: AAThemeData.primaryColor,
                   ),
                   SizedBox(
                     width: 20.0,
@@ -85,40 +94,51 @@ class _LernTimerScreenState extends State<LernTimerScreen>
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Expanded(
-              child: Align(
-                alignment: FractionalOffset.center,
-                child: AspectRatio(
-                  aspectRatio: 1.0,
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned.fill(
-                        child: AnimatedBuilder(
-                          animation: animationController,
-                          builder: (BuildContext context, Widget child) {
-                            return CustomPaint(
-                              painter: TimerPainter(
-                                  animation: animationController,
-                                  backgroundColor: Colors.white,
-                                  color: AAThemeData.primaryColor),
-                            );
-                          },
+                child: Padding(
+              padding: EdgeInsets.all(50),
+              child: FractionallySizedBox(
+                widthFactor: 10,
+                child: Card(
+                  shape: CircleBorder(),
+                  child: Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Align(
+                      alignment: FractionalOffset.center,
+                      child: AspectRatio(
+                        aspectRatio: 1.0,
+                        child: Stack(
+                          children: <Widget>[
+                            Positioned.fill(
+                              child: AnimatedBuilder(
+                                animation: animationController,
+                                builder: (BuildContext context, Widget child) {
+                                  return CustomPaint(
+                                    painter: TimerPainter(
+                                        animation: animationController,
+                                        backgroundColor: Colors.white,
+                                        color: AAThemeData.primaryColor),
+                                  );
+                                },
+                              ),
+                            ),
+                            Align(
+                                alignment: FractionalOffset.center,
+                                child: AnimatedBuilder(
+                                    animation: animationController,
+                                    builder: (_, Widget child) {
+                                      return Text(
+                                        timerString,
+                                        style: TextStyle(fontSize: 60.0),
+                                      );
+                                    }))
+                          ],
                         ),
                       ),
-                      Align(
-                          alignment: FractionalOffset.center,
-                          child: AnimatedBuilder(
-                              animation: animationController,
-                              builder: (_, Widget child) {
-                                return Text(
-                                  timerString,
-                                  style: TextStyle(fontSize: 60.0),
-                                );
-                              }))
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            )),
             Container(
               margin: EdgeInsets.all(8.0),
               child: Row(
@@ -165,7 +185,7 @@ class _LernTimerScreenState extends State<LernTimerScreen>
                     onPressed: () {
                       setState(() {
                         //_duration = Duration(minutes: 0);
-                        i = false;
+                        view = false;
                         animationController.reset();
                       });
                     },
@@ -186,7 +206,11 @@ class _LernTimerScreenState extends State<LernTimerScreen>
         actions: <Widget>[],
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
-        leading: IconButton(icon: Icon(Icons.close), onPressed: (){Navigator.pop(context);}),
+        leading: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
       ),
       body: Padding(
         padding: EdgeInsets.all(60.0),

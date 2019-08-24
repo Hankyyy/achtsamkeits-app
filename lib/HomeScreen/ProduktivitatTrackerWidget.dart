@@ -3,13 +3,9 @@ import 'package:charts_flutter/flutter.dart' as charts;
 
 import 'package:aaproto2/ThemeData.dart';
 
-
 // Für den Prototypen einfach GefuhlTrackerWidget kopiert
 
-
 enum ProduktivitatOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
-
-
 
 class ProduktivitatTrackerWidget extends StatefulWidget {
   ProduktivitatTrackerWidget({Key key}) : super(key: key);
@@ -18,8 +14,8 @@ class ProduktivitatTrackerWidget extends StatefulWidget {
   State createState() => ProduktivitatTrackerWidgetState();
 }
 
-class ProduktivitatTrackerWidgetState extends State<ProduktivitatTrackerWidget> {
-
+class ProduktivitatTrackerWidgetState
+    extends State<ProduktivitatTrackerWidget> {
   static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
       new LinearSales(0, 5),
@@ -47,7 +43,6 @@ class ProduktivitatTrackerWidgetState extends State<ProduktivitatTrackerWidget> 
     PointsLineChart(_createSampleData()),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,38 +57,40 @@ class ProduktivitatTrackerWidgetState extends State<ProduktivitatTrackerWidget> 
           // Use a Builder here, otherwise `DefaultTabController.of(context)` below
           // returns null.
           child: Builder(
-            builder: (BuildContext context) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.edit, color: Colors.black, size: 37.5,),
-                    title: Text("Wie produktiv\nwarst du Heute?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
-                    trailing: IconButton(
-                      icon: Icon(
-                        Icons.assessment,
-                        size: 25.0,
+            builder: (BuildContext context) => Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(
+                        Icons.edit,
                         color: Colors.black,
+                        size: 37.5,
                       ),
-                      tooltip: "Produktivitätsstatistiken",
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/TrackerKalenderScreen");
-                      },
+                      title: Text(
+                        "Wie produktiv\nwarst du Heute?",
+                        style: aABlackBold,
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.assessment,
+                          size: 25.0,
+                          color: Colors.black,
+                        ),
+                        tooltip: "Produktivitätsstatistiken",
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, "/TrackerKalenderScreen");
+                        },
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: IconTheme(
-                      data: IconThemeData(
-                        size: 128.0,
-                        color: Theme.of(context).highlightColor,
-                      ),
+                    Expanded(
                       child: TabBarView(children: gefuhlsWidgets),
                     ),
-                  ),
-                  TabPageSelector(selectedColor: Colors.black),
-                ],
-              ),
-            ),
+                    TabPageSelector(selectedColor: Colors.black),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
           ),
         ),
       ),
@@ -109,7 +106,6 @@ class GefuhlFrageWidget extends StatefulWidget {
 }
 
 class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
-
   ProduktivitatOptionen _gefuhle;
 
   @override
@@ -118,7 +114,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
       child: Column(
         children: <Widget>[
           RadioListTile<ProduktivitatOptionen>(
-            title: const Text('Sehr Produktiv', style: TextStyle(fontSize: 16.0),),
+            title: Text('Sehr Produktiv', style: aABlackReg),
             value: ProduktivitatOptionen.sehrgut,
             groupValue: _gefuhle,
             secondary: Container(
@@ -126,8 +122,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.green,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
@@ -136,16 +131,18 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<ProduktivitatOptionen>(
-            title: const Text('Produktiv', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Produktiv',
+              style: aABlackReg,
+            ),
             value: ProduktivitatOptionen.gut,
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
               width: 100.0,
               decoration: BoxDecoration(
-                  color: Colors.lightGreenAccent,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  color: Colors.lightGreen[400],
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
@@ -154,7 +151,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<ProduktivitatOptionen>(
-            title: const Text('Normal', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Normal',
+              style: aABlackReg,
+            ),
             value: ProduktivitatOptionen.normal,
             groupValue: _gefuhle,
             secondary: Container(
@@ -162,8 +162,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.yellow,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
@@ -172,7 +171,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<ProduktivitatOptionen>(
-            title: const Text('Wenig Produktiv', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Wenig Produktiv',
+              style: aABlackReg,
+            ),
             value: ProduktivitatOptionen.schlecht,
             groupValue: _gefuhle,
             secondary: Container(
@@ -180,8 +182,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.orange,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
@@ -190,7 +191,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<ProduktivitatOptionen>(
-            title: const Text('Gar Nicht Produktiv', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Gar Nicht Produktiv',
+              style: aABlackReg,
+            ),
             value: ProduktivitatOptionen.sehrschlecht,
             groupValue: _gefuhle,
             secondary: Container(
@@ -198,8 +202,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               width: 100.0,
               decoration: BoxDecoration(
                   color: Colors.red,
-                  borderRadius: BorderRadius.all(const Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
@@ -217,7 +220,7 @@ class PointsLineChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  PointsLineChart(this.seriesList,{this.animate});
+  PointsLineChart(this.seriesList, {this.animate});
 
   /// Creates a [LineChart] with sample data and no transition.
   factory PointsLineChart.withSampleData() {
@@ -227,7 +230,6 @@ class PointsLineChart extends StatelessWidget {
       animate: false,
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

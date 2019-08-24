@@ -2,15 +2,46 @@ import 'package:flutter/material.dart';
 
 final ThemeData AAThemeData = ThemeData(
   brightness: Brightness.light,
-  primarySwatch: Colors.green,
   primaryColor: Colors.green,
   primaryColorBrightness: Brightness.light,
-  accentColor: Colors.green[900],
+  accentColor: Colors.green,
   accentColorBrightness: Brightness.light,
-  buttonColor: Colors.green,
-  highlightColor: Colors.green[900],
+
+  highlightColor: Colors.green[200],
+
+  buttonColor: Colors.white,
   backgroundColor: Colors.grey[50],
+
 );
+
+final TextStyle aABlackBold = TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
+
+final TextStyle aABlackReg = TextStyle(
+  fontSize: 16.0,
+  color: Colors.black,
+);
+
+final TextStyle aAGreySmall = TextStyle(
+  fontSize: 14.0,
+  color: Colors.black54,
+);
+
+final TextStyle aAWhiteBold = TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
+
+final TextStyle aAWhiteReg = TextStyle(
+  fontSize: 16.0,
+  color: Colors.white,
+);
+
+
 
 int ThemeOption = 0;
 
@@ -24,7 +55,7 @@ class getThemeClass {
         primarySwatch: Colors.green,
         primaryColor: Colors.green,
         primaryColorBrightness: Brightness.light,
-        accentColor: Colors.green[900],
+        accentColor: Colors.green[400],
         accentColorBrightness: Brightness.light,
         buttonColor: Colors.green,
         highlightColor: Colors.green[900],

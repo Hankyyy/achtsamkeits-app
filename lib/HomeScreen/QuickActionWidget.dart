@@ -37,13 +37,13 @@ class _QAWidgetState extends State<QAWidget> {
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: Colors.white,
-                textColor: AAThemeData.buttonColor,
+                color: AAThemeData.buttonColor,
                 child: Column(
                   children: <Widget>[
                     Icon(
                       Icons.watch_later,
                       size: _quButtonIconSize,
+                      color: AAThemeData.primaryColor,
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 5.0),
@@ -56,20 +56,20 @@ class _QAWidgetState extends State<QAWidget> {
                 onPressed: () {
                   Navigator.pushNamed(context, "/LernTimerScreen");
                 },
-                splashColor: AAThemeData.buttonColor,
+                //splashColor: AAThemeData.buttonColor,
               ),
               MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: Colors.white,
-                textColor: AAThemeData.buttonColor,
+                color: AAThemeData.buttonColor,
                 child: Column(
                   children: <Widget>[
                     Icon(
                       Icons.book,
                       size: _quButtonIconSize,
+                      color: AAThemeData.primaryColor,
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 5.0),
@@ -80,20 +80,20 @@ class _QAWidgetState extends State<QAWidget> {
                 onPressed: () {
                   Navigator.pushNamed(context, "/RatgeberScreen");
                 },
-                splashColor: AAThemeData.buttonColor,
+                //splashColor: AAThemeData.buttonColor,
               ),
               MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 height: _qaButtonHeight,
                 minWidth: _qaButtonWidth,
-                color: Colors.white,
-                textColor: AAThemeData.buttonColor,
+                color: AAThemeData.buttonColor,
                 child: Column(
                   children: <Widget>[
                     Icon(
                       Icons.settings,
                       size: _quButtonIconSize,
+                      color: AAThemeData.primaryColor,
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 5.0),
@@ -104,113 +104,13 @@ class _QAWidgetState extends State<QAWidget> {
                 onPressed: () {
                   Navigator.pushNamed(context, "/EinstellungenScreen");
                 },
-                splashColor: AAThemeData.buttonColor,
+                //splashColor: AAThemeData.buttonColor,
               ),
             ],
           ),
           Container(
             padding: EdgeInsets.only(top: 5.0),
           ),
-
-          /*
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                height: _qaButtonHeight,
-                minWidth: _qaButtonWidth,
-                color: AAThemeData.buttonColor,
-                textColor: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Icon(
-                      getUbungen()[2].icon,
-                      size: _quButtonIconSize,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 5.0),
-                    ),
-                    Text(getUbungen()[2].quickTitle, textAlign: TextAlign.center,)
-                  ],
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
-                          UbungenDetailScreen(ubung: getUbungen()[2])));
-                },
-                splashColor: AAThemeData.highlightColor,
-              ),
-              MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                height: _qaButtonHeight,
-                minWidth: _qaButtonWidth,
-                color: AAThemeData.buttonColor,
-                textColor: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Icon(
-                      getUbungen()[1].icon,
-                      size: _quButtonIconSize,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 5.0),
-                    ),
-                    Text(getUbungen()[1].quickTitle, textAlign: TextAlign.center,)
-                  ],
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
-                          UbungenDetailScreen(ubung: getUbungen()[1])));
-                },
-                splashColor: AAThemeData.highlightColor,
-              ),
-              MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                height: _qaButtonHeight,
-                minWidth: _qaButtonWidth,
-                color: AAThemeData.buttonColor,
-                textColor: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Icon(
-                      getUbungen()[0].icon,
-                      size: _quButtonIconSize,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 5.0),
-                    ),
-                    Text(getUbungen()[0].quickTitle, textAlign: TextAlign.center,)
-                  ],
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
-                          UbungenDetailScreen(ubung: getUbungen()[0])));
-                },
-                splashColor: AAThemeData.highlightColor,
-              ),
-            ],
-          ),
-          */
-
         ],
       ),
     );

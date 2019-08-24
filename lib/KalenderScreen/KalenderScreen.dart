@@ -68,22 +68,24 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   CalendarFormat.month: 'Month',
                 },
                 headerStyle: HeaderStyle(
-                  titleTextStyle: TextStyle(
-                    fontSize: 18.0,
-                  ),
+                  titleTextStyle: aABlackBold,
                 ),
                 daysOfWeekStyle: DaysOfWeekStyle(
+                  weekdayStyle: TextStyle(fontSize: 16),
                   weekendStyle: TextStyle(
                     color: Colors.black,
                     fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 calendarStyle: CalendarStyle(
+                  todayStyle: TextStyle(color: Colors.white,),
+                  selectedStyle: TextStyle(fontWeight: FontWeight.bold, color: Colors.white,),
                   selectedColor: AAThemeData.primaryColor,
-                  todayColor: AAThemeData.accentColor,
+                  todayColor: AAThemeData.highlightColor,
                   markersColor: Colors.brown[700],
                   weekdayStyle: TextStyle(color: Colors.black54),
-                  weekendStyle: TextStyle(color: Colors.black87),
+                  weekendStyle: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold,),
                   outsideStyle: TextStyle(color: Colors.black26),
                   outsideWeekendStyle: TextStyle(color: Colors.black38),
                 ),
@@ -101,7 +103,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 ),
                 child: CheckboxListTile(
                   value: false,
-                  onChanged: (bool newvalue) {},
+                  onChanged: (bool newValue) {},
                   title: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
@@ -116,9 +118,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   ),
                   subtitle: Text(
                     "Online Marketing",
-                    style: TextStyle(
-                        //fontSize: 16.0
-                        ),
+                    style: aAGreySmall,
                   ),
                 )),
           ),
@@ -142,7 +142,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   ),
                   subtitle: Text(
                     "Online Marketing",
-                    //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    style: aAGreySmall,
                   ),
                 )),
           ),
@@ -167,7 +167,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   ),
                   subtitle: Text(
                     "Online Marketing",
-                    //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    style: aAGreySmall,
                   ),
                 )),
           ),
@@ -191,7 +191,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   ),
                   subtitle: Text(
                     "Medienproduktion",
-                    //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    style: aAGreySmall,
                   ),
                 )),
           ),
@@ -215,10 +215,11 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   ),
                   subtitle: Text(
                     "Medienproduktion",
-                    //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    style: aAGreySmall,
                   ),
                 )),
           ),
+          SizedBox(height: 10,),
         ],
       ),
     );

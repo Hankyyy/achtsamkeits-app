@@ -54,46 +54,41 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
           // Use a Builder here, otherwise `DefaultTabController.of(context)` below
           // returns null.
           child: Builder(
-            builder: (BuildContext context) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      ListTile(
-                        leading: Icon(
-                          Icons.insert_emoticon,
+            builder: (BuildContext context) => Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(
+                        Icons.insert_emoticon,
+                        color: Colors.black,
+                        size: 37.5,
+                      ),
+                      title: Text(
+                        "Wie geht es dir Heute?",
+                        style: aABlackBold,
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.assessment,
+                          size: 25.0,
                           color: Colors.black,
-                          size: 37.5,
                         ),
-                        title: Text(
-                          "Wie geht es dir Heute?",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                        ),
-                        trailing: IconButton(
-                          icon: Icon(
-                            Icons.assessment,
-                            size: 25.0,
-                            color: Colors.black,
-                          ),
-                          tooltip: "Gefühlsstatistiken",
-                          onPressed: () {
-                            Navigator.pushNamed(context, "/TrackerKalenderScreen");
-                          },
-                        ),
+                        tooltip: "Gefühlsstatistiken",
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, "/TrackerKalenderScreen");
+                        },
                       ),
-                      Expanded(
-                        child: IconTheme(
-                          data: IconThemeData(
-                            size: 128.0,
-                            color: Theme.of(context).highlightColor,
-                          ),
-                          child: TabBarView(children: gefuhlsWidgets),
-                        ),
-                      ),
-                      TabPageSelector(
-                        selectedColor: Colors.black,
-                      ),
-                    ],
-                  ),
+                    ),
+                    Expanded(
+                      child: TabBarView(children: gefuhlsWidgets),
+                    ),
+                    TabPageSelector(
+                      selectedColor: Colors.black,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
           ),
         ),
@@ -118,7 +113,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
       child: Column(
         children: <Widget>[
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Sehr Gut', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Sehr Gut',
+              style: aABlackReg,
+            ),
             value: GefuhlOptionen.sehrgut,
             groupValue: _gefuhle,
             secondary: Container(
@@ -135,14 +133,17 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Gut', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Gut',
+              style: aABlackReg,
+            ),
             value: GefuhlOptionen.gut,
             groupValue: _gefuhle,
             secondary: Container(
               height: 30.0,
               width: 100.0,
               decoration: BoxDecoration(
-                  color: Colors.lightGreenAccent,
+                  color: Colors.lightGreen[400],
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
@@ -152,7 +153,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Normal', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Normal',
+              style: aABlackReg,
+            ),
             value: GefuhlOptionen.normal,
             groupValue: _gefuhle,
             secondary: Container(
@@ -169,7 +173,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Schlecht', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Schlecht',
+              style: aABlackReg,
+            ),
             value: GefuhlOptionen.schlecht,
             groupValue: _gefuhle,
             secondary: Container(
@@ -186,7 +193,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             },
           ),
           RadioListTile<GefuhlOptionen>(
-            title: const Text('Sehr Schlecht', style: TextStyle(fontSize: 16.0),),
+            title: Text(
+              'Sehr Schlecht',
+              style: aABlackReg,
+            ),
             value: GefuhlOptionen.sehrschlecht,
             groupValue: _gefuhle,
             secondary: Container(

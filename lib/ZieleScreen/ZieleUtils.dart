@@ -2,10 +2,27 @@ class Meilenstein {
   final String title;
   List<Aufgabe> aufgaben;
   List<Aufgabe> erledigteAufgaben;
+  List<Aufgabe> alleAufgaben;
   DateTime geplant;
   DateTime deadline;
   String notizen;
   String nummer;
+
+  List getAufgaben() {
+    return aufgaben;
+  }
+  List getErledigteAufgaben() {
+    return erledigteAufgaben;
+  }
+
+  List getAlleAufgaben() {
+    List<Aufgabe> aA = aufgaben + erledigteAufgaben;
+    aA.sort((a, b){
+      return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+    });
+    return aA;
+  }
+
 
   Meilenstein({
     this.title,
