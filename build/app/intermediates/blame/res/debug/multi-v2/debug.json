@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Jakob\\IdeaProjects\\achtsamkeits-app\\achtsamkeits-app\\build\\app\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
+            "outputFile": "C:\\Users\\monae\\IP\\achtsamkeits-app\\build\\app\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\Jakob\\IdeaProjects\\achtsamkeits-app\\achtsamkeits-app\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\monae\\IP\\achtsamkeits-app\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
