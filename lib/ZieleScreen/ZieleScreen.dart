@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
+import 'package:sqflite/sqflite.dart';
 import 'package:aaproto2/ThemeData.dart';
 import 'package:aaproto2/ZieleScreen/ZielCardWidget.dart';
 
 import 'package:aaproto2/ZieleScreen/ZieleUtils.dart';
+
+import 'package:aaproto2/Model/meilenstein.dart';
+import 'package:aaproto2/Database/dbHelper.dart';
 
 class ZieleScreen extends StatefulWidget {
   @override
   _ZieleScreenState createState() => _ZieleScreenState();
 }
 
-class _ZieleScreenState extends State<ZieleScreen> {
+class _ZieleScreenState extends State<ZieleScreen>{
+  final msText = TextEditingController(); //-------------------
+  final msNotiz = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +50,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
           size: 35.0,
           color: Colors.grey[200],
         ),
-        tooltip: "Neuen Meilenstein erstellen",
-        backgroundColor: AAThemeData.primaryColor,
+        backgroundColor: AAThemeData.accentColor,
       ),
     );
   }
@@ -85,7 +89,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
         return AlertDialog(
           title: Text(
             "Neuer Meilenstein",
-            style: aABlackBold,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           content: Container(
               width: 800,
@@ -94,6 +98,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
                   shrinkWrap: true,
                   children: <Widget>[
                     TextFormField(
+                      controller: msText,
                       decoration: new InputDecoration(
                         labelText: "Titel",
                         fillColor: Colors.white,
@@ -111,7 +116,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('Erledigen bis:', style: aABlackReg,),
+                        Text('Erledigen bis:'),
                         SizedBox(
                           width: 20.0,
                         ),
@@ -132,7 +137,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('Deadline:', style: aABlackReg,),
+                        Text('Deadline:'),
                         SizedBox(
                           width: 20.0,
                         ),
@@ -149,8 +154,11 @@ class _ZieleScreenState extends State<ZieleScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 25,),
+                    Container(
+                      padding: EdgeInsets.only(top: 25.0),
+                    ),
                     TextFormField(
+                      controller: msNotiz,
                       keyboardType: TextInputType.multiline,
                       maxLines: 5,
                       decoration: InputDecoration(
@@ -175,7 +183,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
               child: Text(
                 "Abbrechen",
                 style:
-                aABlackReg,
+                TextStyle(fontSize: 16.0, color: AAThemeData.primaryColor),
               ),
               onPressed: () => Navigator.pop(context),
             ),
@@ -184,10 +192,21 @@ class _ZieleScreenState extends State<ZieleScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
               child: Text(
                 "Bestätigen",
-                style: aAWhiteReg,
+                style: TextStyle(fontSize: 16.0, color: Colors.white),
               ),
-              color: AAThemeData.primaryColor,
-              onPressed: () => Navigator.pop(context),
+              onPressed: () async {
+                var ms = new Meilenstein_db();
+                ms.titel = msText.text;
+                ms.datum = ("${deadlineDate.day.toString()}" +
+                    "."
+                        "${deadlineDate.month.toString()}" +
+                    "."
+                        "${deadlineDate.year.toString()}");
+                ms.notizen = msNotiz.text;
+                await ms.insertMeilenstein(ms);
+                print(await ms.getMeilenstein(msText.text));
+                Navigator.pop(context);
+              },
             ),
           ],
         );

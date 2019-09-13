@@ -1,4 +1,4 @@
-#Sun Sep 01 21:49:22 CEST 2019
-base.0=C\:\\Users\\monae\\IP\\achtsamkeits-app\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+#Mon Sep 02 10:07:39 CEST 2019
+base.0=C\:\\Users\\Tim\\Documents\\FH\\4.Semester\\IP\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

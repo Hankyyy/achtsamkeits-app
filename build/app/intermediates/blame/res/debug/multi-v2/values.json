@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\monae\\IP\\achtsamkeits-app\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\Tim\\Documents\\FH\\4.Semester\\IP\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\monae\\IP\\achtsamkeits-app\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\Tim\\Documents\\FH\\4.Semester\\IP\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
