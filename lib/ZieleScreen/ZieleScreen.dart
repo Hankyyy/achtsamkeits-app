@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:aaproto2/ThemeData.dart';
-import 'package:aaproto2/ZieleScreen/ZielCardWidget.dart';
+import 'ZieleUtils.dart';
+import 'ZielCardWidget.dart';
+import 'AddMeilensteinScreen.dart';
 
 class ZieleScreen extends StatefulWidget {
   @override
@@ -13,49 +14,41 @@ class _ZieleScreenState extends State<ZieleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ziele', style: TextStyle(fontSize: 30.0),),
-        actions: <Widget>[
-
-        ],
-        backgroundColor: Colors.grey[50],
+        title: Text(
+          'Ziele',
+          style: TextStyle(
+              fontSize: 30.0, color: Theme.of(context).textTheme.title.color),
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.color,
+        actions: <Widget>[],
         elevation: 0.0,
       ),
-      body: ListView(
-        padding: EdgeInsets.all(10.0),
-        children: <Widget>[
-          ZielCard(
-            1,
-            1,
-            2,
-            5,
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 10.0),
-          ),
-          ZielCard(
-            2,
-            1,
-            2,
-            1,
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 10.0),
-          ),
-          ZielCard(
-            3,
-            4,
-            6,
-            8,
-          ),
-          Container(padding: EdgeInsets.only(bottom: 75.0),),
-        ],
+      body: ListView.builder(
+        shrinkWrap: true,
+        itemCount: getMeilensteine().length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(bottom: 10.0, left: 12.5, right: 12.5),
+            child: ZielCard(
+              getMeilensteine()[index],
+              index,
+              getMeilensteine().length,
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/neuerMeilenstein');
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AddMeilensteinScreen()));
         },
-        child: Icon(Icons.add, size: 35.0, color: Colors.grey[200],),
-        backgroundColor: AAThemeData.accentColor,
+        child: Icon(
+          Icons.add,
+          size: 35.0,
+          color: Theme.of(context).accentTextTheme.title.color,
+        ),
+        tooltip: "Neuen Meilenstein erstellen",
+        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }

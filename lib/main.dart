@@ -1,91 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
-import 'package:aaproto2/ThemeData.dart';
+import 'BottomNavBarWidget/BottomNavBarWidget.dart';
+import 'package:ape_of_mind/EinstellungenScreen/EinstellungenScreen.dart';
+import 'package:ape_of_mind/Theme/Theme.dart';
+import 'package:ape_of_mind/RatgeberScreen/RatgeberScreen.dart';
+import 'package:ape_of_mind/LernTimerScreen/LernTimerScreen.dart';
+import 'package:ape_of_mind/TrackerKalenderScreen/TrackerKalenderScreen.dart';
 
-import 'package:aaproto2/HomeScreen/HomeScreen.dart';
-import 'package:aaproto2/KalenderScreen/KalenderScreen.dart';
-import 'package:aaproto2/UbungenScreen/UbungenScreen.dart';
-import 'package:aaproto2/ZieleScreen/ZieleScreen.dart';
-import 'package:aaproto2/EinstellungenScreen/EinstellungenScreen.dart';
-import 'package:aaproto2/ZieleScreen/NeuerMeilensteinScreen.dart';
-import 'package:aaproto2/ZieleScreen/NeueAufgabeScreen.dart';
+void main() => runApp(APE());
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  static const String _title = 'AAProto2';
-
+class APE extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: BottomNavBarWidget(),
-      theme: AAThemeData,
-      routes: <String, WidgetBuilder> { //5
-        '/einstellungen': (BuildContext context) => EinstellungenScreen(),
-        '/neuerMeilenstein': (BuildContext context) => NeuerMeilensteinScreen(),//6
-        '/neuesZiel': (BuildContext context) => NeueAufgabeScreen(),
-      },
-    );
-  }
-}
-
-class BottomNavBarWidget extends StatefulWidget {
-  BottomNavBarWidget({Key key}) : super(key: key);
-
-  @override
-  _BottomNavBarWidgetState createState() => _BottomNavBarWidgetState();
-}
-
-class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    KalenderScreen(),
-    UbungenScreen(),
-    ZieleScreen(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: AAThemeData.primaryColor,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            title: Text('Kalender'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            title: Text('Übungen'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.flag),
-            title: Text('Ziele'),
-          ),
-        ],
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        selectedItemColor: AAThemeData.backgroundColor,
-        unselectedItemColor: AAThemeData.buttonColor,
-        onTap: _onItemTapped,
-      ),
-    );
+    return DynamicTheme(
+        defaultBrightness: Brightness.light,
+        data: (brightness) => indigo,
+        themedWidgetBuilder: (context, theme) {
+          return MaterialApp(
+            title: 'Ape of Mind',
+            theme: theme,
+            home: BottomNavBarWidget(),
+            debugShowCheckedModeBanner: false,
+            routes: {
+              "/EinstellungenScreen": (context) => EinstellungenScreen(),
+              "/RatgeberScreen": (context) => RatgeberScreen(),
+              "/LernTimerScreen": (context) => LernTimerScreen(),
+              "/TrackerKalenderScreen": (context) => TrackerKalenderScreen(),
+            },
+          );
+        });
   }
 }

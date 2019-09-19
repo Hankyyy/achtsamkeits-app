@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:aaproto2/ThemeData.dart';
+import 'ZitatWidget.dart';
+import 'ButtonWidget.dart';
+import 'GefuhlTrackerWidget.dart';
+import 'ProduktivitatTrackarWidget.dart';
 
-import 'package:aaproto2/HomeScreen/QuickActionWidget.dart';
-import 'package:aaproto2/HomeScreen/ZitatWidget.dart';
-import 'package:aaproto2/HomeScreen/GefuhlTrackerWidget.dart';
-import 'package:aaproto2/HomeScreen/ProduktivitatTrackerWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,12 +15,26 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: 12.5,
+      ),
       children: <Widget>[
-        QAWidget(),
+        SizedBox(
+          height: 25,
+        ),
+        ButtonWidget(),
+        SizedBox(
+          height: 15,
+        ),
         ZitatWidget(),
+        SizedBox(
+          height: 12.5,
+        ),
         GefuhlTrackerWidget(),
         ProduktivitatTrackerWidget(),
+        SizedBox(
+          height: 12.5,
+        ),
       ],
     );
   }
