@@ -15,7 +15,7 @@ class APE extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicTheme(
         defaultBrightness: Brightness.light,
-        data: (brightness) => indigo,
+        data: (brightness) => darkTheme,
         themedWidgetBuilder: (context, theme) {
           return MaterialApp(
             title: 'Ape of Mind',

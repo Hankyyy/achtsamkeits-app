@@ -1,3 +1,5 @@
+import 'package:ape_of_mind/Model/aufgaben.dart';
+import 'package:ape_of_mind/Model/meilenstein.dart';
 import 'package:flutter/material.dart';
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -5,11 +7,10 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'ZieleUtils.dart';
 import 'AddAufgabeScreen.dart';
 
-
 class ZielCard extends StatefulWidget {
   ZielCard(this.meilenstein, this.i, this.length);
 
-  final Meilenstein meilenstein;
+  final Meilenstein_db meilenstein;
   final int i;
   final int length;
 
@@ -20,9 +21,11 @@ class ZielCard extends StatefulWidget {
 class _ZielCardState extends State<ZielCard> {
   _ZielCardState(this.meilenstein, this.i, this.length);
 
+  Aufgaben aufgabe = new Aufgaben();
+
   double borderThickness = 1;
 
-  Meilenstein meilenstein;
+  Meilenstein_db meilenstein;
   int i;
   int length;
 
@@ -112,7 +115,7 @@ class _ZielCardState extends State<ZielCard> {
                         borderSide: BorderSide(),
                       ),
                     ),
-                    initialValue: meilenstein.title,
+                    initialValue: meilenstein.titel,
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -213,31 +216,43 @@ class _ZielCardState extends State<ZielCard> {
                     style: Theme.of(context).textTheme.body1,
                   ),
                   children: <Widget>[
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: meilenstein.getAlleAufgaben().length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                            child: ListTile(
-                          title: Text(
-                            meilenstein.getAlleAufgaben()[index].title,
-                            style: Theme.of(context).textTheme.body2,
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(
-                              Icons.delete,
-                              size: 25,
-                              color: Theme.of(context).textTheme.title.color,
+                    FutureBuilder<List<Aufgaben>>(
+                        //future: aufgabenMS(),
+                        builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        // return: show loading widget
+                      }
+                      if (snapshot.hasError) {
+                        // return: show error widget
+                      }
+                      List<Aufgaben> aufgaben = snapshot.data ?? [];
+                      Aufgaben af = new Aufgaben();
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: aufgaben.length,
+                        itemBuilder: (context, index) {
+                          return Center(
+                              child: ListTile(
+                            title: Text(
+                              aufgaben[index].titel,
+                              style: Theme.of(context).textTheme.body2,
                             ),
-                            tooltip: "Aufgabe löschen",
-                            onPressed: () {
-                              Scaffold.of(context).showSnackBar(snackBar);
-                            },
-                          ),
-                        ));
-                      },
-                    ),
+                            trailing: IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                size: 25,
+                                color: Theme.of(context).textTheme.title.color,
+                              ),
+                              tooltip: "Aufgabe löschen",
+                              onPressed: () {
+                                Scaffold.of(context).showSnackBar(snackBar);
+                              },
+                            ),
+                          ));
+                        },
+                      );
+                    }),
                   ],
                 ),
                 SizedBox(
@@ -306,7 +321,7 @@ class _ZielCardState extends State<ZielCard> {
                 contentPadding: EdgeInsets.only(
                     top: 10.0, left: 15.0, bottom: 10, right: 12.5),
                 title: Text(
-                  meilenstein.title,
+                  meilenstein.titel,
                   style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Column(
@@ -316,21 +331,11 @@ class _ZielCardState extends State<ZielCard> {
                       height: 10.0,
                     ),
                     Text(
-                      "Erledigen bis: " +
-                          meilenstein.geplant.day.toString() +
-                          "." +
-                          meilenstein.geplant.month.toString() +
-                          "." +
-                          meilenstein.geplant.year.toString(),
+                      "Erledigen bis: " + meilenstein.datum,
                       style: Theme.of(context).textTheme.body2,
                     ),
                     Text(
-                      "Deadline: " +
-                          meilenstein.deadline.day.toString() +
-                          "." +
-                          meilenstein.deadline.month.toString() +
-                          "." +
-                          meilenstein.deadline.year.toString(),
+                      "Deadline: " + meilenstein.deadline,
                       style: Theme.of(context).textTheme.body2,
                     ),
                   ],
@@ -363,14 +368,14 @@ class _ZielCardState extends State<ZielCard> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    AddAufgabeScreen(meilenstein.title)));
+                                    AddAufgabeScreen(meilenstein.titel)));
                       },
                     ),
                   ],
                 ),
               ),
               _getNotizen(),
-              LinearPercentIndicator(
+              /*LinearPercentIndicator(
                 padding: EdgeInsets.symmetric(horizontal: 25),
                 lineHeight: 15,
                 backgroundColor: Theme.of(context).highlightColor,
@@ -378,48 +383,44 @@ class _ZielCardState extends State<ZielCard> {
                 percent: meilenstein.getErledigteAufgaben().length /
                     (meilenstein.getAufgaben().length +
                         meilenstein.getErledigteAufgaben().length),
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: meilenstein.getAufgaben().length,
-                itemBuilder: (context, index) {
-                  return Center(
-                      child: CheckboxListTile(
-                    value: false,
-                    onChanged: null,
-                    title: Text(
-                      meilenstein.getAufgaben()[index].title,
-                      style: Theme.of(context).textTheme.body2,
-                    ),
-                    subtitle: Text(
-                      "Erledigen bis: " +
-                          meilenstein
-                              .getAufgaben()[index]
-                              .geplant
-                              .day
-                              .toString() +
-                          "." +
-                          meilenstein
-                              .getAufgaben()[index]
-                              .geplant
-                              .month
-                              .toString() +
-                          "." +
-                          meilenstein
-                              .getAufgaben()[index]
-                              .geplant
-                              .year
-                              .toString(),
-                      style: Theme.of(context).textTheme.subtitle,
-                    ),
-                  ));
-                },
-              ),
+              ),*/
+              FutureBuilder<List<Aufgaben>>(
+                  future: aufgabe.aufgabenMS(meilenstein.titel),
+                  builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  // return: show loading widget
+                }
+                if (snapshot.hasError) {
+                  // return: show error widget
+                }
+                List<Aufgaben> aufgaben = snapshot.data ?? [];
+                Aufgaben af = new Aufgaben();
+                return ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) {
+                    return Center(
+                        child: CheckboxListTile(
+                          value: false,
+                          onChanged: null,
+                          title: Text(
+                            snapshot.data[index].titel,
+                            style: Theme.of(context).textTheme.body2,
+                          ),
+                          subtitle: Text(
+                            "Erledigen bis: " +
+                                snapshot.data[index].datum,
+                            style: Theme.of(context).textTheme.subtitle,
+                          ),
+                        ));
+                  },
+                );
+              }),
               SizedBox(
                 height: 10,
               ),
-              ExpansionTile(
+              /*ExpansionTile(
                 title: Text(
                   "Erledigte Aufgaben",
                   style: Theme.of(context).textTheme.body1,
@@ -443,7 +444,7 @@ class _ZielCardState extends State<ZielCard> {
                     },
                   ),
                 ],
-              )
+              )*/
             ],
           ),
         ),
@@ -471,7 +472,7 @@ class _ZielCardState extends State<ZielCard> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: Theme.of(context).dialogTheme.shape,
-          title: Text(meilenstein.title + ' löschen?'),
+          title: Text(meilenstein.titel + ' löschen?'),
           actions: <Widget>[
             RaisedButton(
               shape: RoundedRectangleBorder(

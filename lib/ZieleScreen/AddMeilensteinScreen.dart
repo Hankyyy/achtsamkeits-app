@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ape_of_mind/Model/meilenstein.dart';
 
 class AddMeilensteinScreen extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class AddMeilensteinScreen extends StatefulWidget {
 class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
   DateTime selectedDate = DateTime.now();
   DateTime deadlineDate = DateTime.now();
+  final msTitel = TextEditingController();
+  final msNotiz = TextEditingController();
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -71,6 +74,7 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                       shrinkWrap: true,
                       children: <Widget>[
                         TextFormField(
+                          controller: msTitel,
                           decoration: new InputDecoration(
                             labelText: "Titel",
                             fillColor: Colors.white,
@@ -138,6 +142,7 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                           height: 25,
                         ),
                         TextFormField(
+                          controller: msNotiz,
                           keyboardType: TextInputType.multiline,
                           maxLines: 5,
                           decoration: InputDecoration(
@@ -174,7 +179,23 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                   )
                 ],
               ),
-              onPressed: () {},
+              onPressed: () async {
+                var ms = new Meilenstein_db();
+                ms.titel = msTitel.text;
+                ms.datum = ("${selectedDate.day.toString()}" +
+                    "."
+                        "${selectedDate.month.toString()}" +
+                    "."
+                        "${selectedDate.year.toString()}");
+                ms.deadline = ("${deadlineDate.day.toString()}" +
+                    "."
+                        "${deadlineDate.month.toString()}" +
+                    "."
+                        "${deadlineDate.year.toString()}");
+                ms.notizen = msNotiz.text;
+                await ms.insertMeilenstein(ms);
+                Navigator.pop(context);
+              },
               splashColor: Theme.of(context).highlightColor,
             ),
           ),

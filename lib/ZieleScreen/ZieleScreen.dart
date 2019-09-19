@@ -1,3 +1,4 @@
+import 'package:ape_of_mind/Model/meilenstein.dart';
 import 'package:flutter/material.dart';
 
 import 'ZieleUtils.dart';
@@ -23,20 +24,33 @@ class _ZieleScreenState extends State<ZieleScreen> {
         actions: <Widget>[],
         elevation: 0.0,
       ),
-      body: ListView.builder(
-        shrinkWrap: true,
-        itemCount: getMeilensteine().length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: 10.0, left: 12.5, right: 12.5),
-            child: ZielCard(
-              getMeilensteine()[index],
-              index,
-              getMeilensteine().length,
-            ),
-          );
-        },
-      ),
+      body:
+      FutureBuilder<List<Meilenstein_db>>(
+          future: getMeilensteine(),
+          builder: (context, snapshot) {
+            if(snapshot.connectionState != ConnectionState.done) {
+              // return: show loading widget
+            }
+            if(snapshot.hasError) {
+              // return: show error widget
+            }
+            List<Meilenstein_db> meilensteine = snapshot.data ?? [];
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: meilensteine.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 10.0, left: 12.5, right: 12.5),
+                  child: ZielCard(
+                    meilensteine[index],
+                    index,
+                    meilensteine.length,
+                  ),
+                );
+              },
+            );
+          }),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,

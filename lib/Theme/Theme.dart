@@ -129,7 +129,7 @@ ThemeData darkTheme = ThemeData(
   buttonColor: Colors.grey[800],
   cursorColor: Colors.white,
   bottomAppBarColor: Colors.black,
-  hoverColor: Colors.grey[900],
+  //hoverColor: Colors.grey[900],
   appBarTheme: darkAppBarTheme,
   textTheme: darkTextTheme,
   accentTextTheme: darkAccentTextTheme,

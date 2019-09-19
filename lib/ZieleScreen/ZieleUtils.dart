@@ -1,3 +1,5 @@
+import 'package:ape_of_mind/Model/meilenstein.dart';
+
 class Meilenstein {
   final String title;
   List<Aufgabe> aufgaben;
@@ -50,8 +52,12 @@ class Aufgabe {
   }) : assert(title != null);
 }
 
-List<Meilenstein> getMeilensteine() {
-  return [
+Future<List<Meilenstein_db>> getMeilensteine() async {
+
+  var ms = new Meilenstein_db();
+  return ms.msget();
+
+  /*return [
     Meilenstein(
       title: "Online Marketing",
       geplant: DateTime(2019, 08, 14),
@@ -79,7 +85,7 @@ List<Meilenstein> getMeilensteine() {
       aufgaben: getFITUAufgaben(),
       erledigteAufgaben: getFITUerledigteAufgaben(),
     ),
-  ];
+  ];*/
 }
 
 List<Aufgabe> getOMAufgaben() {

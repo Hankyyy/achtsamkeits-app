@@ -28,6 +28,9 @@ dependencies:
   flutter_visualizers: ^0.0.2
   flutter_bloc: ^0.20.0
   equatable: ^0.4.0
+  sqflite:
+  path:
+  path_provider:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -54,7 +57,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
+    - assets/Ubungen/atem_anker_audio.mp3
+    - assets/Ubungen/blick_fokussieren_audio.mp3
+    - assets/Ubungen/bodyscan_audio.mp3
+    - assets/Ubungen/drei_minuten_taucher_audio.mp3
+    - assets/Ubungen/meditatives_zirkeltraining_audio.mp3
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

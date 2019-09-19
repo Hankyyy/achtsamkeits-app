@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ape_of_mind/Model/aufgaben.dart';
 
 class AddAufgabeScreen extends StatefulWidget {
   final String meilensteinTitle;
+
 
   AddAufgabeScreen(this.meilensteinTitle);
 
@@ -12,6 +14,7 @@ class AddAufgabeScreen extends StatefulWidget {
 
 class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
   String meilensteinTitle;
+  final afTitel = TextEditingController();
 
   _AddAufgabeScreenState(this.meilensteinTitle);
 
@@ -84,6 +87,7 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                           padding: EdgeInsets.only(top: 25.0),
                         ),
                         TextFormField(
+                          controller: afTitel,
                           decoration: new InputDecoration(
                             labelText: "Titel",
                             fillColor: Colors.white,
@@ -144,7 +148,19 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                   )
                 ],
               ),
-              onPressed: () {},
+              onPressed: () async {
+                var af = new Aufgaben();
+                af.titel = afTitel.text;
+                af.datum = ("${selectedDate.day.toString()}" +
+                    "."
+                        "${selectedDate.month.toString()}" +
+                    "."
+                        "${selectedDate.year.toString()}");
+                af.erledigt = 0;
+                af.meilenstein_id = meilensteinTitle;
+                await af.insertAufgabe(af);
+                Navigator.pop(context);
+              },
               splashColor: Theme.of(context).highlightColor,
             ),
           ),
