@@ -20,7 +20,7 @@ class _RatgeberScreenState extends State<RatgeberScreen> {
             size: 30.0,
           ),
           color: Theme.of(context).textTheme.title.color,
-          tooltip: "Abbrechen",
+          tooltip: "Zurück",
           onPressed: () {
             Navigator.pop(context);
           },

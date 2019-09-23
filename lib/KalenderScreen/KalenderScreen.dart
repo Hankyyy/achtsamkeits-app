@@ -44,10 +44,12 @@ class _KalenderScreenState extends State<KalenderScreen> {
             color: Theme.of(context).textTheme.title.color,
             tooltip: "Heute",
             onPressed: () {
-              setState(() {
-                _calendarController.setSelectedDay(DateTime.now(),
-                    runCallback: true);
-              });
+              setState(
+                () {
+                  _calendarController.setSelectedDay(DateTime.now(),
+                      runCallback: true);
+                },
+              );
             },
           ),
         ],
@@ -111,99 +113,103 @@ class _KalenderScreenState extends State<KalenderScreen> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.5),
             child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: CheckboxListTile(
+                value: false,
+                onChanged: (bool newValue) {},
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      "Übung 5",
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                  ],
                 ),
-                child: CheckboxListTile(
-                  value: false,
-                  onChanged: (bool newValue) {},
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Übung 5",
-                        style: Theme.of(context).textTheme.title,
-                      ),
-                    ],
-                  ),
-                  subtitle: Text(
-                    "Online Marketing",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                )),
+                subtitle: Text(
+                  "Online Marketing",
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ),
+            ),
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.5),
             child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: CheckboxListTile(
+                value: false,
+                onChanged: (bool newvalue) {},
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      "Praktikum 4",
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                  ],
                 ),
-                child: CheckboxListTile(
-                  value: false,
-                  onChanged: (bool newvalue) {},
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Praktikum 4",
-                        style: Theme.of(context).textTheme.title,
-                      ),
-                    ],
-                  ),
-                  subtitle: Text(
-                    "Online Marketing",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                )),
+                subtitle: Text(
+                  "Online Marketing",
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ),
+            ),
           ),
           //Text(DateTime.now().day.toString()),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.5),
             child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: CheckboxListTile(
+                value: false,
+                onChanged: (bool newvalue) {},
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      "Übung 5",
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                  ],
                 ),
-                child: CheckboxListTile(
-                  value: false,
-                  onChanged: (bool newvalue) {},
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Übung 5",
-                        style: Theme.of(context).textTheme.title,
-                      ),
-                    ],
-                  ),
-                  subtitle: Text(
-                    "Online Marketing",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                )),
+                subtitle: Text(
+                  "Online Marketing",
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ),
+            ),
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.5),
             child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: CheckboxListTile(
+                value: false,
+                onChanged: (bool newvalue) {},
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      "Vorlesung 5",
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                  ],
                 ),
-                child: CheckboxListTile(
-                  value: false,
-                  onChanged: (bool newvalue) {},
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Vorlesung 5",
-                        style: Theme.of(context).textTheme.title,
-                      ),
-                    ],
-                  ),
-                  subtitle: Text(
-                    "Medienproduktion",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                )),
+                subtitle: Text(
+                  "Medienproduktion",
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ),
+            ),
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.5),

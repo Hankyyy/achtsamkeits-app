@@ -55,37 +55,39 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
 
   Widget designCard(context) {
     void handleChange(int i) {
-      setState(() {
-        selectedColor = i;
-        themeValue = i;
-        darkModeValue = false;
-        switch (i) {
-          case 0:
-            DynamicTheme.of(context).setThemeData(grun);
-            break;
-          case 1:
-            DynamicTheme.of(context).setThemeData(aquamarin);
-            break;
-          case 2:
-            DynamicTheme.of(context).setThemeData(limette);
-            break;
-          case 3:
-            DynamicTheme.of(context).setThemeData(bernstein);
-            break;
-          case 4:
-            DynamicTheme.of(context).setThemeData(lila);
-            break;
-          case 5:
-            DynamicTheme.of(context).setThemeData(indigo);
-            break;
-          case 6:
-            DynamicTheme.of(context).setThemeData(cyan);
-            break;
-          case 7:
-            DynamicTheme.of(context).setThemeData(blaugrau);
-            break;
-        }
-      });
+      setState(
+        () {
+          selectedColor = i;
+          themeValue = i;
+          darkModeValue = false;
+          switch (i) {
+            case 0:
+              DynamicTheme.of(context).setThemeData(grun);
+              break;
+            case 1:
+              DynamicTheme.of(context).setThemeData(aquamarin);
+              break;
+            case 2:
+              DynamicTheme.of(context).setThemeData(limette);
+              break;
+            case 3:
+              DynamicTheme.of(context).setThemeData(bernstein);
+              break;
+            case 4:
+              DynamicTheme.of(context).setThemeData(lila);
+              break;
+            case 5:
+              DynamicTheme.of(context).setThemeData(indigo);
+              break;
+            case 6:
+              DynamicTheme.of(context).setThemeData(cyan);
+              break;
+            case 7:
+              DynamicTheme.of(context).setThemeData(blaugrau);
+              break;
+          }
+        },
+      );
     }
 
     String getTitle(int i) {
@@ -118,13 +120,15 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
     }
 
     void changeDarkTheme(bool state, context) {
-      setState(() {
-        if (state == true) {
-          selectedColor = null;
-          DynamicTheme.of(context).setThemeData(darkTheme);
-        } else
-          handleChange(themeValue);
-      });
+      setState(
+        () {
+          if (state == true) {
+            selectedColor = null;
+            DynamicTheme.of(context).setThemeData(darkTheme);
+          } else
+            handleChange(themeValue);
+        },
+      );
     }
 
     return Card(
@@ -212,19 +216,22 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       child: Column(
         children: <Widget>[
           Container(
-              child: ListTile(
-            title: Text(
-              "Benachrichtigungen",
-              //style: aABlackBold,
+            child: ListTile(
+              title: Text(
+                "Benachrichtigungen",
+                //style: aABlackBold,
+              ),
             ),
-          )),
+          ),
           SwitchListTile(
             value: i,
             activeColor: Theme.of(context).primaryColor,
             onChanged: (bool newValue) {
-              setState(() {
-                i = newValue;
-              });
+              setState(
+                () {
+                  i = newValue;
+                },
+              );
             },
             secondary: Icon(
               Icons.insert_emoticon,
@@ -239,9 +246,11 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             value: j,
             activeColor: Theme.of(context).primaryColor,
             onChanged: (bool newValue) {
-              setState(() {
-                j = newValue;
-              });
+              setState(
+                () {
+                  j = newValue;
+                },
+              );
             },
             secondary: Icon(
               Icons.calendar_today,
@@ -256,9 +265,11 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             value: k,
             activeColor: Theme.of(context).primaryColor,
             onChanged: (bool newValue) {
-              setState(() {
-                k = newValue;
-              });
+              setState(
+                () {
+                  k = newValue;
+                },
+              );
             },
             secondary: Icon(
               Icons.bookmark,

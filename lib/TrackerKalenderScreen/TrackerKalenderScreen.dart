@@ -81,9 +81,6 @@ String getTitle(GP gP){
 
 class GefuhleScreen extends StatelessWidget {
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -115,5 +112,4 @@ Color getColor(int wert){
     case 3: return Colors.orange;
     case 4: return Colors.red;
   }
-
 }

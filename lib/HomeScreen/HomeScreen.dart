@@ -5,7 +5,6 @@ import 'ButtonWidget.dart';
 import 'GefuhlTrackerWidget.dart';
 import 'ProduktivitatTrackarWidget.dart';
 
-
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -14,28 +13,34 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12.5,
+    return SafeArea(
+      top: true,
+      minimum: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top,
       ),
-      children: <Widget>[
-        SizedBox(
-          height: 25,
+      child: ListView(
+        padding: EdgeInsets.symmetric(
+          horizontal: 12.5,
         ),
-        ButtonWidget(),
-        SizedBox(
-          height: 15,
-        ),
-        ZitatWidget(),
-        SizedBox(
-          height: 12.5,
-        ),
-        GefuhlTrackerWidget(),
-        ProduktivitatTrackerWidget(),
-        SizedBox(
-          height: 12.5,
-        ),
-      ],
+        children: <Widget>[
+          SizedBox(
+            height: 25,
+          ),
+          ButtonWidget(),
+          SizedBox(
+            height: 15,
+          ),
+          ZitatWidget(),
+          SizedBox(
+            height: 12.5,
+          ),
+          GefuhlTrackerWidget(),
+          ProduktivitatTrackerWidget(),
+          SizedBox(
+            height: 12.5,
+          ),
+        ],
+      ),
     );
   }
 }

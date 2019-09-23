@@ -25,7 +25,7 @@ class Aufgaben {
     };
   }
 
-  Future<void> insertAufgabe(Aufgaben a) async{
+  Future<void> insertAufgabe(Aufgaben a) async {
     final Database db = await DB.instance.initDB();
     await db.insert(
       'aufgaben',
@@ -35,25 +35,27 @@ class Aufgaben {
   }
 
 //einzelne Aufgaben, unabhängig von Meilensteinen!!
-  Future<String> getAufgaben(String s) async{
+  Future<String> getAufgaben(String s) async {
     final Database db = await DB.instance.initDB();
-    List<Map<String, dynamic>> map = await db.query('aufgaben', where: "titel =?",
-        whereArgs: [s]);
+    List<Map<String, dynamic>> map =
+        await db.query('aufgaben', where: "titel =?", whereArgs: [s]);
     return map.toString();
   }
 
-  Future<List<Aufgaben>> aufgabenMS(String titel) async{
+  Future<List<Aufgaben>> aufgabenMS(String titel) async {
     final Database db = await DB.instance.initDB();
-    List<Map<String, dynamic>> map = await db.query('aufgaben', where: "meilenstein_id =?",
-        whereArgs: [titel]);
-    return List.generate(map.length, (i) {
-      return Aufgaben(
-        titel: map[i]["titel"],
-        erledigt: map[i]["erledigt"],
-        datum: map[i]["datum"],
-        meilenstein_id: map[i]["meilenstein_id"],
-      );
-    });
+    List<Map<String, dynamic>> map = await db
+        .query('aufgaben', where: "meilenstein_id =?", whereArgs: [titel]);
+    return List.generate(
+      map.length,
+      (i) {
+        return Aufgaben(
+          titel: map[i]["titel"],
+          erledigt: map[i]["erledigt"],
+          datum: map[i]["datum"],
+          meilenstein_id: map[i]["meilenstein_id"],
+        );
+      },
+    );
   }
-
 }

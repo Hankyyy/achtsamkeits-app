@@ -31,9 +31,11 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
     if (picked != null && picked != deadlineDate)
-      setState(() {
-        deadlineDate = picked;
-      });
+      setState(
+        () {
+          deadlineDate = picked;
+        },
+      );
   }
 
   @override
@@ -68,95 +70,97 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Container(
-                  padding: EdgeInsets.all(20),
-                  child: Form(
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: <Widget>[
-                        TextFormField(
-                          controller: msTitel,
-                          decoration: new InputDecoration(
-                            labelText: "Titel",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(),
-                            ),
-                            //fillColor: Colors.green
+                padding: EdgeInsets.all(20),
+                child: Form(
+                  child: ListView(
+                    shrinkWrap: true,
+                    primary: false,
+                    children: <Widget>[
+                      TextFormField(
+                        controller: msTitel,
+                        decoration: new InputDecoration(
+                          labelText: "Titel",
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(),
                           ),
+                          //fillColor: Colors.green
                         ),
-                        Container(
-                          padding: EdgeInsets.only(top: 25.0),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              'Erledigen bis:',
-                              style: Theme.of(context).textTheme.body2,
-                            ),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            OutlineButton(
-                              onPressed: () => _selectDate(context),
-                              highlightedBorderColor:
-                                  Theme.of(context).primaryColor,
-                              child: Text("${selectedDate.day.toString()}" +
-                                  "."
-                                      "${selectedDate.month.toString()}" +
-                                  "."
-                                      "${selectedDate.year.toString()}"),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              'Deadline:',
-                              style: Theme.of(context).textTheme.body2,
-                            ),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            OutlineButton(
-                              onPressed: () => _deadlineDate(context),
-                              highlightedBorderColor:
-                                  Theme.of(context).primaryColor,
-                              child: Text("${deadlineDate.day.toString()}" +
-                                  "."
-                                      "${deadlineDate.month.toString()}" +
-                                  "."
-                                      "${deadlineDate.year.toString()}"),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        TextFormField(
-                          controller: msNotiz,
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 5,
-                          decoration: InputDecoration(
-                            labelText: "Notizen",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(),
-                            ), //fillColor: Colors.green
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 25.0),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Erledigen bis:',
+                            style: Theme.of(context).textTheme.body2,
                           ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          OutlineButton(
+                            onPressed: () => _selectDate(context),
+                            highlightedBorderColor:
+                                Theme.of(context).primaryColor,
+                            child: Text("${selectedDate.day.toString()}" +
+                                "."
+                                    "${selectedDate.month.toString()}" +
+                                "."
+                                    "${selectedDate.year.toString()}"),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Deadline:',
+                            style: Theme.of(context).textTheme.body2,
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          OutlineButton(
+                            onPressed: () => _deadlineDate(context),
+                            highlightedBorderColor:
+                                Theme.of(context).primaryColor,
+                            child: Text("${deadlineDate.day.toString()}" +
+                                "."
+                                    "${deadlineDate.month.toString()}" +
+                                "."
+                                    "${deadlineDate.year.toString()}"),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      TextFormField(
+                        controller: msNotiz,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          labelText: "Notizen",
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(),
+                          ), //fillColor: Colors.green
                         ),
-                      ],
-                    ),
-                  )),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
           Padding(

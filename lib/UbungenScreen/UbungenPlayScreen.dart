@@ -94,56 +94,54 @@ class _UbungenPlayScreenState extends State<UbungenPlayScreen>
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Expanded(
-                  child: Padding(
-                padding: EdgeInsets.all(50),
                 child: FractionallySizedBox(
-                  widthFactor: 10,
-                  child: Card(
-                    shape: CircleBorder(),
-                    child: Padding(
-                      padding: EdgeInsets.all(30),
-                      child: Align(
-                        alignment: FractionalOffset.center,
-                        child: AspectRatio(
-                          aspectRatio: 1.0,
-                          child: Stack(
-                            children: <Widget>[
-                              Positioned.fill(
-                                child: AnimatedBuilder(
-                                  animation: animationController,
-                                  builder:
-                                      (BuildContext context, Widget child) {
-                                    return CustomPaint(
-                                      painter: TimerPainter(
-                                          animation: animationController,
-                                          backgroundColor:
-                                              Theme.of(context).highlightColor,
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                    );
-                                  },
+                    widthFactor: 1.1,
+                    child: Card(
+                      shape: CircleBorder(),
+                      child: Padding(
+                        padding: EdgeInsets.all(30),
+                        child: Align(
+                          alignment: FractionalOffset.center,
+                          child: AspectRatio(
+                            aspectRatio: 1.0,
+                            child: Stack(
+                              children: <Widget>[
+                                Positioned.fill(
+                                  child: AnimatedBuilder(
+                                    animation: animationController,
+                                    builder:
+                                        (BuildContext context, Widget child) {
+                                      return CustomPaint(
+                                        painter: TimerPainter(
+                                            animation: animationController,
+                                            backgroundColor: Theme.of(context)
+                                                .highlightColor,
+                                            color:
+                                                Theme.of(context).primaryColor),
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                              Align(
-                                alignment: FractionalOffset.center,
-                                child: AnimatedBuilder(
-                                  animation: animationController,
-                                  builder: (_, Widget child) {
-                                    return Text(
-                                      timerString,
-                                      style: TextStyle(fontSize: 60.0),
-                                    );
-                                  },
+                                Align(
+                                  alignment: FractionalOffset.center,
+                                  child: AnimatedBuilder(
+                                    animation: animationController,
+                                    builder: (_, Widget child) {
+                                      return Text(
+                                        timerString,
+                                        style: TextStyle(fontSize: 60.0),
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
                     ),
                   ),
                 ),
-              )),
+              ),
               Container(
                 margin: EdgeInsets.all(8.0),
                 child: Row(
@@ -159,28 +157,33 @@ class _UbungenPlayScreenState extends State<UbungenPlayScreen>
                               animationController.isAnimating
                                   ? Icons.pause
                                   : played ? Icons.refresh : Icons.play_arrow,
-                              color: Theme.of(context).accentTextTheme.title.color,
+                              color:
+                                  Theme.of(context).accentTextTheme.title.color,
                             );
                           }),
                       onPressed: () {
                         if (animationController.isAnimating) {
-                          setState(() {
-                            audioPlayer.pause();
-                            animationController.stop();
-                          });
+                          setState(
+                            () {
+                              audioPlayer.pause();
+                              animationController.stop();
+                            },
+                          );
                         } else if (animationController.status.index == 3) {
                         } else {
-                          setState(() {
-                            if (played == false) {
-                              loadMusic();
-                              played = true;
-                            } else
-                              audioPlayer.resume();
-                            animationController.reverse(
-                                from: animationController.value == 0.0
-                                    ? 1.0
-                                    : animationController.value);
-                          });
+                          setState(
+                            () {
+                              if (played == false) {
+                                loadMusic();
+                                played = true;
+                              } else
+                                audioPlayer.resume();
+                              animationController.reverse(
+                                  from: animationController.value == 0.0
+                                      ? 1.0
+                                      : animationController.value);
+                            },
+                          );
                         }
                       },
                     ),

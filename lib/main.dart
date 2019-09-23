@@ -14,21 +14,23 @@ class APE extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DynamicTheme(
-        defaultBrightness: Brightness.light,
-        data: (brightness) => darkTheme,
-        themedWidgetBuilder: (context, theme) {
-          return MaterialApp(
-            title: 'Ape of Mind',
-            theme: theme,
-            home: BottomNavBarWidget(),
-            debugShowCheckedModeBanner: false,
-            routes: {
-              "/EinstellungenScreen": (context) => EinstellungenScreen(),
-              "/RatgeberScreen": (context) => RatgeberScreen(),
-              "/LernTimerScreen": (context) => LernTimerScreen(),
-              "/TrackerKalenderScreen": (context) => TrackerKalenderScreen(),
-            },
-          );
-        });
+      defaultBrightness: Brightness.light,
+      data: (brightness) => darkTheme,
+      themedWidgetBuilder: (context, theme) {
+        return MaterialApp(
+          locale: Locale("de"),
+          title: 'Ape of Mind',
+          theme: theme,
+          home: BottomNavBarWidget(),
+          debugShowCheckedModeBanner: false,
+          routes: {
+            "/EinstellungenScreen": (context) => EinstellungenScreen(),
+            "/RatgeberScreen": (context) => RatgeberScreen(),
+            "/LernTimerScreen": (context) => LernTimerScreen(),
+            "/TrackerKalenderScreen": (context) => TrackerKalenderScreen(),
+          },
+        );
+      },
+    );
   }
 }

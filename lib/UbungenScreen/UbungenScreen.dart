@@ -65,12 +65,14 @@ class _UbungenScreenState extends State<UbungenScreen> {
               ),
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UbungenDetailScreen(
-                              ubung: ubungen[index],
-                              index: index,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UbungenDetailScreen(
+                          ubung: ubungen[index],
+                          index: index,
+                        ),
+                  ),
+                );
               },
               splashColor: Theme.of(context).highlightColor,
             );
@@ -98,9 +100,3 @@ class _UbungenScreenState extends State<UbungenScreen> {
       );
   }
 }
-
-/*
-
-
-
- */

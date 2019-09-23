@@ -39,14 +39,16 @@ class Meilenstein_db {
   Future<List<Meilenstein_db>> msget() async {
     final Database db = await DB.instance.initDB();
     final List<Map<String, dynamic>> maps = await db.query('meilenstein');
-    return List.generate(maps.length, (i) {
-      return Meilenstein_db(
-        titel: maps[i]['titel'],
-        datum: maps[i]['datum'],
-        deadline: maps[i]['deadline'],
-        notizen: maps[i]['notizen'],
-      );
-    });
+    return List.generate(
+      maps.length,
+      (i) {
+        return Meilenstein_db(
+          titel: maps[i]['titel'],
+          datum: maps[i]['datum'],
+          deadline: maps[i]['deadline'],
+          notizen: maps[i]['notizen'],
+        );
+      },
+    );
   }
-
 }

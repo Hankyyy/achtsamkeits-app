@@ -4,7 +4,6 @@ import 'package:ape_of_mind/Model/aufgaben.dart';
 class AddAufgabeScreen extends StatefulWidget {
   final String meilensteinTitle;
 
-
   AddAufgabeScreen(this.meilensteinTitle);
 
   @override
@@ -27,9 +26,11 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-      });
+      setState(
+        () {
+          selectedDate = picked;
+        },
+      );
   }
 
   @override
@@ -64,68 +65,70 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Container(
-                  padding: EdgeInsets.all(20),
-                  child: Form(
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: <Widget>[
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              'Meilenstein:',
-                              style: Theme.of(context).textTheme.body2,
-                            ),
-                            Text(
-                              meilensteinTitle,
-                              style: Theme.of(context).textTheme.body2,
-                            ),
-                          ],
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 25.0),
-                        ),
-                        TextFormField(
-                          controller: afTitel,
-                          decoration: new InputDecoration(
-                            labelText: "Titel",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(),
-                            ),
-                            //fillColor: Colors.green
+                padding: EdgeInsets.all(20),
+                child: Form(
+                  child: ListView(
+                    shrinkWrap: true,
+                    primary: false,
+                    children: <Widget>[
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Meilenstein:',
+                            style: Theme.of(context).textTheme.body2,
                           ),
+                          Text(
+                            meilensteinTitle,
+                            style: Theme.of(context).textTheme.body2,
+                          ),
+                        ],
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 25.0),
+                      ),
+                      TextFormField(
+                        controller: afTitel,
+                        decoration: new InputDecoration(
+                          labelText: "Titel",
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(),
+                          ),
+                          //fillColor: Colors.green
                         ),
-                        Container(
-                          padding: EdgeInsets.only(top: 25.0),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              'Erledigen bis:',
-                              style: Theme.of(context).textTheme.body2,
-                            ),
-                            OutlineButton(
-                              onPressed: () => _selectDate(context),
-                              highlightedBorderColor:
-                                  Theme.of(context).primaryColor,
-                              child: Text("${selectedDate.day.toString()}" +
-                                  "."
-                                      "${selectedDate.month.toString()}" +
-                                  "."
-                                      "${selectedDate.year.toString()}"),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 25.0),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Erledigen bis:',
+                            style: Theme.of(context).textTheme.body2,
+                          ),
+                          OutlineButton(
+                            onPressed: () => _selectDate(context),
+                            highlightedBorderColor:
+                                Theme.of(context).primaryColor,
+                            child: Text("${selectedDate.day.toString()}" +
+                                "."
+                                    "${selectedDate.month.toString()}" +
+                                "."
+                                    "${selectedDate.year.toString()}"),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
           Padding(

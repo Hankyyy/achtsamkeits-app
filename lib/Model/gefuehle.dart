@@ -6,11 +6,11 @@ class Gefuehle {
   int gWert;
   String datum;
 
-  Gefuehle({
-    //this.id,
-    this.gWert,
-    this.datum
-  });
+  Gefuehle(
+      {
+      //this.id,
+      this.gWert,
+      this.datum});
 
   Map<String, dynamic> toMap() {
     return {
@@ -32,12 +32,14 @@ class Gefuehle {
   Future<List<Gefuehle>> msget() async {
     final Database db = await DB.instance.initDB();
     final List<Map<String, dynamic>> maps = await db.query('gefuehle');
-    return List.generate(maps.length, (i) {
-      return Gefuehle(
-        gWert: maps[i]['gWert'],
-        datum: maps[i]['datum'],
-      );
-    });
+    return List.generate(
+      maps.length,
+      (i) {
+        return Gefuehle(
+          gWert: maps[i]['gWert'],
+          datum: maps[i]['datum'],
+        );
+      },
+    );
   }
-
 }
