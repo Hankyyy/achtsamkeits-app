@@ -220,14 +220,9 @@ class _KalenderScreenState extends State<KalenderScreen> {
               child: CheckboxListTile(
                 value: false,
                 onChanged: (bool newvalue) {},
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      "Übung 2",
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                  ],
+                title: Text(
+                  "Übung 2",
+                  style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Text(
                   "Medienproduktion",

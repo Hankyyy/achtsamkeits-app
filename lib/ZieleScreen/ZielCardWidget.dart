@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:async/async.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+
 import 'package:ape_of_mind/Model/aufgaben.dart';
 import 'package:ape_of_mind/Model/meilenstein.dart';
-import 'package:flutter/material.dart';
 
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'ZieleUtils.dart';
 import 'AddAufgabeScreen.dart';
@@ -33,6 +35,9 @@ class _ZielCardState extends State<ZielCard> {
 
   DateTime selectedDate = DateTime.now();
   DateTime deadlineDate = DateTime.now();
+
+  final msTitel = TextEditingController();
+  final msNotiz = TextEditingController();
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -212,12 +217,11 @@ class _ZielCardState extends State<ZielCard> {
                       FutureBuilder<List<Aufgaben>>(
                         //future: aufgabenMS(),
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState !=
-                              ConnectionState.done) {
-                            // return: show loading widget
+                          if (snapshot.connectionState != ConnectionState.done) {
+                            return Center(child: CircularProgressIndicator(),);
                           }
                           if (snapshot.hasError) {
-                            // return: show error widget
+                            return Center(child: Text("Error!"),);
                           }
                           List<Aufgaben> aufgaben = snapshot.data ?? [];
                           Aufgaben af = new Aufgaben();
@@ -347,6 +351,7 @@ class _ZielCardState extends State<ZielCard> {
                 ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     IconButton(
                       icon: Icon(
