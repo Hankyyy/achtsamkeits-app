@@ -395,10 +395,10 @@ class _ZielCardState extends State<ZielCard> {
                 future: aufgabe.aufgabenMS(meilenstein.titel),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    // return: show loading widget
+                    return Center(child: CircularProgressIndicator(),);
                   }
                   if (snapshot.hasError) {
-                    // return: show error widget
+                    return Center(child: Text("Error!"),);
                   }
                   List<Aufgaben> aufgaben = snapshot.data ?? [];
                   Aufgaben af = new Aufgaben();

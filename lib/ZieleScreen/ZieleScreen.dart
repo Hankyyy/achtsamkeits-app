@@ -28,10 +28,10 @@ class _ZieleScreenState extends State<ZieleScreen> {
         future: getMeilensteine(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            // return: show loading widget
+            return Center(child: CircularProgressIndicator(),);
           }
           if (snapshot.hasError) {
-            // return: show error widget
+            return Center(child: Text("Error!"),);
           }
           List<Meilenstein_db> meilensteine = snapshot.data ?? [];
           return ListView.builder(

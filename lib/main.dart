@@ -15,7 +15,7 @@ class APE extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicTheme(
       defaultBrightness: Brightness.light,
-      data: (brightness) => darkTheme,
+      data: (brightness) => indigo,
       themedWidgetBuilder: (context, theme) {
         return MaterialApp(
           locale: Locale("de"),

@@ -17,7 +17,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
         crossAxisSpacing: 10.0,
         shrinkWrap: true,
         primary: false,
-        padding: EdgeInsets.only(left: 4, right: 4),
+        padding: EdgeInsets.only(left: 4, right: 4, bottom: 15, top: 15),
         children: [
           MaterialButton(
             shape: RoundedRectangleBorder(

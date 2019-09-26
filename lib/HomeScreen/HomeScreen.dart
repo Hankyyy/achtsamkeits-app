@@ -24,12 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         children: <Widget>[
           SizedBox(
-            height: 25,
+            height: 10,
           ),
           ButtonWidget(),
-          SizedBox(
-            height: 15,
-          ),
+
           ZitatWidget(),
           SizedBox(
             height: 12.5,
