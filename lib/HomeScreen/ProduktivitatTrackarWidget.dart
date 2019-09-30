@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-
+import 'package:ape_of_mind/Model/produktivitaet.dart';
 
 enum ProduktivitatOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
-
 
 class ProduktivitatTrackerWidget extends StatefulWidget {
   ProduktivitatTrackerWidget({Key key}) : super(key: key);
@@ -126,6 +125,14 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
+                Produktivitaet p = new Produktivitaet();
+                p.datum = DateTime.now().year.toString() +
+                    "." +
+                    DateTime.now().month.toString() +
+                    "." +
+                    DateTime.now().day.toString();
+                p.pWert = 5;
+                p.insertProduktivitaet(p);
                 _gefuhle = value;
               });
             },
@@ -147,6 +154,14 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
+                Produktivitaet p = new Produktivitaet();
+                p.datum = DateTime.now().year.toString() +
+                    "." +
+                    DateTime.now().month.toString() +
+                    "." +
+                    DateTime.now().day.toString();
+                p.pWert = 4;
+                p.insertProduktivitaet(p);
                 _gefuhle = value;
               });
             },
@@ -168,6 +183,14 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
+                Produktivitaet p = new Produktivitaet();
+                p.datum = DateTime.now().year.toString() +
+                    "." +
+                    DateTime.now().month.toString() +
+                    "." +
+                    DateTime.now().day.toString();
+                p.pWert = 3;
+                p.insertProduktivitaet(p);
                 _gefuhle = value;
               });
             },
@@ -189,6 +212,14 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
+                Produktivitaet p = new Produktivitaet();
+                p.datum = DateTime.now().year.toString() +
+                    "." +
+                    DateTime.now().month.toString() +
+                    "." +
+                    DateTime.now().day.toString();
+                p.pWert = 2;
+                p.insertProduktivitaet(p);
                 _gefuhle = value;
               });
             },
@@ -210,6 +241,14 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             onChanged: (ProduktivitatOptionen value) {
               setState(() {
+                Produktivitaet p = new Produktivitaet();
+                p.datum = DateTime.now().year.toString() +
+                    "." +
+                    DateTime.now().month.toString() +
+                    "." +
+                    DateTime.now().day.toString();
+                p.pWert = 1;
+                p.insertProduktivitaet(p);
                 _gefuhle = value;
               });
             },

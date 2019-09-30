@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:ape_of_mind/Model/gefuehle.dart';
 
 enum GefuhlOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
 
@@ -127,6 +128,11 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             onChanged: (GefuhlOptionen value) {
               setState(
                 () {
+
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.gWert = 5;
+                  g.insertGefuehle(g);
                   _gefuhle = value;
                 },
               );
@@ -150,6 +156,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             onChanged: (GefuhlOptionen value) {
               setState(
                 () {
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.gWert = 4;
+                  g.insertGefuehle(g);
                   _gefuhle = value;
                 },
               );
@@ -173,6 +183,19 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             onChanged: (GefuhlOptionen value) {
               setState(
                 () {
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime
+                      .now()
+                      .year
+                      .toString() + "." + DateTime
+                      .now()
+                      .month
+                      .toString() + "." + DateTime
+                      .now()
+                      .day
+                      .toString();
+                  g.gWert = 3;
+                  g.insertGefuehle(g);
                   _gefuhle = value;
                 },
               );
@@ -196,6 +219,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             onChanged: (GefuhlOptionen value) {
               setState(
                 () {
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.gWert = 2;
+                  g.insertGefuehle(g);
                   _gefuhle = value;
                 },
               );
@@ -219,6 +246,10 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             onChanged: (GefuhlOptionen value) {
               setState(
                 () {
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.gWert = 1;
+                  g.insertGefuehle(g);
                   _gefuhle = value;
                 },
               );
