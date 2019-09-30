@@ -67,6 +67,10 @@ class DB {
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
         "zitat TEXT NOT NULL"
         ")");
+
+    db.execute("CREATE TABLE theme ("
+    "id INTEGER NOT NULL"
+    ")");
   }
 
   Future<void> setupEintraegeDefault(Database db) async {
@@ -74,5 +78,7 @@ class DB {
         "VALUES(1 , 'Hello World')");
     db.execute("INSERT into zitate (id, zitat) "
         "VALUES(2 , 'testtest')");
+    db.execute("INSERT into theme (id) "
+        "VALUES(0) ");
   }
 }

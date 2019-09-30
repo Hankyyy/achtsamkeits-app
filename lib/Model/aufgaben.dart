@@ -58,4 +58,29 @@ class Aufgaben {
       },
     );
   }
+
+  Future<void> checkAF(String titel, String meilenstein_id, int erledigt) async {
+    final Database db = await DB.instance.initDB();
+    if(erledigt == 0){
+      await db.rawUpdate('''
+    UPDATE aufgaben
+    SET erledigt = ?
+    WHERE titel = ? AND meilenstein_id = ?
+    ''', [1, titel, meilenstein_id]);
+    }
+    else {
+      await db.rawUpdate('''
+    UPDATE aufgaben
+    SET erledigt = ?
+    WHERE titel = ? AND meilenstein_id = ?
+    ''', [0, titel, meilenstein_id]);
+    }
+  }
+
+  Future<void> deleteAF(String titel) async {
+
+    final Database db = await DB.instance.initDB();
+    await db.rawDelete('DELETE FROM aufgaben WHERE meilenstein_id = ?', [titel]);
+  }
+
 }

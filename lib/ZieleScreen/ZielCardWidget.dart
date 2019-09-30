@@ -36,7 +36,7 @@ class _ZielCardState extends State<ZielCard> {
   DateTime selectedDate = DateTime.now();
   DateTime deadlineDate = DateTime.now();
 
-  final msTitel = TextEditingController();
+  //final msTitel = TextEditingController();
   final msNotiz = TextEditingController();
 
   Future<Null> _selectDate(BuildContext context) async {
@@ -190,9 +190,10 @@ class _ZielCardState extends State<ZielCard> {
                           height: 15,
                         ),
                         TextFormField(
+                          controller: msNotiz,
                           keyboardType: TextInputType.multiline,
                           maxLines: 5,
-                          initialValue: meilenstein.notizen,
+                          //initialValue: meilenstein.notizen,
                           decoration: InputDecoration(
                             labelText: "Notizen",
                             fillColor: Colors.white,
@@ -295,6 +296,16 @@ class _ZielCardState extends State<ZielCard> {
                         ),
                         color: Theme.of(context).primaryColor,
                         onPressed: () {
+                          Meilenstein_db ms = Meilenstein_db();
+                          ms.updateMS(meilenstein.titel, "${selectedDate.day.toString()}" +
+                              "."
+                                  "${selectedDate.month.toString()}" +
+                              "."
+                                  "${selectedDate.year.toString()}", "${deadlineDate.day.toString()}" +
+                              "."
+                                  "${deadlineDate.month.toString()}" +
+                              "."
+                                  "${deadlineDate.year.toString()}", msNotiz.text);
                           setState(
                             () {
                               view = true;
@@ -414,8 +425,8 @@ class _ZielCardState extends State<ZielCard> {
                     itemBuilder: (context, index) {
                       return Center(
                         child: CheckboxListTile(
-                          value: false,
-                          onChanged: null,
+                          value: isChecked(snapshot.data[index].erledigt),
+                          onChanged:(bool value){ changeCheck(snapshot.data[index].titel, snapshot.data[index].meilenstein_id, snapshot.data[index].erledigt);},
                           title: Text(
                             snapshot.data[index].titel,
                             style: Theme.of(context).textTheme.body2,
@@ -439,6 +450,20 @@ class _ZielCardState extends State<ZielCard> {
       );
   }
 
+  bool isChecked(int i){
+    if(i == 0){
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  bool changeCheck(String titel, String meilenstein_id, int erledigt) {
+    Aufgaben af = new Aufgaben();
+    af.checkAF(titel, meilenstein_id, erledigt);
+  }
+
   Widget _getNotizen() {
     if (meilenstein.notizen.isEmpty)
       return Container();
@@ -454,7 +479,7 @@ class _ZielCardState extends State<ZielCard> {
   }
 
   Future<void> _meilenSteinLoschenDialog() async {
-    return showDialog<void>(
+    return showDialog<void> (
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
@@ -482,7 +507,9 @@ class _ZielCardState extends State<ZielCard> {
                 style: Theme.of(context).accentTextTheme.body2,
               ),
               color: Theme.of(context).primaryColor,
-              onPressed: () {
+              onPressed: () async {
+                Meilenstein_db ms = new Meilenstein_db();
+                await ms.deleteMS(meilenstein.titel);
                 Navigator.of(context).pop();
               },
             ),

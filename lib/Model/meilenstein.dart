@@ -1,6 +1,7 @@
 import 'package:ape_of_mind/Database/dbHelper.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/material.dart';
+import 'package:ape_of_mind/Model/aufgaben.dart';
 
 class Meilenstein_db {
   String titel;
@@ -50,5 +51,21 @@ class Meilenstein_db {
         );
       },
     );
+  }
+
+  Future<void> updateMS(String titel, String datum, String deadline, String notizen) async {
+    final Database db = await DB.instance.initDB();
+    await db.rawUpdate('''
+    UPDATE meilenstein
+    SET datum = ?, deadline = ?, notizen = ?
+    WHERE titel = ?
+    ''', [datum, deadline, notizen, titel]);
+  }
+
+  Future<void> deleteMS(String titel) async {
+    Aufgaben af = new Aufgaben();
+    af.deleteAF(titel);
+    final Database db = await DB.instance.initDB();
+    await db.rawDelete('DELETE FROM meilenstein WHERE titel = ?', [titel]);
   }
 }
