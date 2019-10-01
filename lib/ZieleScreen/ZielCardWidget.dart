@@ -170,6 +170,7 @@ class _ZielCardState extends State<ZielCard> {
                   );
                 },
               ),
+              SizedBox(height: 15,),
               FutureBuilder<List<Aufgaben>>(
                 future: aufgabe.aufgabenMSnotdone(meilenstein.titel),
                 builder: (context, snapshot) {
@@ -272,8 +273,7 @@ class _ZielCardState extends State<ZielCard> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 
   bool isChecked(int i) {

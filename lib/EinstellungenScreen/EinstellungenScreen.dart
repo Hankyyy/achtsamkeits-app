@@ -153,114 +153,79 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       );
     }
 
+    Color getColor(Color color) {
+      if (color==Colors.white)
+        return Colors.grey[850];
+      else
+        return color;
+    }
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(
         children: <Widget>[
-          ListTile(
+          ExpansionTile(
             title: Text(
               "Design",
               //style: aABlackBold,
             ),
-          ),
-          ExpansionTile(
-            title: Text(
-              "Farbe",
-              //style: aABlackReg,
-            ),
-            leading: Icon(
-              Icons.color_lens,
-              color: Theme.of(context).primaryColor,
-            ),
             children: <Widget>[
               FutureBuilder<int>(
-                  future: theme.getThemeInt(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text("Error!"),
-                      );
-                    }
-
-                    selectedColor = snapshot.data;
-
-                    return ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: themes.length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: RadioListTile(
-                            title: Text(
-                              getTitle(index),
-                              style: Theme.of(context).textTheme.body2,
-                            ),
-                            value: index,
-                            groupValue: selectedColor,
-                            activeColor: Theme.of(context).primaryColor,
-                            secondary: Container(
-                              height: 30.0,
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                  color: themes[index].primaryColor,
-                                  borderRadius: BorderRadius.all(
-                                      const Radius.circular(10.0))),
-                            ),
-                            onChanged: (value) {
-                              handleChange(value);
-                            },
-                          ),
-                        );
-                      },
+                future: theme.getThemeInt(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Center(
+                      child: CircularProgressIndicator(),
                     );
-                  }),
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error!"),
+                    );
+                  }
+
+                  selectedColor = snapshot.data;
+
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: themes.length,
+                    itemBuilder: (context, index) {
+                      return Center(
+                        child: RadioListTile(
+                          title: Text(
+                            getTitle(index),
+                            style: Theme.of(context).textTheme.body2,
+                          ),
+                          value: index,
+                          groupValue: selectedColor,
+                          activeColor: Theme.of(context).primaryColor,
+                          secondary: Container(
+                            height: 30.0,
+                            width: 100.0,
+                            decoration: BoxDecoration(
+                                color: getColor(themes[index].primaryColor),
+                                borderRadius: BorderRadius.all(
+                                    const Radius.circular(10.0))),
+                          ),
+                          onChanged: (value) {
+                            handleChange(value);
+                          },
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
   }
 
-  /*
-  
-  ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: themes.length,
-                itemBuilder: (context, index) {
-                  return Center(
-                    child: RadioListTile(
-                      title: Text(
-                        getTitle(index),
-                        style: Theme.of(context).textTheme.body2,
-                      ),
-                      value: index,
-                      groupValue: selectedColor,
-                      activeColor: Theme.of(context).primaryColor,
-                      secondary: Container(
-                        height: 30.0,
-                        width: 100.0,
-                        decoration: BoxDecoration(
-                            color: themes[index].primaryColor,
-                            borderRadius:
-                                BorderRadius.all(const Radius.circular(10.0))),
-                      ),
-                      onChanged: (value) {
-                        handleChange(value);
-                      },
-                    ),
-                  );
-                },
-              ),
-  
-   */
 
   Widget BenachrichtigungenCard() {
     return Card(

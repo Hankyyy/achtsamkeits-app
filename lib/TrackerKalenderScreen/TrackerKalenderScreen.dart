@@ -55,21 +55,6 @@ class _TrackerKalenderScreenState extends State<TrackerKalenderScreen> {
   }
 }
 
-/*class GPCards {
-  GP gP;
-
-  GPCards({gP});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        getTitle(gP),
-      ),
-    );
-  }
-}*/
-
 String getTitleG(Gefuehle gP) {
   switch (gP.gWert) {
     case 5:
