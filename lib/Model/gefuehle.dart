@@ -21,11 +21,14 @@ class Gefuehle {
 
   Future<void> insertGefuehle(Gefuehle g) async {
     final Database db = await DB.instance.initDB();
-    await db.insert(
+    /*await db.insert(
       'gefuehle',
       g.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    );*/
+    print(g.datum);
+    await db.rawInsert("INSERT OR REPLACE INTO gefuehle(datum, gWert) VALUES (?, ?)",
+        [g.datum, g.gWert]);
   }
 
   //liefert alle Einträge
@@ -60,5 +63,7 @@ class Gefuehle {
     );
     
   }
+
+
 
 }

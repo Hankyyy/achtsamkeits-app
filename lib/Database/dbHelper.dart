@@ -54,12 +54,12 @@ class DB {
         ")");
 
     db.execute("CREATE TABLE produktivitaet ("
-        "datum TEXT NOT NULL,"
+        "datum TEXT NOT NULL UNIQUE,"
         "pWert INTEGER"
         ")");
 
     db.execute("CREATE TABLE gefuehle ("
-        "datum TEXT NOT NULL,"
+        "datum TEXT NOT NULL UNIQUE,"
         "gWert INTEGER"
         ")");
 
