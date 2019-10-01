@@ -295,9 +295,9 @@ class _ZielCardState extends State<ZielCard> {
                           style: Theme.of(context).accentTextTheme.body2,
                         ),
                         color: Theme.of(context).primaryColor,
-                        onPressed: () {
+                        onPressed: () async {
                           Meilenstein_db ms = Meilenstein_db();
-                          ms.updateMS(meilenstein.titel, "${selectedDate.day.toString()}" +
+                          await ms.updateMS(meilenstein.titel, "${selectedDate.day.toString()}" +
                               "."
                                   "${selectedDate.month.toString()}" +
                               "."
@@ -308,6 +308,7 @@ class _ZielCardState extends State<ZielCard> {
                                   "${deadlineDate.year.toString()}", msNotiz.text);
                           setState(
                             () {
+
                               view = true;
                             },
                           );
