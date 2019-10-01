@@ -1,11 +1,11 @@
 import 'package:ape_of_mind/Database/dbHelper.dart';
 import 'package:sqflite/sqflite.dart';
 
-class Theme {
+class ApeTheme {
 
   int id;
 
-  Theme(
+  ApeTheme(
       {this.id});
 
   Map<String, dynamic> toMap() {
@@ -15,18 +15,18 @@ class Theme {
   }
 
   //liefert alle Einträge
-  Future<String> getTheme() async {
+  Future<int> getThemeInt() async {
     final Database db = await DB.instance.initDB();
     final List<Map<String, dynamic>> maps = await db.query('theme');
     List.generate(
       maps.length,
           (i) {
-        return Theme(
+        return ApeTheme(
           id: maps[i]['id'],
         );
       },
     );
-    return maps.first.toString();
+    return maps.first.values.first;
   }
 
   Future<void> updateTheme(int i) async {

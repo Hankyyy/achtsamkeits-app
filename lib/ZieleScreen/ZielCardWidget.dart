@@ -55,221 +55,222 @@ class _ZielCardState extends State<ZielCard> {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      padding: EdgeInsets.only(bottom: _getPadding(i, length).toDouble()),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              contentPadding: EdgeInsets.only(
-                  top: 10.0, left: 15.0, bottom: 10, right: 12.5),
-              title: Text(
-                meilenstein.titel,
-                style: Theme.of(context).textTheme.title,
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Text(
-                    "Erledigen bis: " + meilenstein.datum,
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  Text(
-                    "Deadline: " + meilenstein.deadline,
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                ],
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.mode_edit,
-                      size: 28,
-                      color: Theme.of(context).textTheme.title.color,
+      return Container(
+        padding: EdgeInsets.only(bottom: _getPadding(i, length).toDouble()),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                contentPadding: EdgeInsets.only(
+                    top: 10.0, left: 15.0, bottom: 10, right: 12.5),
+                title: Text(
+                  meilenstein.titel,
+                  style: Theme.of(context).textTheme.title,
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10.0,
                     ),
-                    tooltip: "Meilenstein bearbeiten",
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  EditMeilensteinScreen(meilenstein.titel)));
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.add,
-                      size: 40,
-                      color: Theme.of(context).textTheme.title.color,
+                    Text(
+                      "Erledigen bis: " + meilenstein.datum,
+                      style: Theme.of(context).textTheme.body2,
                     ),
-                    tooltip: "Neue Aufgabe hinzufügen",
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  AddAufgabeScreen(meilenstein.titel)));
-                    },
-                  ),
-                ],
+                    Text(
+                      "Deadline: " + meilenstein.deadline,
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                  ],
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.mode_edit,
+                        size: 28,
+                        color: Theme.of(context).textTheme.title.color,
+                      ),
+                      tooltip: "Meilenstein bearbeiten",
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    EditMeilensteinScreen(meilenstein.titel)));
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.add,
+                        size: 40,
+                        color: Theme.of(context).textTheme.title.color,
+                      ),
+                      tooltip: "Neue Aufgabe hinzufügen",
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    AddAufgabeScreen(meilenstein.titel)));
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            _getNotizen(),
-            FutureBuilder<List<Aufgaben>>(
-              future: aufgabe.aufgabenMSdone(meilenstein.titel),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text("Error!"),
-                  );
-                }
-
-                List<Aufgaben> erledigt = snapshot.data ?? [];
-
-                return FutureBuilder<List<Aufgaben>>(
-                  future: aufgabe.aufgabenMSnotdone(meilenstein.titel),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text("Error!"),
-                      );
-                    }
-
-                    List<Aufgaben> unErledigt = snapshot.data ?? [];
-
-                    return LinearPercentIndicator(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      lineHeight: 15,
-                      backgroundColor: Theme.of(context).highlightColor,
-                      progressColor: Theme.of(context).primaryColor,
-                      percent: erledigt.length /
-                          (unErledigt.length +
-                              erledigt.length),
-                    );
-                  },
-                );
-              },
-            ),
-            FutureBuilder<List<Aufgaben>>(
-              future: aufgabe.aufgabenMSnotdone(meilenstein.titel),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text("Error!"),
-                  );
-                }
-                List<Aufgaben> aufgaben = snapshot.data ?? [];
-                Aufgaben af = new Aufgaben();
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
+              _getNotizen(),
+              FutureBuilder<List<Aufgaben>>(
+                future: aufgabe.aufgabenMSdone(meilenstein.titel),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
                     return Center(
-                      child: CheckboxListTile(
-                        value: isChecked(snapshot.data[index].erledigt),
-                        onChanged: (bool value) {
-                          setState(
-                                () {
-                              changeCheck(
-                                  snapshot.data[index].titel,
-                                  snapshot.data[index].meilenstein_id,
-                                  snapshot.data[index].erledigt);
-                            },
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error!"),
+                    );
+                  }
+
+                  List<Aufgaben> erledigt = snapshot.data ?? [];
+
+                  return FutureBuilder<List<Aufgaben>>(
+                    future: aufgabe.aufgabenMSnotdone(meilenstein.titel),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text("Error!"),
+                        );
+                      }
+
+                      List<Aufgaben> unErledigt = snapshot.data ?? [];
+
+                      return LinearPercentIndicator(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        lineHeight: 15,
+                        backgroundColor: Theme.of(context).highlightColor,
+                        progressColor: Theme.of(context).primaryColor,
+                        percent: erledigt.length /
+                            (unErledigt.length +
+                                erledigt.length),
+                      );
+                    },
+                  );
+                },
+              ),
+              FutureBuilder<List<Aufgaben>>(
+                future: aufgabe.aufgabenMSnotdone(meilenstein.titel),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error!"),
+                    );
+                  }
+                  List<Aufgaben> aufgaben = snapshot.data ?? [];
+                  Aufgaben af = new Aufgaben();
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      return Center(
+                        child: CheckboxListTile(
+                          value: isChecked(snapshot.data[index].erledigt),
+                          onChanged: (bool value) {
+                            setState(
+                              () {
+                                changeCheck(
+                                    snapshot.data[index].titel,
+                                    snapshot.data[index].meilenstein_id,
+                                    snapshot.data[index].erledigt);
+                              },
+                            );
+                          },
+                          title: Text(
+                            snapshot.data[index].titel,
+                            style: Theme.of(context).textTheme.body2,
+                          ),
+                          subtitle: Text(
+                            "Erledigen bis: " + snapshot.data[index].datum,
+                            style: Theme.of(context).textTheme.subtitle,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              ExpansionTile(
+                title: Text(
+                  "Erledigte Aufgaben",
+                  style: Theme.of(context).textTheme.body1,
+                ),
+                children: <Widget>[
+                  FutureBuilder<List<Aufgaben>>(
+                    future: aufgabe.aufgabenMSdone(meilenstein.titel),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState !=
+                          ConnectionState.done) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text("Error!"),
+                        );
+                      }
+                      List<Aufgaben> aufgaben = snapshot.data ?? [];
+                      Aufgaben af = Aufgaben();
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return Center(
+                            child: CheckboxListTile(
+                              value: isChecked(snapshot.data[index].erledigt),
+                              onChanged: (bool value) {
+                                setState(
+                                      () {
+                                    changeCheck(
+                                        snapshot.data[index].titel,
+                                        snapshot.data[index].meilenstein_id,
+                                        snapshot.data[index].erledigt);
+                                  },
+                                );
+                              },
+                              title: Text(
+                                snapshot.data[index].titel,
+                                style: Theme.of(context).textTheme.body2,
+                              ),
+                            ),
                           );
                         },
-                        title: Text(
-                          snapshot.data[index].titel,
-                          style: Theme.of(context).textTheme.body2,
-                        ),
-                        subtitle: Text(
-                          "Erledigen bis: " + snapshot.data[index].datum,
-                          style: Theme.of(context).textTheme.subtitle,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-            ExpansionTile(
-              title: Text(
-                "Erledigte Aufgaben",
-                style: Theme.of(context).textTheme.body1,
+                      );
+                    },
+                  ),
+                ],
               ),
-              children: <Widget>[
-                FutureBuilder<List<Aufgaben>>(
-                  future: aufgabe.aufgabenMSdone(meilenstein.titel),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState !=
-                        ConnectionState.done) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text("Error!"),
-                      );
-                    }
-                    List<Aufgaben> aufgaben = snapshot.data ?? [];
-                    Aufgaben af = Aufgaben();
-                    return ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: CheckboxListTile(
-                            value: isChecked(snapshot.data[index].erledigt),
-                            onChanged: (bool value) {
-                              setState(
-                                    () {
-                                  changeCheck(
-                                      snapshot.data[index].titel,
-                                      snapshot.data[index].meilenstein_id,
-                                      snapshot.data[index].erledigt);
-                                },
-                              );
-                            },
-                            title: Text(
-                              snapshot.data[index].titel,
-                              style: Theme.of(context).textTheme.body2,
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

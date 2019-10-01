@@ -3,7 +3,22 @@ import 'package:flutter/material.dart';
 
 //Themes
 
-List<ThemeData> themes = [grun, aquamarin, limette, bernstein, lila, indigo, cyan, blaugrau,];
+ThemeData getTheme(int i){
+  switch(i){
+    case 0: return grun; break;
+    case 1: return aquamarin; break;
+    case 2: return limette; break;
+    case 3: return bernstein; break;
+    case 4: return lila; break;
+    case 5: return indigo; break;
+    case 6: return cyan; break;
+    case 7: return blaugrau; break;
+    case 8: return darkTheme; break;
+
+  }
+}
+
+List<ThemeData> themes = [grun, aquamarin, limette, bernstein, lila, indigo, cyan, blaugrau, darkTheme];
 
 
 ThemeData grun = ThemeData(
