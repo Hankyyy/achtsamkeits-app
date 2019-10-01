@@ -24,33 +24,32 @@ class _ZieleScreenState extends State<ZieleScreen> {
         actions: <Widget>[],
         elevation: 0.0,
       ),
-      body:
-      FutureBuilder<List<Meilenstein_db>>(
-          future: getMeilensteine(),
-          builder: (context, snapshot) {
-            if(snapshot.connectionState != ConnectionState.done) {
-              // return: show loading widget
-            }
-            if(snapshot.hasError) {
-              // return: show error widget
-            }
-            List<Meilenstein_db> meilensteine = snapshot.data ?? [];
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: meilensteine.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 10.0, left: 12.5, right: 12.5),
-                  child: ZielCard(
-                    meilensteine[index],
-                    index,
-                    meilensteine.length,
-                  ),
-                );
-              },
-            );
-          }),
-
+      body: FutureBuilder<List<Meilenstein_db>>(
+        future: getMeilensteine(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return Center(child: CircularProgressIndicator(),);
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text("Error!"),);
+          }
+          List<Meilenstein_db> meilensteine = snapshot.data ?? [];
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: meilensteine.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(bottom: 10.0, left: 12.5, right: 12.5),
+                child: ZielCard(
+                  meilensteine[index],
+                  index,
+                  meilensteine.length,
+                ),
+              );
+            },
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,

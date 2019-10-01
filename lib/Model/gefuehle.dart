@@ -6,11 +6,11 @@ class Gefuehle {
   int gWert;
   String datum;
 
-  Gefuehle({
-    //this.id,
-    this.gWert,
-    this.datum
-  });
+  Gefuehle(
+      {
+      //this.id,
+      this.gWert,
+      this.datum});
 
   Map<String, dynamic> toMap() {
     return {
@@ -29,15 +29,36 @@ class Gefuehle {
   }
 
   //liefert alle Einträge
-  Future<List<Gefuehle>> msget() async {
+  Future<List<Gefuehle>> getGefuehle() async {
     final Database db = await DB.instance.initDB();
     final List<Map<String, dynamic>> maps = await db.query('gefuehle');
-    return List.generate(maps.length, (i) {
-      return Gefuehle(
-        gWert: maps[i]['gWert'],
-        datum: maps[i]['datum'],
-      );
-    });
+    return List.generate(
+      maps.length,
+      (i) {
+        return Gefuehle(
+          gWert: maps[i]['gWert'],
+          datum: maps[i]['datum'],
+        );
+      },
+    );
+  }
+
+  Future<List<Gefuehle>> getGefuehleSort() async {
+    final Database db = await DB.instance.initDB();
+    final List<Map<String, dynamic>> maps = await db.rawQuery(
+        "SELECT * FROM gefuehle "
+            "ORDER BY datum DESC "
+            "LIMIT 7");
+    return List.generate(
+      maps.length,
+          (i) {
+        return Gefuehle(
+          gWert: maps[i]['gWert'],
+          datum: maps[i]['datum'],
+        );
+      },
+    );
+    
   }
 
 }

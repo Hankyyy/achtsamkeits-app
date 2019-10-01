@@ -75,10 +75,8 @@ class _LernTimerScreenState extends State<LernTimerScreen>
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Expanded(
-            child: Padding(
-          padding: EdgeInsets.all(50),
           child: FractionallySizedBox(
-            widthFactor: 10,
+            widthFactor: 1.1,
             child: Card(
               shape: CircleBorder(),
               child: Padding(
@@ -122,7 +120,7 @@ class _LernTimerScreenState extends State<LernTimerScreen>
               ),
             ),
           ),
-        )),
+        ),
         Container(
           margin: EdgeInsets.all(8.0),
           child: Row(
@@ -132,27 +130,30 @@ class _LernTimerScreenState extends State<LernTimerScreen>
                 heroTag: 2,
                 backgroundColor: Theme.of(context).primaryColor,
                 child: AnimatedBuilder(
-                    animation: animationController,
-                    builder: (_, Widget child) {
-                      return Icon(
-                        animationController.isAnimating
-                            ? Icons.pause
-                            : Icons.play_arrow,
-                        color: Theme.of(context).accentTextTheme.title.color,
-                      );
-                    }),
+                  animation: animationController,
+                  builder: (_, Widget child) {
+                    return Icon(
+                      animationController.isAnimating
+                          ? Icons.pause
+                          : Icons.play_arrow,
+                      color: Theme.of(context).accentTextTheme.title.color,
+                    );
+                  },
+                ),
                 onPressed: () {
                   if (animationController.isAnimating) {
                     setState(() {
                       animationController.stop();
                     });
                   } else {
-                    setState(() {
-                      animationController.reverse(
-                          from: animationController.value == 0.0
-                              ? 1.0
-                              : animationController.value);
-                    });
+                    setState(
+                      () {
+                        animationController.reverse(
+                            from: animationController.value == 0.0
+                                ? 1.0
+                                : animationController.value);
+                      },
+                    );
                   }
                 },
               ),
@@ -167,12 +168,14 @@ class _LernTimerScreenState extends State<LernTimerScreen>
                 ),
                 backgroundColor: Theme.of(context).accentTextTheme.title.color,
                 onPressed: () {
-                  setState(() {
-                    //_duration = Duration(minutes: 0);
-                    view = false;
-                    animationController.reset();
-                    //swapWidget = PickerWidget();
-                  });
+                  setState(
+                    () {
+                      //_duration = Duration(minutes: 0);
+                      view = false;
+                      animationController.reset();
+                      //swapWidget = PickerWidget();
+                    },
+                  );
                 },
               ),
             ],
@@ -187,26 +190,25 @@ class _LernTimerScreenState extends State<LernTimerScreen>
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(50),
-            child: FractionallySizedBox(
-              widthFactor: 10,
-              child: Card(
-                shape: CircleBorder(
-                  side: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 1),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(75),
-                  child: DurationPicker(
-                    duration: _duration,
-                    onChange: (val) {
-                      setState(() {
+          child: FractionallySizedBox(
+            widthFactor: 1.1,
+            child: Card(
+              shape: CircleBorder(
+                side:
+                    BorderSide(color: Theme.of(context).primaryColor, width: 1),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(75),
+                child: DurationPicker(
+                  duration: _duration,
+                  onChange: (val) {
+                    setState(
+                      () {
                         _duration = val;
-                      });
-                    },
-                    snapToMins: 5.0,
-                  ),
+                      },
+                    );
+                  },
+                  snapToMins: 5.0,
                 ),
               ),
             ),
@@ -223,11 +225,13 @@ class _LernTimerScreenState extends State<LernTimerScreen>
                   color: Theme.of(context).accentTextTheme.title.color,
                 ),
                 onPressed: () {
-                  setState(() {
-                    animationController.duration = _duration;
-                    view = true;
-                    //swapWidget = TimerWidget();
-                  });
+                  setState(
+                    () {
+                      animationController.duration = _duration;
+                      view = true;
+                      //swapWidget = TimerWidget();
+                    },
+                  );
                 },
                 backgroundColor: Theme.of(context).primaryColor,
               ),

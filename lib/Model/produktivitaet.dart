@@ -6,11 +6,11 @@ class Produktivitaet {
   int pWert;
   String datum;
 
-  Produktivitaet({
-    //this.id,
-    this.pWert,
-    this.datum
-  });
+  Produktivitaet(
+      {
+      //this.id,
+      this.pWert,
+      this.datum});
 
   Map<String, dynamic> toMap() {
     return {
@@ -38,5 +38,22 @@ class Produktivitaet {
         datum: maps[i]['datum'],
       );
     });
+  }
+
+  Future<List<Produktivitaet>> getGefuehleSort() async {
+    final Database db = await DB.instance.initDB();
+    final List<Map<String, dynamic>> maps =
+        await db.rawQuery("SELECT * FROM üroduktivitaet "
+            "ORDER BY datum DESC "
+            "LIMIT 7");
+    return List.generate(
+      maps.length,
+      (i) {
+        return Produktivitaet(
+          pWert: maps[i]['pWert'],
+          datum: maps[i]['datum'],
+        );
+      },
+    );
   }
 }

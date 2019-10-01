@@ -175,12 +175,14 @@ class UbungenDetailScreen extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UbungenPlayScreen(
-                                    ubung: ubung,
-                                    index: index,
-                                  )));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UbungenPlayScreen(
+                                ubung: ubung,
+                                index: index,
+                              ),
+                        ),
+                      );
                     },
                     splashColor: Theme.of(context).highlightColor,
                   ),
