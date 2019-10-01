@@ -272,7 +272,8 @@ class _ZielCardState extends State<ZielCard> {
             ],
           ),
         ),
-      );
+      ),
+    );
   }
 
   bool isChecked(int i) {
