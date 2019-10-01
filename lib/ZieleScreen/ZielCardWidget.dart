@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:async/async.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+
 import 'package:ape_of_mind/Model/aufgaben.dart';
 import 'package:ape_of_mind/Model/meilenstein.dart';
-import 'package:flutter/material.dart';
 
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'ZieleUtils.dart';
 import 'AddAufgabeScreen.dart';
@@ -33,6 +35,9 @@ class _ZielCardState extends State<ZielCard> {
 
   DateTime selectedDate = DateTime.now();
   DateTime deadlineDate = DateTime.now();
+
+  //final msTitel = TextEditingController();
+  final msNotiz = TextEditingController();
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -98,212 +103,228 @@ class _ZielCardState extends State<ZielCard> {
           child: Padding(
             padding: EdgeInsets.all(borderThickness),
             child: Form(
-                child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 5,
-                ),
-                ListTile(
-                  contentPadding: EdgeInsets.only(
-                      top: 10.0, left: 15.0, bottom: 10, right: 12.5),
-                  title: TextFormField(
-                    decoration: new InputDecoration(
-                      labelText: "Titel",
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(),
-                      ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 5,
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.only(
+                        top: 10.0, left: 15.0, bottom: 10, right: 12.5),
+                    title: Text(
+                      meilenstein.titel,
+                      style: Theme.of(context).textTheme.title,
                     ),
-                    initialValue: meilenstein.titel,
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(
-                          Icons.delete,
-                          size: 30,
-                          color: Theme.of(context).textTheme.title.color,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            Icons.delete,
+                            size: 30,
+                            color: Theme.of(context).textTheme.title.color,
+                          ),
+                          tooltip: "Meilenstein löschen",
+                          onPressed: () {
+                            _meilenSteinLoschenDialog();
+                          },
                         ),
-                        tooltip: "Meilenstein löschen",
-                        onPressed: () {
-                          _meilenSteinLoschenDialog();
-                        },
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Erledigen bis:',
-                            style: Theme.of(context).textTheme.body2,
-                          ),
-                          SizedBox(
-                            width: 20.0,
-                          ),
-                          OutlineButton(
-                            onPressed: () => _selectDate(context),
-                            highlightedBorderColor:
-                                Theme.of(context).primaryColor,
-                            child: Text("${selectedDate.day.toString()}" +
-                                "."
-                                    "${selectedDate.month.toString()}" +
-                                "."
-                                    "${selectedDate.year.toString()}"),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Deadline:',
-                            style: Theme.of(context).textTheme.body2,
-                          ),
-                          SizedBox(
-                            width: 20.0,
-                          ),
-                          OutlineButton(
-                            onPressed: () => _deadlineDate(context),
-                            highlightedBorderColor:
-                                Theme.of(context).primaryColor,
-                            child: Text("${deadlineDate.day.toString()}" +
-                                "."
-                                    "${deadlineDate.month.toString()}" +
-                                "."
-                                    "${deadlineDate.year.toString()}"),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 5,
-                        initialValue: meilenstein.notizen,
-                        decoration: InputDecoration(
-                          labelText: "Notizen",
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(),
-                          ), //fillColor: Colors.green
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
-                ),
-                ExpansionTile(
-                  title: Text(
-                    "Aufgaben",
-                    style: Theme.of(context).textTheme.body1,
-                  ),
-                  children: <Widget>[
-                    FutureBuilder<List<Aufgaben>>(
-                        //future: aufgabenMS(),
-                        builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.done) {
-                        // return: show loading widget
-                      }
-                      if (snapshot.hasError) {
-                        // return: show error widget
-                      }
-                      List<Aufgaben> aufgaben = snapshot.data ?? [];
-                      Aufgaben af = new Aufgaben();
-                      return ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: aufgaben.length,
-                        itemBuilder: (context, index) {
-                          return Center(
-                              child: ListTile(
-                            title: Text(
-                              aufgaben[index].titel,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Erledigen bis:',
                               style: Theme.of(context).textTheme.body2,
                             ),
-                            trailing: IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                size: 25,
-                                color: Theme.of(context).textTheme.title.color,
-                              ),
-                              tooltip: "Aufgabe löschen",
-                              onPressed: () {
-                                Scaffold.of(context).showSnackBar(snackBar);
-                              },
+                            SizedBox(
+                              width: 20.0,
                             ),
-                          ));
+                            OutlineButton(
+                              onPressed: () => _selectDate(context),
+                              highlightedBorderColor:
+                                  Theme.of(context).primaryColor,
+                              child: Text("${selectedDate.day.toString()}" +
+                                  "."
+                                      "${selectedDate.month.toString()}" +
+                                  "."
+                                      "${selectedDate.year.toString()}"),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Deadline:',
+                              style: Theme.of(context).textTheme.body2,
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            OutlineButton(
+                              onPressed: () => _deadlineDate(context),
+                              highlightedBorderColor:
+                                  Theme.of(context).primaryColor,
+                              child: Text("${deadlineDate.day.toString()}" +
+                                  "."
+                                      "${deadlineDate.month.toString()}" +
+                                  "."
+                                      "${deadlineDate.year.toString()}"),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          controller: msNotiz,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 5,
+                          //initialValue: meilenstein.notizen,
+                          decoration: InputDecoration(
+                            labelText: "Notizen",
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(),
+                            ), //fillColor: Colors.green
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
+                  ),
+                  ExpansionTile(
+                    title: Text(
+                      "Aufgaben",
+                      style: Theme.of(context).textTheme.body1,
+                    ),
+                    children: <Widget>[
+                      FutureBuilder<List<Aufgaben>>(
+                        //future: aufgabenMS(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState != ConnectionState.done) {
+                            return Center(child: CircularProgressIndicator(),);
+                          }
+                          if (snapshot.hasError) {
+                            return Center(child: Text("Error!"),);
+                          }
+                          List<Aufgaben> aufgaben = snapshot.data ?? [];
+                          Aufgaben af = new Aufgaben();
+                          return ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: aufgaben.length,
+                            itemBuilder: (context, index) {
+                              return Center(
+                                child: ListTile(
+                                  title: Text(
+                                    aufgaben[index].titel,
+                                    style: Theme.of(context).textTheme.body2,
+                                  ),
+                                  trailing: IconButton(
+                                    icon: Icon(
+                                      Icons.delete,
+                                      size: 25,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .title
+                                          .color,
+                                    ),
+                                    tooltip: "Aufgabe löschen",
+                                    onPressed: () {
+                                      Scaffold.of(context)
+                                          .showSnackBar(snackBar);
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          );
                         },
-                      );
-                    }),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
-                      color: Theme.of(context).buttonColor,
-                      child: Text(
-                        "Abbrechen",
-                        style: Theme.of(context).textTheme.body2,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          view = true;
-                        });
-                      },
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
-                      child: Text(
-                        "Bestätigen",
-                        style: Theme.of(context).accentTextTheme.body2,
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        color: Theme.of(context).buttonColor,
+                        child: Text(
+                          "Abbrechen",
+                          style: Theme.of(context).textTheme.body2,
+                        ),
+                        onPressed: () {
+                          setState(
+                            () {
+                              view = true;
+                            },
+                          );
+                        },
                       ),
-                      color: Theme.of(context).primaryColor,
-                      onPressed: () {
-                        setState(() {
-                          view = true;
-                        });
-                      },
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                )
-              ],
-            )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        child: Text(
+                          "Bestätigen",
+                          style: Theme.of(context).accentTextTheme.body2,
+                        ),
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () async {
+                          Meilenstein_db ms = Meilenstein_db();
+                          await ms.updateMS(meilenstein.titel, "${selectedDate.day.toString()}" +
+                              "."
+                                  "${selectedDate.month.toString()}" +
+                              "."
+                                  "${selectedDate.year.toString()}", "${deadlineDate.day.toString()}" +
+                              "."
+                                  "${deadlineDate.month.toString()}" +
+                              "."
+                                  "${deadlineDate.year.toString()}", msNotiz.text);
+                          setState(
+                            () {
+
+                              view = true;
+                            },
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       );
@@ -342,6 +363,7 @@ class _ZielCardState extends State<ZielCard> {
                 ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     IconButton(
                       icon: Icon(
@@ -351,9 +373,11 @@ class _ZielCardState extends State<ZielCard> {
                       ),
                       tooltip: "Meilenstein bearbeiten",
                       onPressed: () {
-                        setState(() {
-                          view = false;
-                        });
+                        setState(
+                          () {
+                            view = false;
+                          },
+                        );
                       },
                     ),
                     IconButton(
@@ -385,70 +409,60 @@ class _ZielCardState extends State<ZielCard> {
                         meilenstein.getErledigteAufgaben().length),
               ),*/
               FutureBuilder<List<Aufgaben>>(
-                  future: aufgabe.aufgabenMS(meilenstein.titel),
-                  builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done) {
-                  // return: show loading widget
-                }
-                if (snapshot.hasError) {
-                  // return: show error widget
-                }
-                List<Aufgaben> aufgaben = snapshot.data ?? [];
-                Aufgaben af = new Aufgaben();
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    return Center(
+                future: aufgabe.aufgabenMS(meilenstein.titel),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Center(child: CircularProgressIndicator(),);
+                  }
+                  if (snapshot.hasError) {
+                    return Center(child: Text("Error!"),);
+                  }
+                  List<Aufgaben> aufgaben = snapshot.data ?? [];
+                  Aufgaben af = new Aufgaben();
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      return Center(
                         child: CheckboxListTile(
-                          value: false,
-                          onChanged: null,
+                          value: isChecked(snapshot.data[index].erledigt),
+                          onChanged:(bool value){ changeCheck(snapshot.data[index].titel, snapshot.data[index].meilenstein_id, snapshot.data[index].erledigt);},
                           title: Text(
                             snapshot.data[index].titel,
                             style: Theme.of(context).textTheme.body2,
                           ),
                           subtitle: Text(
-                            "Erledigen bis: " +
-                                snapshot.data[index].datum,
+                            "Erledigen bis: " + snapshot.data[index].datum,
                             style: Theme.of(context).textTheme.subtitle,
                           ),
-                        ));
-                  },
-                );
-              }),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
               SizedBox(
                 height: 10,
               ),
-              /*ExpansionTile(
-                title: Text(
-                  "Erledigte Aufgaben",
-                  style: Theme.of(context).textTheme.body1,
-                ),
-                children: <Widget>[
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: meilenstein.getErledigteAufgaben().length,
-                    itemBuilder: (context, index) {
-                      return Center(
-                          child: CheckboxListTile(
-                        value: true,
-                        onChanged: null,
-                        activeColor: Colors.grey,
-                        title: Text(
-                          meilenstein.getErledigteAufgaben()[index].title,
-                          style: Theme.of(context).textTheme.body2,
-                        ),
-                      ));
-                    },
-                  ),
-                ],
-              )*/
             ],
           ),
         ),
       );
+  }
+
+  bool isChecked(int i){
+    if(i == 0){
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  bool changeCheck(String titel, String meilenstein_id, int erledigt) {
+    Aufgaben af = new Aufgaben();
+    af.checkAF(titel, meilenstein_id, erledigt);
   }
 
   Widget _getNotizen() {
@@ -466,7 +480,7 @@ class _ZielCardState extends State<ZielCard> {
   }
 
   Future<void> _meilenSteinLoschenDialog() async {
-    return showDialog<void>(
+    return showDialog<void> (
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
@@ -494,7 +508,9 @@ class _ZielCardState extends State<ZielCard> {
                 style: Theme.of(context).accentTextTheme.body2,
               ),
               color: Theme.of(context).primaryColor,
-              onPressed: () {
+              onPressed: () async {
+                Meilenstein_db ms = new Meilenstein_db();
+                await ms.deleteMS(meilenstein.titel);
                 Navigator.of(context).pop();
               },
             ),

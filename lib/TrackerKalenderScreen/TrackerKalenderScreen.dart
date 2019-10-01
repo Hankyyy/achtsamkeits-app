@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:ape_of_mind/TrackerKalenderScreen/TrackerUtils.dart';
-
+import 'package:ape_of_mind/Model/gefuehle.dart';
+import 'package:ape_of_mind/Model/produktivitaet.dart';
 
 class TrackerKalenderScreen extends StatefulWidget {
   @override
@@ -18,8 +18,16 @@ class _TrackerKalenderScreenState extends State<TrackerKalenderScreen> {
           title: TabBar(
             indicatorColor: Theme.of(context).highlightColor,
             tabs: [
-              Tab(icon: Icon(Icons.insert_emoticon, color: Theme.of(context).textTheme.title.color,)),
-              Tab(icon: Icon(Icons.edit, color: Theme.of(context).textTheme.title.color,)),
+              Tab(
+                  icon: Icon(
+                Icons.insert_emoticon,
+                color: Theme.of(context).textTheme.title.color,
+              )),
+              Tab(
+                  icon: Icon(
+                Icons.edit,
+                color: Theme.of(context).textTheme.title.color,
+              )),
             ],
           ),
           leading: IconButton(
@@ -39,7 +47,7 @@ class _TrackerKalenderScreenState extends State<TrackerKalenderScreen> {
         body: TabBarView(
           children: [
             GefuhleScreen(),
-            GefuhleScreen(),
+            ProduktivitatsScreen(),
           ],
         ),
       ),
@@ -47,7 +55,7 @@ class _TrackerKalenderScreenState extends State<TrackerKalenderScreen> {
   }
 }
 
-class GPCards {
+/*class GPCards {
   GP gP;
 
   GPCards({gP});
@@ -55,65 +63,151 @@ class GPCards {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(getTitle(gP),),
+      title: Text(
+        getTitle(gP),
+      ),
     );
+  }
+}*/
+
+String getTitleG(Gefuehle gP) {
+  switch (gP.gWert) {
+    case 5:
+      return "Sehr Gut";
+    case 4:
+      return "Gut";
+    case 3:
+      return "Normal";
+    case 2:
+      return "Schlecht";
+    case 1:
+      return "Sehr Schlecht";
   }
 }
 
-String getTitle(GP gP){
-  if (gP.istGefuhl==true)
-    switch(gP.wert){
-      case 0: return "Sehr Gut";
-      case 1: return "Gut";
-      case 2: return "Normal";
-      case 3: return "Schlecht";
-      case 4: return "Sehr Schlecht";
-    }
-  else
-    switch(gP.wert){
-      case 0: return "Sehr Produktiv";
-      case 1: return "Produktiv";
-      case 2: return "Normal";
-      case 3: return "Wenig Produktiv";
-      case 4: return "Gar nicht Produktiv";
-    }
+String getTitleP(Produktivitaet gP) {
+  switch (gP.pWert) {
+    case 5:
+      return "Sehr Produktiv";
+    case 4:
+      return "Produktiv";
+    case 3:
+      return "Normal";
+    case 2:
+      return "Wenig Produktiv";
+    case 1:
+      return "Gar nicht Produktiv";
+  }
 }
 
 class GefuhleScreen extends StatelessWidget {
-
-
-
+  Gefuehle gef = new Gefuehle();
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: getGefuhle().length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 35),
-          title: Text(getGefuhle()[index].tag.day.toString() + "." + getGefuhle()[index].tag.month.toString()  + "." + getGefuhle()[index].tag.year.toString(),
-            style: TextStyle(fontSize: 18.0),),
-          subtitle: Text(getTitle(getGefuhle()[index]),),
-          trailing: Container(
-            height: 30.0,
-            width: 150.0,
-            decoration: BoxDecoration(
-                color: getColor(getGefuhle()[index].wert),
-                borderRadius: BorderRadius.all(const Radius.circular(10.0))),
-          ),
+    return FutureBuilder<List<Gefuehle>>(
+      future: gef.getGefuehle(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (snapshot.hasError) {
+          print(snapshot.error);
+          return Center(
+            child: Text("Error!"),
+          );
+        }
+        List<Gefuehle> gfl = snapshot.data ?? [];
+        return ListView.builder(
+          itemCount: gfl.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 35),
+              title: Text(
+                gfl[index].datum,
+                style: TextStyle(fontSize: 18.0),
+              ),
+              subtitle: Text(
+                getTitleG(gfl[index]),
+              ),
+              trailing: Container(
+                height: 30.0,
+                width: 150.0,
+                decoration: BoxDecoration(
+                    color: getColor(gfl[index].gWert),
+                    borderRadius:
+                        BorderRadius.all(const Radius.circular(10.0))),
+              ),
+            );
+          },
         );
       },
     );
   }
 }
 
-Color getColor(int wert){
-  switch(wert){
-    case 0: return Colors.green;
-    case 1: return Colors.lightGreen[400];
-    case 2: return Colors.yellow;
-    case 3: return Colors.orange;
-    case 4: return Colors.red;
-  }
+class ProduktivitatsScreen extends StatelessWidget {
 
+  Produktivitaet prod = new Produktivitaet();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Produktivitaet>>(
+      future: prod.getProduktivitaet(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (snapshot.hasError) {
+          print(snapshot.error);
+          return Center(
+            child: Text("Error!"),
+          );
+        }
+        List<Produktivitaet> gpl = snapshot.data ?? [];
+        return ListView.builder(
+          itemCount: gpl.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 35),
+              title: Text(
+                gpl[index].datum,
+                style: TextStyle(fontSize: 18.0),
+              ),
+              subtitle: Text(
+                getTitleP(gpl[index]),
+              ),
+              trailing: Container(
+                height: 30.0,
+                width: 150.0,
+                decoration: BoxDecoration(
+                    color: getColor(gpl[index].pWert),
+                    borderRadius:
+                        BorderRadius.all(const Radius.circular(10.0))),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+Color getColor(int wert) {
+  switch (wert) {
+    case 5:
+      return Colors.green;
+    case 4:
+      return Colors.lightGreen[400];
+    case 3:
+      return Colors.yellow;
+    case 2:
+      return Colors.orange;
+    case 1:
+      return Colors.red;
+  }
 }

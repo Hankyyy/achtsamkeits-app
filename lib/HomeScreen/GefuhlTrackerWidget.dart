@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-
+import 'package:ape_of_mind/Model/gefuehle.dart';
 
 enum GefuhlOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
-
 
 class GefuhlTrackerWidget extends StatefulWidget {
   GefuhlTrackerWidget({Key key}) : super(key: key);
@@ -54,41 +53,41 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
           // returns null.
           child: Builder(
             builder: (BuildContext context) => Column(
-              children: <Widget>[
-                ListTile(
-                  leading: Icon(
-                    Icons.insert_emoticon,
-                    color: Theme.of(context).textTheme.title.color,
-                    size: 37.5,
-                  ),
-                  title: Text(
-                    "Wie geht es dir Heute?",
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                  trailing: IconButton(
-                    icon: Icon(
-                      Icons.assessment,
-                      size: 25.0,
-                      color: Theme.of(context).textTheme.title.color,
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(
+                        Icons.insert_emoticon,
+                        color: Theme.of(context).textTheme.title.color,
+                        size: 37.5,
+                      ),
+                      title: Text(
+                        "Wie geht es dir Heute?",
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.assessment,
+                          size: 25.0,
+                          color: Theme.of(context).textTheme.title.color,
+                        ),
+                        tooltip: "Gefühlsstatistiken",
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, "/TrackerKalenderScreen");
+                        },
+                      ),
                     ),
-                    tooltip: "Gefühlsstatistiken",
-                    onPressed: () {
-                      Navigator.pushNamed(
-                          context, "/TrackerKalenderScreen");
-                    },
-                  ),
+                    Expanded(
+                      child: TabBarView(children: gefuhlsWidgets),
+                    ),
+                    TabPageSelector(
+                      selectedColor: Theme.of(context).textTheme.title.color,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: TabBarView(children: gefuhlsWidgets),
-                ),
-                TabPageSelector(
-                  selectedColor: Theme.of(context).textTheme.title.color,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
           ),
         ),
       ),
@@ -127,9 +126,16 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
-              setState(() {
-                _gefuhle = value;
-              });
+              setState(
+                () {
+
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.gWert = 5;
+                  g.insertGefuehle(g);
+                  _gefuhle = value;
+                },
+              );
             },
           ),
           RadioListTile<GefuhlOptionen>(
@@ -148,9 +154,15 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
-              setState(() {
-                _gefuhle = value;
-              });
+              setState(
+                () {
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.gWert = 4;
+                  g.insertGefuehle(g);
+                  _gefuhle = value;
+                },
+              );
             },
           ),
           RadioListTile<GefuhlOptionen>(
@@ -169,9 +181,24 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
-              setState(() {
-                _gefuhle = value;
-              });
+              setState(
+                () {
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime
+                      .now()
+                      .year
+                      .toString() + "." + DateTime
+                      .now()
+                      .month
+                      .toString() + "." + DateTime
+                      .now()
+                      .day
+                      .toString();
+                  g.gWert = 3;
+                  g.insertGefuehle(g);
+                  _gefuhle = value;
+                },
+              );
             },
           ),
           RadioListTile<GefuhlOptionen>(
@@ -190,9 +217,15 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
-              setState(() {
-                _gefuhle = value;
-              });
+              setState(
+                () {
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.gWert = 2;
+                  g.insertGefuehle(g);
+                  _gefuhle = value;
+                },
+              );
             },
           ),
           RadioListTile<GefuhlOptionen>(
@@ -211,9 +244,15 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   borderRadius: BorderRadius.all(const Radius.circular(10.0))),
             ),
             onChanged: (GefuhlOptionen value) {
-              setState(() {
-                _gefuhle = value;
-              });
+              setState(
+                () {
+                  Gefuehle g = new Gefuehle();
+                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.gWert = 1;
+                  g.insertGefuehle(g);
+                  _gefuhle = value;
+                },
+              );
             },
           ),
         ],
@@ -225,6 +264,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
 class PointsLineChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
+
   PointsLineChart(this.seriesList, {this.animate});
 
   /// Creates a [LineChart] with sample data and no transition.
@@ -238,11 +278,13 @@ class PointsLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return charts.LineChart(seriesList,
-        animate: animate,
-        defaultRenderer: charts.LineRendererConfig(
-          includePoints: true,
-        ));
+    return charts.LineChart(
+      seriesList,
+      animate: animate,
+      defaultRenderer: charts.LineRendererConfig(
+        includePoints: true,
+      ),
+    );
   }
 
   /// Create one series with sample hard coded data.

@@ -10,6 +10,7 @@ class DB {
 
   // make this a singleton class
   DB._privateConstructor();
+
   static final DB instance = DB._privateConstructor();
 
   // only have a single app-wide reference to the database
@@ -25,13 +26,18 @@ class DB {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);
-    return await openDatabase(path, version: _databaseVersion, onOpen: (db) {},
-        onCreate: (Database db, int version) async {
-          await setupTables(db);
-          await setupEintraegeDefault(db);
-        });
+    return await openDatabase(
+      path,
+      version: _databaseVersion,
+      onOpen: (db) {},
+      onCreate: (Database db, int version) async {
+        await setupTables(db);
+        await setupEintraegeDefault(db);
+      },
+    );
   }
-  Future<void> setupTables(Database db) async{
+
+  Future<void> setupTables(Database db) async {
     db.execute("CREATE TABLE meilenstein ("
         "titel TEXT NOT NULL,"
         "datum TEXT NOT NULL,"
@@ -48,12 +54,12 @@ class DB {
         ")");
 
     db.execute("CREATE TABLE produktivitaet ("
-        "datum TEXT NOT NULL,"
+        "datum TEXT NOT NULL UNIQUE,"
         "pWert INTEGER"
         ")");
 
     db.execute("CREATE TABLE gefuehle ("
-        "datum TEXT NOT NULL,"
+        "datum TEXT NOT NULL UNIQUE,"
         "gWert INTEGER"
         ")");
 
@@ -61,14 +67,18 @@ class DB {
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
         "zitat TEXT NOT NULL"
         ")");
+
+    db.execute("CREATE TABLE theme ("
+    "id INTEGER NOT NULL"
+    ")");
   }
 
-  Future<void> setupEintraegeDefault(Database db) async{
+  Future<void> setupEintraegeDefault(Database db) async {
     db.execute("INSERT into zitate (id, zitat) "
         "VALUES(1 , 'Hello World')");
     db.execute("INSERT into zitate (id, zitat) "
         "VALUES(2 , 'testtest')");
+    db.execute("INSERT into theme (id) "
+        "VALUES(0) ");
   }
-
-
 }

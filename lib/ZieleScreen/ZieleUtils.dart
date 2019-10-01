@@ -13,18 +13,20 @@ class Meilenstein {
   List getAufgaben() {
     return aufgaben;
   }
+
   List getErledigteAufgaben() {
     return erledigteAufgaben;
   }
 
   List getAlleAufgaben() {
     List<Aufgabe> aA = aufgaben + erledigteAufgaben;
-    aA.sort((a, b){
-      return a.title.toLowerCase().compareTo(b.title.toLowerCase());
-    });
+    aA.sort(
+      (a, b) {
+        return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+      },
+    );
     return aA;
   }
-
 
   Meilenstein({
     this.title,
@@ -53,7 +55,6 @@ class Aufgabe {
 }
 
 Future<List<Meilenstein_db>> getMeilensteine() async {
-
   var ms = new Meilenstein_db();
   return ms.msget();
 
@@ -161,7 +162,6 @@ List<Aufgabe> getFITUAufgaben() {
     Aufgabe(
       title: "Vorlesung 7",
       geplant: DateTime(2019, 08, 14),
-
     ),
     Aufgabe(
       title: "Vorlesung 8",
