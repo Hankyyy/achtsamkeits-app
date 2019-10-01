@@ -83,4 +83,10 @@ class Aufgaben {
     await db.rawDelete('DELETE FROM aufgaben WHERE meilenstein_id = ?', [titel]);
   }
 
+  Future<void> deleteAFS(String titel, String meilenstein_id) async {
+
+    final Database db = await DB.instance.initDB();
+    await db.rawDelete('DELETE FROM aufgaben WHERE meilenstein_id = ? AND WHERE titel = ?', [meilenstein_id, titel]);
+  }
+
 }
