@@ -81,7 +81,7 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                           ),
                           Text(
                             meilensteinTitle,
-                            style: Theme.of(context).textTheme.body2,
+                            style: Theme.of(context).textTheme.title,
                           ),
                         ],
                       ),
@@ -90,7 +90,7 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                       ),
                       TextFormField(
                         controller: afTitel,
-                        decoration: new InputDecoration(
+                        decoration: InputDecoration(
                           labelText: "Titel",
                           fillColor: Colors.white,
                           border: OutlineInputBorder(

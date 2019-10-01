@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:ape_of_mind/Theme/Theme.dart';
 
+import 'package:ape_of_mind/Model/theme.dart';
+
 class EinstellungenScreen extends StatefulWidget {
   @override
   _EinstellungenScreenState createState() => _EinstellungenScreenState();
@@ -13,7 +15,9 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
   bool k = true;
   bool darkModeValue = false;
 
-  int selectedColor = 0;
+  ApeTheme theme = ApeTheme();
+
+  int selectedColor;
 
   @override
   Widget build(BuildContext context) {
@@ -63,27 +67,39 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
           switch (i) {
             case 0:
               DynamicTheme.of(context).setThemeData(grun);
+              theme.updateTheme(0);
               break;
             case 1:
               DynamicTheme.of(context).setThemeData(aquamarin);
+              theme.updateTheme(1);
               break;
             case 2:
               DynamicTheme.of(context).setThemeData(limette);
+              theme.updateTheme(2);
               break;
             case 3:
               DynamicTheme.of(context).setThemeData(bernstein);
+              theme.updateTheme(3);
               break;
             case 4:
               DynamicTheme.of(context).setThemeData(lila);
+              theme.updateTheme(4);
               break;
             case 5:
               DynamicTheme.of(context).setThemeData(indigo);
+              theme.updateTheme(5);
               break;
             case 6:
               DynamicTheme.of(context).setThemeData(cyan);
+              theme.updateTheme(6);
               break;
             case 7:
               DynamicTheme.of(context).setThemeData(blaugrau);
+              theme.updateTheme(7);
+              break;
+            case 8:
+              DynamicTheme.of(context).setThemeData(darkTheme);
+              theme.updateTheme(8);
               break;
           }
         },
@@ -116,6 +132,12 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
         case 7:
           return "Blaugrau";
           break;
+        case 7:
+          return "Blaugrau";
+          break;
+        case 8:
+          return "Darktheme";
+          break;
       }
     }
 
@@ -143,25 +165,6 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
               //style: aABlackBold,
             ),
           ),
-          SwitchListTile(
-            value: darkModeValue,
-            activeColor: Theme.of(context).primaryColor,
-            onChanged: (bool newValue) {
-              changeDarkTheme(newValue, context);
-              setState(() {
-                darkModeValue = newValue;
-              });
-            },
-            secondary: Icon(
-              Icons.insert_emoticon,
-              color: Theme.of(context).primaryColor,
-            ),
-            //activeColor: AAThemeData.primaryColor,
-            title: Text(
-              "Darktheme",
-              //style: aABlackReg,
-            ),
-          ),
           ExpansionTile(
             title: Text(
               "Farbe",
@@ -172,7 +175,62 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
               color: Theme.of(context).primaryColor,
             ),
             children: <Widget>[
-              ListView.builder(
+              FutureBuilder<int>(
+                  future: theme.getThemeInt(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text("Error!"),
+                      );
+                    }
+
+                    selectedColor = snapshot.data;
+
+                    return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: themes.length,
+                      itemBuilder: (context, index) {
+                        return Center(
+                          child: RadioListTile(
+                            title: Text(
+                              getTitle(index),
+                              style: Theme.of(context).textTheme.body2,
+                            ),
+                            value: index,
+                            groupValue: selectedColor,
+                            activeColor: Theme.of(context).primaryColor,
+                            secondary: Container(
+                              height: 30.0,
+                              width: 100.0,
+                              decoration: BoxDecoration(
+                                  color: themes[index].primaryColor,
+                                  borderRadius: BorderRadius.all(
+                                      const Radius.circular(10.0))),
+                            ),
+                            onChanged: (value) {
+                              handleChange(value);
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  }),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  /*
+  
+  ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: themes.length,
@@ -201,12 +259,8 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
                   );
                 },
               ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
+  
+   */
 
   Widget BenachrichtigungenCard() {
     return Card(
