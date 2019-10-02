@@ -103,7 +103,7 @@ class GefuhlFrageWidget extends StatefulWidget {
 }
 
 class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
-  ProduktivitatOptionen _gefuhle;
+  ProduktivitatOptionen _produktivitat;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +115,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 style: Theme.of(context).textTheme.body2),
             activeColor: Theme.of(context).primaryColor,
             value: ProduktivitatOptionen.sehrgut,
-            groupValue: _gefuhle,
+            groupValue: _produktivitat,
             secondary: Container(
               height: 30.0,
               width: 100.0,
@@ -133,7 +133,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     DateTime.now().day.toString();
                 p.pWert = 5;
                 p.insertProduktivitaet(p);
-                _gefuhle = value;
+                _produktivitat = value;
               });
             },
           ),
@@ -144,7 +144,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             activeColor: Theme.of(context).primaryColor,
             value: ProduktivitatOptionen.gut,
-            groupValue: _gefuhle,
+            groupValue: _produktivitat,
             secondary: Container(
               height: 30.0,
               width: 100.0,
@@ -162,7 +162,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     DateTime.now().day.toString();
                 p.pWert = 4;
                 p.insertProduktivitaet(p);
-                _gefuhle = value;
+                _produktivitat = value;
               });
             },
           ),
@@ -173,7 +173,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             activeColor: Theme.of(context).primaryColor,
             value: ProduktivitatOptionen.normal,
-            groupValue: _gefuhle,
+            groupValue: _produktivitat,
             secondary: Container(
               height: 30.0,
               width: 100.0,
@@ -191,7 +191,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     DateTime.now().day.toString();
                 p.pWert = 3;
                 p.insertProduktivitaet(p);
-                _gefuhle = value;
+                _produktivitat = value;
               });
             },
           ),
@@ -202,7 +202,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             activeColor: Theme.of(context).primaryColor,
             value: ProduktivitatOptionen.schlecht,
-            groupValue: _gefuhle,
+            groupValue: _produktivitat,
             secondary: Container(
               height: 30.0,
               width: 100.0,
@@ -220,7 +220,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     DateTime.now().day.toString();
                 p.pWert = 2;
                 p.insertProduktivitaet(p);
-                _gefuhle = value;
+                _produktivitat = value;
               });
             },
           ),
@@ -231,7 +231,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             ),
             activeColor: Theme.of(context).primaryColor,
             value: ProduktivitatOptionen.sehrschlecht,
-            groupValue: _gefuhle,
+            groupValue: _produktivitat,
             secondary: Container(
               height: 30.0,
               width: 100.0,
@@ -249,7 +249,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     DateTime.now().day.toString();
                 p.pWert = 1;
                 p.insertProduktivitaet(p);
-                _gefuhle = value;
+                _produktivitat = value;
               });
             },
           ),
