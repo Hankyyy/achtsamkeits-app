@@ -13,31 +13,11 @@ class ProduktivitatTrackerWidget extends StatefulWidget {
 
 class ProduktivitatTrackerWidgetState
     extends State<ProduktivitatTrackerWidget> {
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      new LinearSales(0, 5),
-      new LinearSales(1, 3),
-      new LinearSales(2, 2),
-      new LinearSales(3, 4),
-      new LinearSales(4, 1),
-      new LinearSales(5, 1),
-      new LinearSales(6, 2),
-    ];
 
-    return [
-      new charts.Series<LinearSales, int>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
-  }
 
   var gefuhlsWidgets = <Widget>[
     GefuhlFrageWidget(),
-    PointsLineChart(_createSampleData()),
+    LetztenSieben(),
   ];
 
   @override
@@ -259,56 +239,67 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
   }
 }
 
-class PointsLineChart extends StatelessWidget {
+class LetztenSieben extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  PointsLineChart(this.seriesList, {this.animate});
+  Produktivitaet produktivitaet = Produktivitaet();
 
-  /// Creates a [LineChart] with sample data and no transition.
-  factory PointsLineChart.withSampleData() {
-    return new PointsLineChart(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: false,
-    );
-  }
+  LetztenSieben({this.seriesList, this.animate});
 
   @override
   Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList,
-        animate: animate,
-        defaultRenderer: new charts.LineRendererConfig(includePoints: true));
+    return FutureBuilder(
+      future: produktivitaet.getProduktivitaetSort(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (snapshot.hasError) {
+          return Center(
+            child: Text("Trage deine Produktivität ein!"),
+          );
+        }
+        List<Produktivitaet> gef = snapshot.data ?? [];
+
+        return charts.BarChart(
+          [
+            charts.Series<proTemp, String>(
+              id: 'Sales',
+              colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+              domainFn: (proTemp sales, _) => sales.year,
+              measureFn: (proTemp sales, _) => sales.sales,
+              data: getList(gef),
+            )
+          ],
+          animate: animate,
+          defaultRenderer: charts.BarRendererConfig(
+            // By default, bar renderer will draw rounded bars with a constant
+            // radius of 100.
+            // To not have any rounded corners, use [NoCornerStrategy]
+            // To change the radius of the bars, use [ConstCornerStrategy]
+              cornerStrategy: const charts.ConstCornerStrategy(20)),
+        );
+      },
+    );
   }
 
-  /// Create one series with sample hard coded data.
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      new LinearSales(0, 0),
-      new LinearSales(1, 5),
-      new LinearSales(2, 1),
-      new LinearSales(3, 5),
-      new LinearSales(4, 4),
-      new LinearSales(5, 2),
-      new LinearSales(6, 4),
-    ];
-
-    return [
-      new charts.Series<LinearSales, int>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
+  List<proTemp> getList(var gef) {
+    List<proTemp> eintrage = [];
+    for (int i = 0; i < gef.length; i++) {
+      eintrage.add(proTemp(gef[i].datum, gef[i].gWert * 25));
+    }
+    return eintrage;
   }
+
 }
 
-/// Sample linear data type.
-class LinearSales {
-  final int year;
+/// Sample ordinal data type.
+class proTemp {
+  final String year;
   final int sales;
 
-  LinearSales(this.year, this.sales);
+  proTemp(this.year, this.sales);
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 //Themes
 
 ThemeData getTheme(int i){

@@ -12,31 +12,10 @@ class GefuhlTrackerWidget extends StatefulWidget {
 }
 
 class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      new LinearSales(0, 0),
-      new LinearSales(1, 5),
-      new LinearSales(2, 1),
-      new LinearSales(3, 5),
-      new LinearSales(4, 4),
-      new LinearSales(5, 2),
-      new LinearSales(6, 4),
-    ];
-
-    return [
-      new charts.Series<LinearSales, int>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
-  }
 
   var gefuhlsWidgets = <Widget>[
     GefuhlFrageWidget(),
-    PointsLineChart(_createSampleData()),
+    LetztenSieben(),
   ];
 
   @override
@@ -128,9 +107,12 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             onChanged: (GefuhlOptionen value) {
               setState(
                 () {
-
                   Gefuehle g = new Gefuehle();
-                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.datum = DateTime.now().year.toString() +
+                      "." +
+                      DateTime.now().month.toString() +
+                      "." +
+                      DateTime.now().day.toString();
                   g.gWert = 5;
                   g.insertGefuehle(g);
                   _gefuhle = value;
@@ -157,7 +139,11 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               setState(
                 () {
                   Gefuehle g = new Gefuehle();
-                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.datum = DateTime.now().year.toString() +
+                      "." +
+                      DateTime.now().month.toString() +
+                      "." +
+                      DateTime.now().day.toString();
                   g.gWert = 4;
                   g.insertGefuehle(g);
                   _gefuhle = value;
@@ -184,16 +170,11 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               setState(
                 () {
                   Gefuehle g = new Gefuehle();
-                  g.datum = DateTime
-                      .now()
-                      .year
-                      .toString() + "." + DateTime
-                      .now()
-                      .month
-                      .toString() + "." + DateTime
-                      .now()
-                      .day
-                      .toString();
+                  g.datum = DateTime.now().year.toString() +
+                      "." +
+                      DateTime.now().month.toString() +
+                      "." +
+                      DateTime.now().day.toString();
                   g.gWert = 3;
                   g.insertGefuehle(g);
                   _gefuhle = value;
@@ -220,7 +201,11 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               setState(
                 () {
                   Gefuehle g = new Gefuehle();
-                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.datum = DateTime.now().year.toString() +
+                      "." +
+                      DateTime.now().month.toString() +
+                      "." +
+                      DateTime.now().day.toString();
                   g.gWert = 2;
                   g.insertGefuehle(g);
                   _gefuhle = value;
@@ -247,7 +232,11 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
               setState(
                 () {
                   Gefuehle g = new Gefuehle();
-                  g.datum = DateTime.now().year.toString() + "." + DateTime.now().month.toString() + "." + DateTime.now().day.toString();
+                  g.datum = DateTime.now().year.toString() +
+                      "." +
+                      DateTime.now().month.toString() +
+                      "." +
+                      DateTime.now().day.toString();
                   g.gWert = 1;
                   g.insertGefuehle(g);
                   _gefuhle = value;
@@ -261,60 +250,69 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
   }
 }
 
-class PointsLineChart extends StatelessWidget {
+class LetztenSieben extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
+  var barColor;
 
-  PointsLineChart(this.seriesList, {this.animate});
+  String color;
 
-  /// Creates a [LineChart] with sample data and no transition.
-  factory PointsLineChart.withSampleData() {
-    return PointsLineChart(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: false,
-    );
-  }
+  Gefuehle gefuehl = Gefuehle();
+
+  LetztenSieben({this.seriesList, this.animate});
 
   @override
   Widget build(BuildContext context) {
-    return charts.LineChart(
-      seriesList,
-      animate: animate,
-      defaultRenderer: charts.LineRendererConfig(
-        includePoints: true,
-      ),
+    return FutureBuilder(
+      future: gefuehl.getGefuehleSort(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (snapshot.hasError) {
+          return Center(
+            child: Text("Trage deine Gefühle ein!"),
+          );
+        }
+        List<Gefuehle> gef = snapshot.data ?? [];
+
+        return charts.BarChart(
+          [
+            charts.Series<gefTemp, String>(
+              id: 'Sales',
+              colorFn: (gefTemp, __) => charts.MaterialPalette.green.shadeDefault,
+              domainFn: (gefTemp sales, _) => sales.year,
+              measureFn: (gefTemp sales, _) => sales.sales,
+              data: getList(gef),
+            )
+          ],
+          animate: animate,
+          defaultRenderer: charts.BarRendererConfig(
+              // By default, bar renderer will draw rounded bars with a constant
+              // radius of 100.
+              // To not have any rounded corners, use [NoCornerStrategy]
+              // To change the radius of the bars, use [ConstCornerStrategy]
+              cornerStrategy: const charts.ConstCornerStrategy(20)),
+        );
+      },
     );
   }
 
-  /// Create one series with sample hard coded data.
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      LinearSales(0, 0),
-      LinearSales(1, 5),
-      LinearSales(2, 1),
-      LinearSales(3, 5),
-      LinearSales(4, 4),
-      LinearSales(5, 2),
-      LinearSales(6, 4),
-    ];
-
-    return [
-      charts.Series<LinearSales, int>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
+  List<gefTemp> getList(var gef) {
+    List<gefTemp> eintrage = [];
+    for (int i = 0; i < gef.length; i++) {
+      eintrage.add(gefTemp(gef[i].datum, gef[i].gWert * 25));
+    }
+    return eintrage;
   }
 }
 
-/// Sample linear data type.
-class LinearSales {
-  final int year;
+/// Sample ordinal data type.
+class gefTemp {
+  final String year;
   final int sales;
 
-  LinearSales(this.year, this.sales);
+  gefTemp(this.year, this.sales);
 }

@@ -128,7 +128,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   selectedStyle: Theme.of(context).accentTextTheme.title,
                   selectedColor: Theme.of(context).primaryColor,
                   todayColor: Theme.of(context).highlightColor,
-                  markersColor: Colors.brown[700],
+                  markersColor: Theme.of(context).primaryColor,
                   weekdayStyle: Theme.of(context).textTheme.caption,
                   weekendStyle: TextStyle(
                     color: Theme.of(context).primaryColor,
@@ -141,6 +141,23 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   ),
                 ),
                 onDaySelected: _onDaySelected,
+                builders: CalendarBuilders(
+                  markersBuilder: (context, date, events, holidays) {
+                    final children = <Widget>[];
+
+                    if (events.isNotEmpty) {
+                      children.add(
+                        Positioned(
+                          right: 1,
+                          bottom: 1,
+                          child: _buildEventsMarker(date, events),
+                        ),
+                      );
+                    }
+
+                    return children;
+                  },
+                ),
               ),
             ),
           ),
@@ -276,6 +293,31 @@ class _KalenderScreenState extends State<KalenderScreen> {
             height: 12.5,
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildEventsMarker(DateTime date, List events) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        color: _calendarController.isSelected(date)
+            ? Colors.brown[500]
+            : _calendarController.isToday(date)
+                ? Colors.brown[300]
+                : Colors.blue[400],
+      ),
+      width: 16.0,
+      height: 16.0,
+      child: Center(
+        child: Text(
+          '${events.length}',
+          style: TextStyle().copyWith(
+            color: Colors.white,
+            fontSize: 12.0,
+          ),
+        ),
       ),
     );
   }
