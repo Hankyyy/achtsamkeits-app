@@ -57,28 +57,3 @@ class APE extends StatelessWidget {
     );
   }
 }
-
-/*
-
-DynamicTheme(
-      defaultBrightness: Brightness.light,
-      data: (brightness) => indigo,
-      themedWidgetBuilder: (context, theme) {
-        return MaterialApp(
-          locale: Locale("de"),
-          title: 'Ape of Mind',
-          theme: theme,
-          home: BottomNavBarWidget(),
-          debugShowCheckedModeBanner: false,
-          routes: {
-            "/EinstellungenScreen": (context) => EinstellungenScreen(),
-            "/RatgeberScreen": (context) => RatgeberScreen(),
-            "/LernTimerScreen": (context) => LernTimerScreen(),
-            "/TrackerKalenderScreen": (context) => TrackerKalenderScreen(),
-            "/BottomNavBarWidget": (context) => BottomNavBarWidget(),
-          },
-        );
-      },
-    )
-
- */
