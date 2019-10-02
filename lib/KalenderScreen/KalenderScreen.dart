@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:ape_of_mind/Model/aufgaben.dart';
 
 class KalenderScreen extends StatefulWidget {
   @override
@@ -10,13 +11,48 @@ class KalenderScreen extends StatefulWidget {
 
 class _KalenderScreenState extends State<KalenderScreen> {
   int test;
+  Map<DateTime, List> _events;
+  List _selectedEvents;
   CalendarController _calendarController;
+  Aufgaben af = Aufgaben();
+  String datum = "${DateTime.now().day.toString()}" +
+      "."
+          "${DateTime.now().month.toString()}" +
+      "."
+          "${DateTime.now().year.toString()}";
+
+  double _getPadding(int i, int length) {
+    if (i != length - 1)
+      return 0;
+    else
+      return 15;
+  }
+
+  void _onDaySelected(DateTime day, List events) {
+    print('CALLBACK: _onDaySelected');
+    setState(() {
+      _selectedEvents = events;
+      datum = "${day.day.toString()}" +
+          "."
+              "${day.month.toString()}" +
+          "."
+              "${day.year.toString()}";
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     initializeDateFormatting('de_DE');
     _calendarController = CalendarController();
+
+    final _selectedDay = DateTime.now();
+
+    _events = {
+      _selectedDay: ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
+    };
+
+    _selectedEvents = _events[_selectedDay] ?? [];
   }
 
   @override
@@ -104,132 +140,137 @@ class _KalenderScreenState extends State<KalenderScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                onDaySelected: _onDaySelected,
               ),
             ),
           ),
           SizedBox(
             height: 10.0,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.5),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
+          Column(
+            children: <Widget>[
+              FutureBuilder<List<Aufgaben>>(
+                future: af.aufgabenDatumNotdone(datum),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error!"),
+                    );
+                  }
+                  List<Aufgaben> aufgaben = snapshot.data ?? [];
+                  Aufgaben af = new Aufgaben();
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: EdgeInsets.only(
+                            left: 12.5,
+                            right: 12.5,
+                            bottom: _getPadding(index, snapshot.data.length)),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: CheckboxListTile(
+                            value: isChecked(snapshot.data[index].erledigt),
+                            onChanged: (bool value) {
+                              setState(
+                                () {
+                                  changeCheck(
+                                      snapshot.data[index].titel,
+                                      snapshot.data[index].meilenstein_id,
+                                      snapshot.data[index].erledigt);
+                                },
+                              );
+                            },
+                            title: Text(
+                              snapshot.data[index].titel,
+                              style: Theme.of(context).textTheme.body2,
+                            ),
+                            subtitle: Text(
+                              snapshot.data[index].meilenstein_id,
+                              style: Theme.of(context).textTheme.subtitle,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
-              child: CheckboxListTile(
-                value: false,
-                onChanged: (bool newValue) {},
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      "Übung 5",
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                  ],
-                ),
-                subtitle: Text(
-                  "Online Marketing",
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.5),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: CheckboxListTile(
-                value: false,
-                onChanged: (bool newvalue) {},
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      "Praktikum 4",
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                  ],
-                ),
-                subtitle: Text(
-                  "Online Marketing",
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ),
-            ),
-          ),
-          //Text(DateTime.now().day.toString()),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.5),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: CheckboxListTile(
-                value: false,
-                onChanged: (bool newvalue) {},
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      "Übung 5",
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                  ],
-                ),
-                subtitle: Text(
-                  "Online Marketing",
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.5),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: CheckboxListTile(
-                value: false,
-                onChanged: (bool newvalue) {},
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      "Vorlesung 5",
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                  ],
-                ),
-                subtitle: Text(
-                  "Medienproduktion",
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.5),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: CheckboxListTile(
-                value: false,
-                onChanged: (bool newvalue) {},
+              ExpansionTile(
                 title: Text(
-                  "Übung 2",
-                  style: Theme.of(context).textTheme.title,
+                  "Erledigte Aufgaben",
+                  style: Theme.of(context).textTheme.body1,
                 ),
-                subtitle: Text(
-                  "Medienproduktion",
-                  style: Theme.of(context).textTheme.caption,
-                ),
+                children: <Widget>[
+                  FutureBuilder<List<Aufgaben>>(
+                    future: af.aufgabenDatumDone(datum),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text("Error!"),
+                        );
+                      }
+                      List<Aufgaben> aufgaben = snapshot.data ?? [];
+                      Aufgaben af = Aufgaben();
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                left: 12.5,
+                                right: 12.5,
+                                bottom:
+                                    _getPadding(index, snapshot.data.length)),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: CheckboxListTile(
+                                value: isChecked(snapshot.data[index].erledigt),
+                                onChanged: (bool value) {
+                                  setState(
+                                    () {
+                                      changeCheck(
+                                          snapshot.data[index].titel,
+                                          snapshot.data[index].meilenstein_id,
+                                          snapshot.data[index].erledigt);
+                                    },
+                                  );
+                                },
+                                title: Text(
+                                  snapshot.data[index].titel,
+                                  style: Theme.of(context).textTheme.body2,
+                                ),
+                                subtitle: Text(
+                                  snapshot.data[index].meilenstein_id,
+                                  style: Theme.of(context).textTheme.subtitle,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
+            ],
           ),
           SizedBox(
             height: 12.5,
@@ -238,6 +279,17 @@ class _KalenderScreenState extends State<KalenderScreen> {
       ),
     );
   }
-}
 
-//Text(DateTime.now().toString()),
+  bool isChecked(int i) {
+    if (i == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool changeCheck(String titel, String meilenstein_id, int erledigt) {
+    Aufgaben af = new Aufgaben();
+    af.checkAF(titel, meilenstein_id, erledigt);
+  }
+}

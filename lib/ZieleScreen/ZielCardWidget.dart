@@ -125,6 +125,7 @@ class _ZielCardState extends State<ZielCard> {
                 ),
               ),
               _getNotizen(),
+              SizedBox(height: 15,),
               FutureBuilder<List<Aufgaben>>(
                 future: aufgabe.aufgabenMSdone(meilenstein.titel),
                 builder: (context, snapshot) {

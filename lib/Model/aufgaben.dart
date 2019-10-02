@@ -93,6 +93,40 @@ class Aufgaben {
     );
   }
 
+  Future<List<Aufgaben>> aufgabenDatumDone(String datum) async {
+    final Database db = await DB.instance.initDB();
+    List<Map<String, dynamic>> map = await db
+        .query('aufgaben', where: "datum = ? AND erledigt = 1", whereArgs: [datum]);
+    return List.generate(
+      map.length,
+          (i) {
+        return Aufgaben(
+          titel: map[i]["titel"],
+          erledigt: map[i]["erledigt"],
+          datum: map[i]["datum"],
+          meilenstein_id: map[i]["meilenstein_id"],
+        );
+      },
+    );
+  }
+
+  Future<List<Aufgaben>> aufgabenDatumNotdone(String datum) async {
+    final Database db = await DB.instance.initDB();
+    List<Map<String, dynamic>> map = await db
+        .query('aufgaben', where: "datum =? AND erledigt = 0", whereArgs: [datum]);
+    return List.generate(
+      map.length,
+          (i) {
+        return Aufgaben(
+          titel: map[i]["titel"],
+          erledigt: map[i]["erledigt"],
+          datum: map[i]["datum"],
+          meilenstein_id: map[i]["meilenstein_id"],
+        );
+      },
+    );
+  }
+
   Future<void> checkAF(String titel, String meilenstein_id, int erledigt) async {
     final Database db = await DB.instance.initDB();
     if(erledigt == 0){
