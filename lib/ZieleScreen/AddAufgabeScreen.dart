@@ -115,11 +115,11 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                             onPressed: () => _selectDate(context),
                             highlightedBorderColor:
                                 Theme.of(context).primaryColor,
-                            child: Text("${selectedDate.day.toString()}" +
+                            child: Text("${selectedDate.year.toString()}" +
                                 "."
                                     "${selectedDate.month.toString()}" +
                                 "."
-                                    "${selectedDate.year.toString()}"),
+                                    "${selectedDate.day.toString()}"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                           ),
@@ -154,11 +154,11 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
               onPressed: () async {
                 var af = new Aufgaben();
                 af.titel = afTitel.text;
-                af.datum = ("${selectedDate.day.toString()}" +
+                af.datum = ("${selectedDate.year.toString()}" +
                     "."
                         "${selectedDate.month.toString()}" +
                     "."
-                        "${selectedDate.year.toString()}");
+                        "${selectedDate.day.toString()}");
                 af.erledigt = 0;
                 af.meilenstein_id = meilensteinTitle;
                 await af.insertAufgabe(af);

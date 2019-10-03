@@ -106,11 +106,11 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                             onPressed: () => _selectDate(context),
                             highlightedBorderColor:
                                 Theme.of(context).primaryColor,
-                            child: Text("${selectedDate.day.toString()}" +
+                            child: Text("${selectedDate.year.toString()}" +
                                 "."
                                     "${selectedDate.month.toString()}" +
                                 "."
-                                    "${selectedDate.year.toString()}"),
+                                    "${selectedDate.day.toString()}"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                           ),
@@ -131,11 +131,11 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                             onPressed: () => _deadlineDate(context),
                             highlightedBorderColor:
                                 Theme.of(context).primaryColor,
-                            child: Text("${deadlineDate.day.toString()}" +
+                            child: Text("${deadlineDate.year.toString()}" +
                                 "."
                                     "${deadlineDate.month.toString()}" +
                                 "."
-                                    "${deadlineDate.year.toString()}"),
+                                    "${deadlineDate.day.toString()}"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                           ),
@@ -186,16 +186,16 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
               onPressed: () async {
                 var ms = new Meilenstein_db();
                 ms.titel = msTitel.text;
-                ms.datum = ("${selectedDate.day.toString()}" +
+                ms.datum = ("${selectedDate.year.toString()}" +
                     "."
                         "${selectedDate.month.toString()}" +
                     "."
-                        "${selectedDate.year.toString()}");
-                ms.deadline = ("${deadlineDate.day.toString()}" +
+                        "${selectedDate.day.toString()}");
+                ms.deadline = ("${deadlineDate.year.toString()}" +
                     "."
                         "${deadlineDate.month.toString()}" +
                     "."
-                        "${deadlineDate.year.toString()}");
+                        "${deadlineDate.day.toString()}");
                 ms.notizen = msNotiz.text;
                 await ms.insertMeilenstein(ms);
                 Navigator.pop(context);

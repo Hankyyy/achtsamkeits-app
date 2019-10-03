@@ -35,7 +35,7 @@ class Produktivitaet {
   //liefert alle Einträge
   Future<List<Produktivitaet>> getProduktivitaet() async {
     final Database db = await DB.instance.initDB();
-    final List<Map<String, dynamic>> maps = await db.query('produktivitaet');
+    final List<Map<String, dynamic>> maps = await db.query('produktivitaet', orderBy: "datum DESCf");
     return List.generate(maps.length, (i) {
       return Produktivitaet(
         pWert: maps[i]['pWert'],

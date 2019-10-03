@@ -35,7 +35,7 @@ class Gefuehle {
   //liefert alle Einträge
   Future<List<Gefuehle>> getGefuehle() async {
     final Database db = await DB.instance.initDB();
-    final List<Map<String, dynamic>> maps = await db.query('gefuehle');
+    final List<Map<String, dynamic>> maps = await db.query('gefuehle', orderBy: "datum DESC");
     return List.generate(
       maps.length,
       (i) {
