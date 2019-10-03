@@ -15,11 +15,11 @@ class _KalenderScreenState extends State<KalenderScreen> {
   List _selectedEvents;
   CalendarController _calendarController;
   Aufgaben af = Aufgaben();
-  String datum = "${DateTime.now().day.toString()}" +
+  String datum = "${DateTime.now().year.toString()}" +
       "."
           "${DateTime.now().month.toString()}" +
       "."
-          "${DateTime.now().year.toString()}";
+          "${DateTime.now().day.toString()}";
 
   double _getPadding(int i, int length) {
     if (i != length - 1)
@@ -32,11 +32,11 @@ class _KalenderScreenState extends State<KalenderScreen> {
     print('CALLBACK: _onDaySelected');
     setState(() {
       _selectedEvents = events;
-      datum = "${day.day.toString()}" +
+      datum = "${day.year.toString()}" +
           "."
               "${day.month.toString()}" +
           "."
-              "${day.year.toString()}";
+              "${day.day.toString()}";
     });
   }
 
