@@ -219,62 +219,68 @@ class _ZielCardState extends State<ZielCard> {
                   );
                 },
               ),
-              ExpansionTile(
-                title: Text(
-                  "Erledigte Aufgaben",
-                  style: Theme.of(context).textTheme.body1,
-                ),
-                children: <Widget>[
-                  FutureBuilder<List<Aufgaben>>(
-                    future: aufgabe.aufgabenMSdone(meilenstein.titel),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState !=
-                          ConnectionState.done) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text("Error!"),
-                        );
-                      }
-                      List<Aufgaben> aufgaben = snapshot.data ?? [];
-                      Aufgaben af = Aufgaben();
-                      return ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                          return Center(
-                            child: CheckboxListTile(
-                              value: isChecked(snapshot.data[index].erledigt),
-                              onChanged: (bool value) {
-                                setState(
-                                      () {
-                                    changeCheck(
-                                        snapshot.data[index].titel,
-                                        snapshot.data[index].meilenstein_id,
-                                        snapshot.data[index].erledigt);
-                                  },
-                                );
-                              },
-                              title: Text(
-                                snapshot.data[index].titel,
-                                style: Theme.of(context).textTheme.body2,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
+        FutureBuilder<List<Aufgaben>>(
+          future: aufgabe.aufgabenMSdone(meilenstein.titel),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Error!"),
+              );
+            }
+            List<Aufgaben> aufgaben = snapshot.data ?? [];
+            Aufgaben af = Aufgaben();
+            return getErledigteAufgaben(snapshot);
+          },
+        ),
             ],
           ),
         ),
       );
+  }
+
+  Widget getErledigteAufgaben(var snapshot) {
+    if (snapshot.data.length != 0)
+      return ExpansionTile(
+        title: Text(
+          "Erledigte Aufgaben",
+          style: Theme.of(context).textTheme.body1,
+        ),
+        children: <Widget>[
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              return Center(
+                child: CheckboxListTile(
+                  value: isChecked(snapshot.data[index].erledigt),
+                  onChanged: (bool value) {
+                    setState(
+                          () {
+                        changeCheck(
+                            snapshot.data[index].titel,
+                            snapshot.data[index].meilenstein_id,
+                            snapshot.data[index].erledigt);
+                      },
+                    );
+                  },
+                  title: Text(
+                    snapshot.data[index].titel,
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    else
+      return Container();
   }
 
   bool isChecked(int i) {
