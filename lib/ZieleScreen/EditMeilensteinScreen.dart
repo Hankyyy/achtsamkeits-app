@@ -106,36 +106,37 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(0),
                 child: Form(
                   child: ListView(
                     shrinkWrap: true,
                     primary: false,
                     children: <Widget>[
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Meilenstein:',
-                            style: Theme.of(context).textTheme.body2,
-                          ),
-                          Text(
-                            meilensteinTitle,
-                            style: Theme.of(context).textTheme.title,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
+
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 0),
+                        padding: EdgeInsets.all(20),
                         child: Column(
                           children: <Widget>[
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  'Meilenstein:',
+                                  style: Theme.of(context).textTheme.body2,
+                                ),
+                                Text(
+                                  meilensteinTitle,
+                                  style: Theme.of(context).textTheme.title,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -199,74 +200,26 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                                 ), //fillColor: Colors.green
                               ),
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
                           ],
                         ),
                       ),
-                      ExpansionTile(
-                        title: Text(
-                          "Aufgaben",
-                          style: Theme.of(context).textTheme.body1,
-                        ),
-                        children: <Widget>[
-                          FutureBuilder<List<Aufgaben>>(
-                            future: aufgabe.aufgabenMS(meilensteinTitle),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState !=
-                                  ConnectionState.done) {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              }
-                              if (snapshot.hasError) {
-                                return Center(
-                                  child: Text("Error!"),
-                                );
-                              }
-                              List<Aufgaben> aufgaben = snapshot.data ?? [];
-                              Aufgaben af = Aufgaben();
-                              return ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: snapshot.data.length,
-                                itemBuilder: (context, index) {
-                                  return Center(
-                                    child: ListTile(
-                                      title: Text(
-                                        snapshot.data[index].titel,
-                                        style:
-                                            Theme.of(context).textTheme.body2,
-                                      ),
-                                      trailing: IconButton(
-                                        icon: Icon(
-                                          Icons.delete,
-                                          size: 30,
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .title
-                                              .color,
-                                        ),
-                                        tooltip: "Aufgabe löschen",
-                                        onPressed: () {
-                                          Aufgaben af = Aufgaben();
-                                          setState(
-                                            () {
-                                              af.deleteAFS(
-                                                  snapshot.data[index].titel,
-                                                  meilensteinTitle);
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ],
+                      FutureBuilder<List<Aufgaben>>(
+                        future: aufgabe.aufgabenMS(meilensteinTitle),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState != ConnectionState.done) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          if (snapshot.hasError) {
+                            return Center(
+                              child: Text("Error!"),
+                            );
+                          }
+                          List<Aufgaben> aufgaben = snapshot.data ?? [];
+                          Aufgaben af = Aufgaben();
+                          return getAufgaben(snapshot);
+                        },
                       ),
                     ],
                   ),
@@ -321,6 +274,57 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
         ],
       ),
     );
+  }
+
+  Widget getAufgaben(var snapshot) {
+    if (snapshot.data.length != 0)
+      return ExpansionTile(
+        title: Text(
+          "Aufgaben",
+          style: Theme.of(context).textTheme.body1,
+        ),
+        children: <Widget>[
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              return Center(
+                child: ListTile(
+                  title: Text(
+                    snapshot.data[index].titel,
+                    style:
+                    Theme.of(context).textTheme.body2,
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      size: 22.5,
+                      color: Theme.of(context)
+                          .textTheme
+                          .title
+                          .color,
+                    ),
+                    tooltip: "Aufgabe löschen",
+                    onPressed: () {
+                      Aufgaben af = Aufgaben();
+                      setState(
+                            () {
+                          af.deleteAFS(
+                              snapshot.data[index].titel,
+                              meilensteinTitle);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    else
+      return Container();
   }
 
   Future<void> _meilenSteinLoschenDialog() async {

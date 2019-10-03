@@ -281,7 +281,7 @@ class LetztenSieben extends StatelessWidget {
         return charts.BarChart(
           [
             charts.Series<gefTemp, String>(
-              id: 'Sales',
+              id: 'Gefühle',
               colorFn: (gefTemp, __) => charts.MaterialPalette.green.shadeDefault,
               domainFn: (gefTemp sales, _) => sales.year,
               measureFn: (gefTemp sales, _) => sales.sales,

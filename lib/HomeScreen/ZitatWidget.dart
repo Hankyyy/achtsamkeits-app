@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'ZitatWidgetUtils.dart';
+
 class ZitatWidget extends StatefulWidget {
   @override
   _ZitatWidgetState createState() => _ZitatWidgetState();
 }
 
 class _ZitatWidgetState extends State<ZitatWidget> {
-  var _zitat = (getZitate()..shuffle()).first;
+  var _zitat = (zitatList()..shuffle()).first;
   var _newZitat = Zitat();
   int i;
 
@@ -18,7 +20,7 @@ class _ZitatWidgetState extends State<ZitatWidget> {
       onLongPress: () {
         i = 0;
         while (i == 0) {
-          _newZitat = (getZitate()..shuffle()).first;
+          _newZitat = (zitatList()..shuffle()).first;
           if (_zitat.inhalt != _newZitat.inhalt)
             setState(
               () {
@@ -42,7 +44,7 @@ class _ZitatWidgetState extends State<ZitatWidget> {
               style: Theme.of(context).accentTextTheme.title,
             ),
             subtitle: Text(
-              "- " + _zitat.name,
+              "- " + _zitat.autor,
               textAlign: TextAlign.end,
               style: Theme.of(context).accentTextTheme.body2,
             ),
@@ -53,61 +55,4 @@ class _ZitatWidgetState extends State<ZitatWidget> {
   }
 }
 
-class Zitat {
-  String name;
-  String inhalt;
 
-  Zitat({this.name, this.inhalt});
-}
-
-List<Zitat> getZitate() {
-  return [
-    Zitat(
-      inhalt:
-          "Arbeite an deinem Innern. Da ist die Quelle des Guten, eine unversiegbare Quelle, wenn du nur immer nachgräbst.",
-      name: "Marc Aurel",
-    ),
-    Zitat(
-      inhalt:
-          "Was hinter uns liegt und was vor uns liegt, sind Kleinigkeiten verglichen mit dem, was in uns liegt.",
-      name: "?",
-    ),
-    Zitat(
-      inhalt: "Durch Nicht-Tun wird alles Tun möglich.",
-      name: "frei nach Laotse",
-    ),
-    Zitat(
-      inhalt:
-          "Die Achtsamkeit aber, ihr Mönche, ist zu allem nützlich, sage ich.",
-      name: "Buddha",
-    ),
-    Zitat(
-      inhalt:
-          "Probleme lassen sich niemals auf der Ebene des Denkens lösen, auf der sie auch entstanden sind.",
-      name: "Albert Einstein",
-    ),
-    Zitat(
-      inhalt:
-          "Es gibt keine geringere und keine größere Meisterschaft als die Meisterschaft über sich selbst.",
-      name: "Leonardo da Vinci",
-    ),
-    Zitat(
-      inhalt:
-          "Die älteste, selbstverständlichste und zuverlässigste Konstante in dieser Welt ist nicht bloß, dass wir glücklich sein wollen, sondern dass wir nur glücklich sein wollen. Unsere Natur verlangt es von uns.",
-      name: "Augustinus",
-    ),
-    Zitat(
-      inhalt: "Erst verstehen, dann verstanden werden.",
-      name: "Stephen R. Covey",
-    ),
-    Zitat(
-      inhalt:
-          "Wer sich für andere interessiert, gewinnt in zwei Monaten mehr Freunde als jemand, der immer nur versucht, die anderen für sich zu interessieren, in zwei Jahren.",
-      name: "Dale Carnegie",
-    ),
-    Zitat(
-      inhalt: "Zum Frieden erziehen, um zum Frieden zu gelangen.",
-      name: "Papst Johannes Paul II",
-    ),
-  ];
-}

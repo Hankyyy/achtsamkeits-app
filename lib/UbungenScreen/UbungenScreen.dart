@@ -31,7 +31,7 @@ class _UbungenScreenState extends State<UbungenScreen> {
         elevation: 0.0,
       ),
       body: GridView.count(
-        padding: EdgeInsets.only(left: 16.5, right: 16.5, bottom: 17.5),
+        padding: EdgeInsets.only(left: 16.5, right: 16.5, bottom: 18.5, top: 4),
         crossAxisCount: 2,
         mainAxisSpacing: 16.0,
         crossAxisSpacing: 16.0,

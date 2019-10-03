@@ -35,7 +35,7 @@ class _ZieleScreenState extends State<ZieleScreen> {
         future: getMeilensteine(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return Center(child: CircularProgressIndicator(),);
+            return Container();
           }
           if (snapshot.hasError) {
             return Center(child: Text("Error!"),);

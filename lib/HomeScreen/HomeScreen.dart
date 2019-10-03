@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           GefuhlTrackerWidget(),
           ProduktivitatTrackerWidget(),
           SizedBox(
-            height: 12.5,
+            height: 15,
           ),
         ],
       ),

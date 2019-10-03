@@ -27,7 +27,8 @@ class Produktivitaet {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );*/
     print(p.datum);
-    await db.rawInsert("INSERT OR REPLACE INTO produktivitaet(datum, pWert) VALUES (?, ?)",
+    await db.rawInsert(
+        "INSERT OR REPLACE INTO produktivitaet(datum, pWert) VALUES (?, ?)",
         [p.datum, p.pWert]);
   }
 
@@ -46,7 +47,7 @@ class Produktivitaet {
   Future<List<Produktivitaet>> getProduktivitaetSort() async {
     final Database db = await DB.instance.initDB();
     final List<Map<String, dynamic>> maps =
-        await db.rawQuery("SELECT * FROM üroduktivitaet "
+        await db.rawQuery("SELECT * FROM produktivitaet "
             "ORDER BY datum DESC "
             "LIMIT 7");
     return List.generate(

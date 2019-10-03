@@ -27,7 +27,8 @@ class Gefuehle {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );*/
     print(g.datum);
-    await db.rawInsert("INSERT OR REPLACE INTO gefuehle(datum, gWert) VALUES (?, ?)",
+    await db.rawInsert(
+        "INSERT OR REPLACE INTO gefuehle(datum, gWert) VALUES (?, ?)",
         [g.datum, g.gWert]);
   }
 
@@ -48,22 +49,18 @@ class Gefuehle {
 
   Future<List<Gefuehle>> getGefuehleSort() async {
     final Database db = await DB.instance.initDB();
-    final List<Map<String, dynamic>> maps = await db.rawQuery(
-        "SELECT * FROM gefuehle "
+    final List<Map<String, dynamic>> maps =
+        await db.rawQuery("SELECT * FROM gefuehle "
             "ORDER BY datum DESC "
             "LIMIT 7");
     return List.generate(
       maps.length,
-          (i) {
+      (i) {
         return Gefuehle(
           gWert: maps[i]['gWert'],
           datum: maps[i]['datum'],
         );
       },
     );
-    
   }
-
-
-
 }

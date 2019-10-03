@@ -262,16 +262,16 @@ class LetztenSieben extends StatelessWidget {
             child: Text("Trage deine Produktivität ein!"),
           );
         }
-        List<Produktivitaet> gef = snapshot.data ?? [];
+        List<Produktivitaet> pro = snapshot.data ?? [];
 
         return charts.BarChart(
           [
             charts.Series<proTemp, String>(
-              id: 'Sales',
+              id: 'Produktivität',
               colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
               domainFn: (proTemp sales, _) => sales.year,
               measureFn: (proTemp sales, _) => sales.sales,
-              data: getList(gef),
+              data: getList(pro),
             )
           ],
           animate: animate,
@@ -289,7 +289,7 @@ class LetztenSieben extends StatelessWidget {
   List<proTemp> getList(var gef) {
     List<proTemp> eintrage = [];
     for (int i = 0; i < gef.length; i++) {
-      eintrage.add(proTemp(gef[i].datum, gef[i].gWert * 25));
+      eintrage.add(proTemp(gef[i].datum, gef[i].pWert * 25));
     }
     return eintrage;
   }

@@ -170,9 +170,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 future: af.aufgabenDatumNotdone(datum),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return Container();
                   }
                   if (snapshot.hasError) {
                     return Center(
@@ -222,75 +220,23 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   );
                 },
               ),
-              ExpansionTile(
-                title: Text(
-                  "Erledigte Aufgaben",
-                  style: Theme.of(context).textTheme.body1,
-                ),
-                children: <Widget>[
-                  FutureBuilder<List<Aufgaben>>(
-                    future: af.aufgabenDatumDone(datum),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.done) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text("Error!"),
-                        );
-                      }
-                      List<Aufgaben> aufgaben = snapshot.data ?? [];
-                      Aufgaben af = Aufgaben();
-                      return ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                                left: 12.5,
-                                right: 12.5,
-                                bottom:
-                                    _getPadding(index, snapshot.data.length)),
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: CheckboxListTile(
-                                value: isChecked(snapshot.data[index].erledigt),
-                                onChanged: (bool value) {
-                                  setState(
-                                    () {
-                                      changeCheck(
-                                          snapshot.data[index].titel,
-                                          snapshot.data[index].meilenstein_id,
-                                          snapshot.data[index].erledigt);
-                                    },
-                                  );
-                                },
-                                title: Text(
-                                  snapshot.data[index].titel,
-                                  style: Theme.of(context).textTheme.body2,
-                                ),
-                                subtitle: Text(
-                                  snapshot.data[index].meilenstein_id,
-                                  style: Theme.of(context).textTheme.subtitle,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
+              FutureBuilder<List<Aufgaben>>(
+                future: af.aufgabenDatumDone(datum),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Container();
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error!"),
+                    );
+                  }
+                  List<Aufgaben> aufgaben = snapshot.data ?? [];
+                  Aufgaben af = Aufgaben();
+                  return getErledigteAufgaben(snapshot);
+                },
               ),
             ],
-          ),
-          SizedBox(
-            height: 12.5,
           ),
         ],
       ),
@@ -320,6 +266,61 @@ class _KalenderScreenState extends State<KalenderScreen> {
         ),
       ),
     );
+  }
+
+  Widget getErledigteAufgaben(var snapshot) {
+    List list = snapshot.data;
+
+    if (snapshot.data.length != 0)
+      return ExpansionTile(
+        title: Text(
+          "Erledigte Aufgaben",
+          style: Theme.of(context).textTheme.body1,
+        ),
+        children: <Widget>[
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: EdgeInsets.only(
+                    left: 12.5,
+                    right: 12.5,
+                    bottom: _getPadding(index, snapshot.data.length)),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: CheckboxListTile(
+                    value: isChecked(snapshot.data[index].erledigt),
+                    onChanged: (bool value) {
+                      setState(
+                        () {
+                          changeCheck(
+                              snapshot.data[index].titel,
+                              snapshot.data[index].meilenstein_id,
+                              snapshot.data[index].erledigt);
+                        },
+                      );
+                    },
+                    title: Text(
+                      snapshot.data[index].titel,
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    subtitle: Text(
+                      snapshot.data[index].meilenstein_id,
+                      style: Theme.of(context).textTheme.subtitle,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    else
+      return Container();
   }
 
   bool isChecked(int i) {
