@@ -21,8 +21,8 @@ class APE extends StatelessWidget {
       future: theme.getThemeInt(),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return Center(
-            child: CircularProgressIndicator(),
+          return Container(
+            color: Colors.white,
           );
         }
         if (snapshot.hasError) {

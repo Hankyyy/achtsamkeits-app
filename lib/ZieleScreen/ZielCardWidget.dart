@@ -130,8 +130,12 @@ class _ZielCardState extends State<ZielCard> {
                 future: aufgabe.aufgabenMSdone(meilenstein.titel),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                      child: CircularProgressIndicator(),
+                    return LinearPercentIndicator(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      lineHeight: 15,
+                      backgroundColor: Theme.of(context).highlightColor,
+                      progressColor: Theme.of(context).primaryColor,
+                      percent: 0,
                     );
                   }
                   if (snapshot.hasError) {
@@ -146,8 +150,12 @@ class _ZielCardState extends State<ZielCard> {
                     future: aufgabe.aufgabenMSnotdone(meilenstein.titel),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState != ConnectionState.done) {
-                        return Center(
-                          child: CircularProgressIndicator(),
+                        return LinearPercentIndicator(
+                          padding: EdgeInsets.symmetric(horizontal: 25),
+                          lineHeight: 15,
+                          backgroundColor: Theme.of(context).highlightColor,
+                          progressColor: Theme.of(context).primaryColor,
+                          percent: 0,
                         );
                       }
                       if (snapshot.hasError) {
@@ -176,9 +184,7 @@ class _ZielCardState extends State<ZielCard> {
                 future: aufgabe.aufgabenMSnotdone(meilenstein.titel),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return Container();
                   }
                   if (snapshot.hasError) {
                     return Center(
@@ -223,9 +229,7 @@ class _ZielCardState extends State<ZielCard> {
           future: aufgabe.aufgabenMSdone(meilenstein.titel),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Container();
             }
             if (snapshot.hasError) {
               return Center(

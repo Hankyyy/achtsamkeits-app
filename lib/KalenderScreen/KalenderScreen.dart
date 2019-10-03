@@ -170,9 +170,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 future: af.aufgabenDatumNotdone(datum),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return Container();
                   }
                   if (snapshot.hasError) {
                     return Center(
@@ -226,9 +224,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 future: af.aufgabenDatumDone(datum),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return Container();
                   }
                   if (snapshot.hasError) {
                     return Center(
@@ -241,9 +237,6 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 },
               ),
             ],
-          ),
-          SizedBox(
-            height: 12.5,
           ),
         ],
       ),
