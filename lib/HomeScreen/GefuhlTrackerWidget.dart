@@ -8,6 +8,7 @@ enum GefuhlOptionen {
   normal,
   gut,
   sehrgut,
+  test,
 }
 
 class GefuhlTrackerWidget extends StatefulWidget {

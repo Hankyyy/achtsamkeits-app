@@ -166,7 +166,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
           ExpansionTile(
             title: Text(
               "Design",
-              //style: aABlackBold,
+              style: Theme.of(context).textTheme.title,
             ),
             children: <Widget>[
               FutureBuilder<int>(
@@ -261,7 +261,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             child: ListTile(
               title: Text(
                 "Benachrichtigungen",
-                //style: aABlackBold,
+                style: Theme.of(context).textTheme.title,
               ),
             ),
           ),
@@ -281,7 +281,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             ),
             title: Text(
               "Tracker",
-              //style: aABlackReg,
+              style: Theme.of(context).textTheme.body2,
             ),
           ),
           SwitchListTile(
@@ -300,7 +300,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             ),
             title: Text(
               "Termine",
-              //style: aABlackReg,
+              style: Theme.of(context).textTheme.body2,
             ),
           ),
           SwitchListTile(
@@ -319,7 +319,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             ),
             title: Text(
               "Lernen",
-              //style: aABlackReg,
+              style: Theme.of(context).textTheme.body2,
             ),
           ),
         ],

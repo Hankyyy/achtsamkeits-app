@@ -29,8 +29,8 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
 
   bool view;
 
-  DateTime selectedDate;
-  DateTime deadlineDate;
+  DateTime selectedDate = DateTime.now();
+  DateTime deadlineDate = DateTime.now();
 
   TextEditingController msNotiz;
 
@@ -66,8 +66,6 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
     msNotiz.text = meilenstein.notizen;
     //DateTime selectedDate = DateTime.parse(meilenstein.datum);
     //DateTime deadlineDate = DateTime.parse(meilenstein.deadline);
-    DateTime selectedDate = DateTime.now();
-    DateTime deadlineDate = DateTime.now();
     super.initState();
   }
 

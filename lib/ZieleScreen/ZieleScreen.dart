@@ -11,10 +11,8 @@ class ZieleScreen extends StatefulWidget {
 }
 
 class _ZieleScreenState extends State<ZieleScreen> {
-
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -38,22 +36,32 @@ class _ZieleScreenState extends State<ZieleScreen> {
             return Container();
           }
           if (snapshot.hasError) {
-            return Center(child: Text("Error!"),);
+            return Center(
+              child: Text("Error!"),
+            );
           }
           List<Meilenstein_db> meilensteine = snapshot.data ?? [];
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: meilensteine.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(bottom: 10.0, left: 12.5, right: 12.5),
-                child: ZielCard(
-                  meilensteine[index],
-                  index,
-                  meilensteine.length,
+          return Flex(
+            direction: Axis.vertical,
+            children: <Widget>[
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: meilensteine.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          bottom: 10.0, left: 12.5, right: 12.5),
+                      child: ZielCard(
+                        meilensteine[index],
+                        index,
+                        meilensteine.length,
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+              ),
+            ],
           );
         },
       ),
