@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 
 import 'BottomNavBarWidget/BottomNavBarWidget.dart';
@@ -17,6 +18,9 @@ class APE extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ApeTheme theme = ApeTheme();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return FutureBuilder(
       future: theme.getThemeInt(),
       builder: (context, snapshot) {

@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:ape_of_mind/Model/aufgaben.dart';
 
+import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:ape_of_mind/Model/aufgaben.dart';
 import 'package:ape_of_mind/Model/meilenstein.dart';
 
 class EditMeilensteinScreen extends StatefulWidget {
-  final String meilensteinTitle;
+  Meilenstein_db meilenstein;
 
-  EditMeilensteinScreen(this.meilensteinTitle);
+  EditMeilensteinScreen(this.meilenstein);
 
   @override
   _EditMeilensteinScreenState createState() =>
-      _EditMeilensteinScreenState(meilensteinTitle);
+      _EditMeilensteinScreenState(meilenstein);
 }
 
 class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
+
+  Meilenstein_db meilenstein;
+
   Aufgaben aufgabe = new Aufgaben();
 
   double borderThickness = 1;
 
-  String meilensteinTitle;
-
-  Meilenstein_db meilenstein;
   int i;
   int length;
 
   bool view;
 
-  DateTime selectedDate = DateTime.now();
-  DateTime deadlineDate = DateTime.now();
+  DateTime selectedDate;
+  DateTime deadlineDate;
 
-  //final msTitel = TextEditingController();
-  final msNotiz = TextEditingController();
+  TextEditingController msNotiz;
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -57,15 +58,24 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
       });
   }
 
-  final afTitel = TextEditingController();
+  _EditMeilensteinScreenState(this.meilenstein);
 
-  _EditMeilensteinScreenState(this.meilensteinTitle);
+  @override
+  void initState() {
+    msNotiz = TextEditingController();
+    msNotiz.text = meilenstein.notizen;
+    //DateTime selectedDate = DateTime.parse(meilenstein.datum);
+    //DateTime deadlineDate = DateTime.parse(meilenstein.deadline);
+    DateTime selectedDate = DateTime.now();
+    DateTime deadlineDate = DateTime.now();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AutoSizeText(
           'Meilenstein bearbeiten',
           style: TextStyle(
               fontSize: 30.0, color: Theme.of(context).textTheme.title.color),
@@ -123,14 +133,20 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
                                   'Meilenstein:',
                                   style: Theme.of(context).textTheme.body2,
                                 ),
-                                Text(
-                                  meilensteinTitle,
-                                  style: Theme.of(context).textTheme.title,
+                                Container(
+                                  width: MediaQuery.of(context).size.width/2,
+                                  child: Text(
+                                    meilenstein.titel,
+                                    style: Theme.of(context).textTheme.title,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 5,
+                                  ),
                                 ),
                               ],
                             ),
@@ -190,7 +206,6 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                               controller: msNotiz,
                               keyboardType: TextInputType.multiline,
                               maxLines: 5,
-                              //initialValue: meilenstein.notizen,
                               decoration: InputDecoration(
                                 labelText: "Notizen",
                                 fillColor: Colors.white,
@@ -204,7 +219,7 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                         ),
                       ),
                       FutureBuilder<List<Aufgaben>>(
-                        future: aufgabe.aufgabenMS(meilensteinTitle),
+                        future: aufgabe.aufgabenMS(meilenstein.titel),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState != ConnectionState.done) {
                             return Center(
@@ -250,7 +265,7 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
               onPressed: () {
                 Meilenstein_db ms = Meilenstein_db();
                 ms.updateMS(
-                    meilensteinTitle,
+                    meilenstein.titel,
                     "${selectedDate.day.toString()}" +
                         "."
                             "${selectedDate.month.toString()}" +
@@ -312,7 +327,7 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                             () {
                           af.deleteAFS(
                               snapshot.data[index].titel,
-                              meilensteinTitle);
+                              meilenstein.titel);
                         },
                       );
                     },
@@ -334,7 +349,7 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: Theme.of(context).dialogTheme.shape,
-          title: Text(meilensteinTitle + ' löschen?'),
+          title: Text(meilenstein.titel + ' löschen?'),
           actions: <Widget>[
             RaisedButton(
               shape: RoundedRectangleBorder(
@@ -358,7 +373,7 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
               color: Theme.of(context).primaryColor,
               onPressed: () async {
                 Meilenstein_db ms = new Meilenstein_db();
-                await ms.deleteMS(meilensteinTitle);
+                await ms.deleteMS(meilenstein.titel);
                 Navigator.of(context).pop();
                 Navigator.pop(context);
               },

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:auto_size_text/auto_size_text.dart';
+
 import 'UbungenUtils.dart';
 import 'UbungenPlayScreen.dart';
 
@@ -17,7 +19,7 @@ class UbungenDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AutoSizeText(
           ubung.title,
           style: TextStyle(
               fontSize: 30.0, color: Theme.of(context).textTheme.title.color),

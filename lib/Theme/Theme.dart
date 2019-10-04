@@ -32,6 +32,7 @@ ThemeData grun = ThemeData(
   textTheme: textTheme,
   accentTextTheme: whiteTextTheme,
   dialogTheme: dialogTheme,
+  dividerColor: Colors.grey[50],
 );
 
 ThemeData aquamarin = ThemeData(

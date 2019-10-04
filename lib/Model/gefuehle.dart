@@ -64,13 +64,13 @@ class Gefuehle {
     );
   }
 
-  Future<List<Gefuehle>> getGefuehlHeute() async {
+  Future<Gefuehle> getGefuehlHeute() async {
     final Database db = await DB.instance.initDB();
     String date = DateTime.now().year.toString() + "." +
         DateTime.now().month.toString() + "." +
         DateTime.now().day.toString();
     final List<Map<String, dynamic>> maps = await db.query('gefuehle', where: "datum = ?", whereArgs: [date]);
-    return List.generate(
+    List l = List.generate(
       maps.length,
           (i) {
         return Gefuehle(
@@ -79,6 +79,10 @@ class Gefuehle {
         );
       },
     );
+    if(l!=null){
+      return l[0];
+    }
+    return null;
   }
 
 }

@@ -28,6 +28,7 @@ dependencies:
   flutter_visualizers: ^0.0.2
   flutter_bloc: ^0.20.0
   equatable: ^0.4.0
+  auto_size_text: ^2.1.0
   sqflite:
   path:
   path_provider:

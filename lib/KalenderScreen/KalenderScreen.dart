@@ -15,6 +15,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
   List _selectedEvents;
   CalendarController _calendarController;
   Aufgaben af = Aufgaben();
+
   String datum = "${DateTime.now().year.toString()}" +
       "."
           "${DateTime.now().month.toString()}" +
@@ -48,11 +49,9 @@ class _KalenderScreenState extends State<KalenderScreen> {
 
     final _selectedDay = DateTime.now();
 
-    _events = {
-      _selectedDay: ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
-    };
+    //_events = [];
 
-    _selectedEvents = _events[_selectedDay] ?? [];
+    //_selectedEvents = _events[_selectedDay] ?? [];
   }
 
   @override
@@ -99,65 +98,60 @@ class _KalenderScreenState extends State<KalenderScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: TableCalendar(
-                calendarController: _calendarController,
-                locale: 'de_DE',
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                availableCalendarFormats: const {
-                  CalendarFormat.month: 'Month',
+              child: FutureBuilder(
+                future: af.aufgabenNotDone(),
+                builder: (context, snapshot) {
+
+
+                  _events = snapshot.data;
+                  //_selectedEvents = _events[DateTime.now()] ?? [];
+
+
+                  return TableCalendar(
+                    calendarController: _calendarController,
+                    events: _events,
+                    locale: 'de_DE',
+                    startingDayOfWeek: StartingDayOfWeek.monday,
+                    availableCalendarFormats: const {
+                      CalendarFormat.month: 'Month',
+                    },
+                    headerStyle: HeaderStyle(
+                      titleTextStyle: Theme.of(context).textTheme.title,
+                      leftChevronIcon: Icon(
+                        Icons.arrow_back_ios,
+                        color: Theme.of(context).textTheme.title.color,
+                        size: 17.5,
+                      ),
+                      rightChevronIcon: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Theme.of(context).textTheme.title.color,
+                        size: 17.5,
+                      ),
+                    ),
+                    daysOfWeekStyle: DaysOfWeekStyle(
+                      weekdayStyle: Theme.of(context).textTheme.body1,
+                      weekendStyle: Theme.of(context).textTheme.body1,
+                    ),
+                    calendarStyle: CalendarStyle(
+                      todayStyle: Theme.of(context).accentTextTheme.body2,
+                      selectedStyle: Theme.of(context).accentTextTheme.title,
+                      selectedColor: Theme.of(context).primaryColor,
+                      todayColor: Theme.of(context).highlightColor,
+                      markersColor: Theme.of(context).textTheme.title.color,
+                      weekdayStyle: Theme.of(context).textTheme.caption,
+                      weekendStyle: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      outsideStyle: Theme.of(context).textTheme.overline,
+                      outsideWeekendStyle: TextStyle(
+                        color: Theme.of(context).highlightColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onDaySelected: _onDaySelected,
+                  );
                 },
-                headerStyle: HeaderStyle(
-                  titleTextStyle: Theme.of(context).textTheme.title,
-                  leftChevronIcon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Theme.of(context).textTheme.title.color,
-                    size: 17.5,
-                  ),
-                  rightChevronIcon: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Theme.of(context).textTheme.title.color,
-                    size: 17.5,
-                  ),
-                ),
-                daysOfWeekStyle: DaysOfWeekStyle(
-                  weekdayStyle: Theme.of(context).textTheme.body1,
-                  weekendStyle: Theme.of(context).textTheme.body1,
-                ),
-                calendarStyle: CalendarStyle(
-                  todayStyle: Theme.of(context).accentTextTheme.body2,
-                  selectedStyle: Theme.of(context).accentTextTheme.title,
-                  selectedColor: Theme.of(context).primaryColor,
-                  todayColor: Theme.of(context).highlightColor,
-                  markersColor: Theme.of(context).primaryColor,
-                  weekdayStyle: Theme.of(context).textTheme.caption,
-                  weekendStyle: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  outsideStyle: Theme.of(context).textTheme.overline,
-                  outsideWeekendStyle: TextStyle(
-                    color: Theme.of(context).highlightColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onDaySelected: _onDaySelected,
-                builders: CalendarBuilders(
-                  markersBuilder: (context, date, events, holidays) {
-                    final children = <Widget>[];
-
-                    if (events.isNotEmpty) {
-                      children.add(
-                        Positioned(
-                          right: 1,
-                          bottom: 1,
-                          child: _buildEventsMarker(date, events),
-                        ),
-                      );
-                    }
-
-                    return children;
-                  },
-                ),
               ),
             ),
           ),
@@ -243,33 +237,8 @@ class _KalenderScreenState extends State<KalenderScreen> {
     );
   }
 
-  Widget _buildEventsMarker(DateTime date, List events) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        color: _calendarController.isSelected(date)
-            ? Colors.brown[500]
-            : _calendarController.isToday(date)
-                ? Colors.brown[300]
-                : Colors.blue[400],
-      ),
-      width: 16.0,
-      height: 16.0,
-      child: Center(
-        child: Text(
-          '${events.length}',
-          style: TextStyle().copyWith(
-            color: Colors.white,
-            fontSize: 12.0,
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget getErledigteAufgaben(var snapshot) {
-    List list = snapshot.data;
 
     if (snapshot.data.length != 0)
       return ExpansionTile(
@@ -335,4 +304,5 @@ class _KalenderScreenState extends State<KalenderScreen> {
     Aufgaben af = new Aufgaben();
     af.checkAF(titel, meilenstein_id, erledigt);
   }
+
 }

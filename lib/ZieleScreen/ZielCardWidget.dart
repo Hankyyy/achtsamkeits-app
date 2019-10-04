@@ -47,6 +47,7 @@ class _ZielCardState extends State<ZielCard> {
       return 75;
   }
 
+
   @override
   void initState() {
     super.initState();
@@ -103,7 +104,7 @@ class _ZielCardState extends State<ZielCard> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    EditMeilensteinScreen(meilenstein.titel)));
+                                    EditMeilensteinScreen(meilenstein)));
                       },
                     ),
                     IconButton(

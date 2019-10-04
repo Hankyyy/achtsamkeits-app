@@ -25,8 +25,9 @@ class _TrackerKalenderScreenState extends State<TrackerKalenderScreen> {
               )),
               Tab(
                   icon: Icon(
-                Icons.edit,
+                Icons.border_color,
                 color: Theme.of(context).textTheme.title.color,
+                    size: 20,
               )),
             ],
           ),
@@ -144,7 +145,7 @@ class ProduktivitatsScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Container(),
           );
         }
         if (snapshot.hasError) {
