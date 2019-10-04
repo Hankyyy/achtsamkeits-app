@@ -60,4 +60,22 @@ class Produktivitaet {
       },
     );
   }
+
+  Future<List<Produktivitaet>> getProduktivitaetHeute() async {
+    final Database db = await DB.instance.initDB();
+    String date = DateTime.now().year.toString() + "." +
+        DateTime.now().month.toString() + "." +
+        DateTime.now().day.toString();
+    final List<Map<String, dynamic>> maps = await db.query('produktivitaet', where: "datum = ?", whereArgs: [date]);
+    return List.generate(
+      maps.length,
+          (i) {
+        return Produktivitaet(
+          pWert: maps[i]['gWert'],
+          datum: maps[i]['datum'],
+        );
+      },
+    );
+  }
+
 }
