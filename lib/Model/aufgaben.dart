@@ -160,14 +160,23 @@ class Aufgaben {
         );
       },
     );
-    Map<DateTime, List<Aufgaben>> m = Map();
+
     Aufgaben a = Aufgaben();
+    List<DateTime> daten = List();
     for (int i = 0; i < l.length; i++) {
-      if (!m.containsKey(DateTime.parse(l[i].datum))) {
-        m[DateTime.parse(l[i].datum)] =
-        await a.aufgabenDatumNotdone(l[i].datum);
+      if (!l.contains(DateTime.parse(l[i].datum))) {
+        //m[DateTime.parse(l[i].datum)] =
+        //await a.aufgabenDatumNotdone(l[i].datum);
+        l.add(DateTime.parse(l[i].datum));
       }
     }
+
+    List<List<Aufgaben>> afg = List(l.length);
+    for(int i = 0; i < l.length; i++){
+      afg[i] = await a.aufgabenDatumNotdone(l[i].datum);
+    }
+
+    Map<DateTime, List<Aufgaben>> m = Map.fromIterables(daten, afg);
     return m;
   }
 
