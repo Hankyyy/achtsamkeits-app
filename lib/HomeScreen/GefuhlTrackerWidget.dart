@@ -434,10 +434,15 @@ class LetztenSieben extends StatelessWidget {
   List<gefTemp> getList(var gef) {
     List<gefTemp> eintrage = [];
     for (int i = 0; i < gef.length; i++) {
-      eintrage.add(gefTemp(gef[i].datum, gef[i].gWert));
+      eintrage.add(gefTemp(nurTagMonat(gef[i].datum), gef[i].gWert));
     }
 
     return eintrage;
+  }
+
+  String nurTagMonat(String datum){
+    var getrennt = datum.split(".");
+    return getrennt[2] + "." + getrennt[1] + ".";
   }
 }
 

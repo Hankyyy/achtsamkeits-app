@@ -414,12 +414,21 @@ class LetztenSieben extends StatelessWidget {
   List<proTemp> getList(var gef) {
     List<proTemp> eintrage = [];
     for (int i = 0; i < gef.length; i++) {
-      eintrage.add(proTemp(gef[i].datum, gef[i].pWert));
+      eintrage.add(proTemp(nurTagMonat(gef[i].datum), gef[i].pWert));
     }
 
     return eintrage;
   }
+  
+  String nurTagMonat(String datum){
+    var getrennt = datum.split(".");
+    return getrennt[2] + "." + getrennt[1] + ".";
+  }
+  
 }
+
+
+
 
 /// Sample ordinal data type.
 class proTemp {

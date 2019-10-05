@@ -123,11 +123,11 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                             onPressed: () => _selectDate(context),
                             highlightedBorderColor:
                                 Theme.of(context).primaryColor,
-                            child: Text("${selectedDate.year.toString()}" +
+                            child: Text("${selectedDate.day.toString()}" +
                                 "."
                                     "${selectedDate.month.toString()}" +
                                 "."
-                                    "${selectedDate.day.toString()}"),
+                                    "${selectedDate.year.toString()}"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                           ),

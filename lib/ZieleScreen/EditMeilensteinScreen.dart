@@ -161,11 +161,11 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                                   onPressed: () => _selectDate(context),
                                   highlightedBorderColor:
                                       Theme.of(context).primaryColor,
-                                  child: Text("${selectedDate.year.toString()}" +
+                                  child: Text("${selectedDate.day.toString()}" +
                                       "."
                                           "${selectedDate.month.toString()}" +
                                       "."
-                                          "${selectedDate.day.toString()}"),
+                                          "${selectedDate.year.toString()}"),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(10.0)),
@@ -184,11 +184,11 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                                   onPressed: () => _deadlineDate(context),
                                   highlightedBorderColor:
                                       Theme.of(context).primaryColor,
-                                  child: Text("${deadlineDate.year.toString()}" +
+                                  child: Text("${deadlineDate.day.toString()}" +
                                       "."
                                           "${deadlineDate.month.toString()}" +
                                       "."
-                                          "${deadlineDate.day.toString()}"),
+                                          "${deadlineDate.year.toString()}"),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(10.0)),
