@@ -171,7 +171,7 @@ class Aufgaben {
     var date;
     for (int i = 0; i < l.length; i++) {
       date = datumTrenner(l[i].datum);
-      print(date);
+      //print(date);
       daten.add(
           DateTime(int.parse(date[0]), int.parse(date[1]), int.parse(date[2])));
       print("test1");

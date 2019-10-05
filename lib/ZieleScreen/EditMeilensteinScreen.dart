@@ -23,6 +23,8 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
 
   double borderThickness = 1;
 
+  DateTime datumsDaten;
+
   int i;
   int length;
 
@@ -63,8 +65,10 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
   void initState() {
     msNotiz = TextEditingController();
     msNotiz.text = meilenstein.notizen;
-    //DateTime selectedDate = DateTime.parse(meilenstein.datum);
-    //DateTime deadlineDate = DateTime.parse(meilenstein.deadline);
+    var date;
+
+    //selectedDate = DateTime.parse(meilenstein.datum);
+    //deadlineDate = DateTime.parse(meilenstein.deadline);
     super.initState();
   }
 
