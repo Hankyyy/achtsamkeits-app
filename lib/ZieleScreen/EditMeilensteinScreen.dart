@@ -17,7 +17,6 @@ class EditMeilensteinScreen extends StatefulWidget {
 }
 
 class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
-
   Meilenstein_db meilenstein;
 
   Aufgaben aufgabe = new Aufgaben();
@@ -120,7 +119,6 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                     shrinkWrap: true,
                     primary: false,
                     children: <Widget>[
-
                       Padding(
                         padding: EdgeInsets.all(20),
                         child: Column(
@@ -138,7 +136,7 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                                   style: Theme.of(context).textTheme.body2,
                                 ),
                                 Container(
-                                  width: MediaQuery.of(context).size.width/2,
+                                  width: MediaQuery.of(context).size.width / 2,
                                   child: Text(
                                     meilenstein.titel,
                                     style: Theme.of(context).textTheme.title,
@@ -163,11 +161,11 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                                   onPressed: () => _selectDate(context),
                                   highlightedBorderColor:
                                       Theme.of(context).primaryColor,
-                                  child: Text("${selectedDate.day.toString()}" +
+                                  child: Text("${selectedDate.year.toString()}" +
                                       "."
                                           "${selectedDate.month.toString()}" +
                                       "."
-                                          "${selectedDate.year.toString()}"),
+                                          "${selectedDate.day.toString()}"),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(10.0)),
@@ -186,11 +184,11 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                                   onPressed: () => _deadlineDate(context),
                                   highlightedBorderColor:
                                       Theme.of(context).primaryColor,
-                                  child: Text("${deadlineDate.day.toString()}" +
+                                  child: Text("${deadlineDate.year.toString()}" +
                                       "."
                                           "${deadlineDate.month.toString()}" +
                                       "."
-                                          "${deadlineDate.year.toString()}"),
+                                          "${deadlineDate.day.toString()}"),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(10.0)),
@@ -219,7 +217,8 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                       FutureBuilder<List<Aufgaben>>(
                         future: aufgabe.aufgabenMS(meilenstein.titel),
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState != ConnectionState.done) {
+                          if (snapshot.connectionState !=
+                              ConnectionState.done) {
                             return Center(
                               child: CircularProgressIndicator(),
                             );
@@ -264,16 +263,16 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                 Meilenstein_db ms = Meilenstein_db();
                 ms.updateMS(
                     meilenstein.titel,
-                    "${selectedDate.day.toString()}" +
+                    "${selectedDate.year.toString()}" +
                         "."
                             "${selectedDate.month.toString()}" +
                         "."
-                            "${selectedDate.year.toString()}",
-                    "${deadlineDate.day.toString()}" +
+                            "${selectedDate.day.toString()}",
+                    "${deadlineDate.year.toString()}" +
                         "."
                             "${deadlineDate.month.toString()}" +
                         "."
-                            "${deadlineDate.year.toString()}",
+                            "${deadlineDate.day.toString()}",
                     msNotiz.text);
                 setState(
                   () {
@@ -306,26 +305,21 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
                 child: ListTile(
                   title: Text(
                     snapshot.data[index].titel,
-                    style:
-                    Theme.of(context).textTheme.body2,
+                    style: Theme.of(context).textTheme.body2,
                   ),
                   trailing: IconButton(
                     icon: Icon(
                       Icons.delete,
                       size: 22.5,
-                      color: Theme.of(context)
-                          .textTheme
-                          .title
-                          .color,
+                      color: Theme.of(context).textTheme.title.color,
                     ),
                     tooltip: "Aufgabe löschen",
                     onPressed: () {
                       Aufgaben af = Aufgaben();
                       setState(
-                            () {
+                        () {
                           af.deleteAFS(
-                              snapshot.data[index].titel,
-                              meilenstein.titel);
+                              snapshot.data[index].titel, meilenstein.titel);
                         },
                       );
                     },

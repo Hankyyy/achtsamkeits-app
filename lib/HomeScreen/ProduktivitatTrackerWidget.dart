@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:ape_of_mind/Model/produktivitaet.dart';
 
-enum ProduktivitatOptionen { sehrgut, gut, normal, schlecht, sehrschlecht }
+enum ProduktivitatOptionen { sehrgut, gut, normal, schlecht, sehrschlecht, test }
 
 class ProduktivitatTrackerWidget extends StatefulWidget {
   ProduktivitatTrackerWidget({Key key}) : super(key: key);
@@ -101,6 +101,8 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
       case 5:
         return ProduktivitatOptionen.sehrgut;
         break;
+      default:
+        return ProduktivitatOptionen.test;
     }
   }
 
@@ -213,7 +215,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     style: Theme.of(context).textTheme.body2),
                 activeColor: Theme.of(context).primaryColor,
                 value: ProduktivitatOptionen.sehrgut,
-                groupValue: getGroupValue(snapshot.data.pWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,
@@ -243,7 +245,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: ProduktivitatOptionen.gut,
-                groupValue: getGroupValue(snapshot.data.pWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,
@@ -273,7 +275,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: ProduktivitatOptionen.normal,
-                groupValue: getGroupValue(snapshot.data.pWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,
@@ -303,7 +305,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: ProduktivitatOptionen.schlecht,
-                groupValue: getGroupValue(snapshot.data.pWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,
@@ -333,7 +335,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: ProduktivitatOptionen.sehrschlecht,
-                groupValue: getGroupValue(snapshot.data.pWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,

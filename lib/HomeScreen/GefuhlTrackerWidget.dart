@@ -108,6 +108,8 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
       case 5:
         return GefuhlOptionen.sehrgut;
         break;
+      default:
+        return GefuhlOptionen.test;
     }
   }
 
@@ -208,6 +210,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             );
           }
           if (snapshot.hasError) {
+            print(snapshot.error);
             return Center(
               child: Text("Error!"),
             );
@@ -222,7 +225,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: GefuhlOptionen.sehrgut,
-                groupValue: getGroupValue(snapshot.data.gWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,
@@ -254,7 +257,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: GefuhlOptionen.gut,
-                groupValue: getGroupValue(snapshot.data.gWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,
@@ -286,7 +289,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: GefuhlOptionen.normal,
-                groupValue: getGroupValue(snapshot.data.gWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,
@@ -318,7 +321,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: GefuhlOptionen.schlecht,
-                groupValue: getGroupValue(snapshot.data.gWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,
@@ -350,7 +353,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 activeColor: Theme.of(context).primaryColor,
                 value: GefuhlOptionen.sehrschlecht,
-                groupValue: getGroupValue(snapshot.data.gWert),
+                groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
                   width: 100.0,

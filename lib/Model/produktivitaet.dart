@@ -61,7 +61,7 @@ class Produktivitaet {
     );
   }
 
-  Future<Produktivitaet> getProduktivitaetHeute() async {
+  Future<int> getProduktivitaetHeute() async {
     final Database db = await DB.instance.initDB();
     String date = DateTime.now().year.toString() + "." +
         DateTime.now().month.toString() + "." +
@@ -76,10 +76,10 @@ class Produktivitaet {
         );
       },
     );
-    if(l!=null){
-      return l[0];
+    if(!(l.length < 1)){
+      return l[0].pWert;
     }
-    return null;
+    return 7;
   }
 
 }

@@ -64,7 +64,7 @@ class Gefuehle {
     );
   }
 
-  Future<Gefuehle> getGefuehlHeute() async {
+  Future<int> getGefuehlHeute() async {
     final Database db = await DB.instance.initDB();
     String date = DateTime.now().year.toString() + "." +
         DateTime.now().month.toString() + "." +
@@ -79,10 +79,10 @@ class Gefuehle {
         );
       },
     );
-    if(l!=null){
-      return l[0];
+    if(!(l.length < 1)){
+      return l[0].gWert;
     }
-    return null;
+    return 7;
   }
 
 }
