@@ -80,5 +80,40 @@ class DB {
         "VALUES(2 , 'testtest')");
     db.execute("INSERT into theme (id) "
         "VALUES(0) ");
+
+    //testwerte
+    /*db.execute("INSERT INTO gefuehle (datum, gWert) "
+        "VALUES('2019.10.1', 1)");
+    db.execute("INSERT INTO gefuehle (datum, gWert) "
+        "VALUES('2019.10.2', 2)");
+    db.execute("INSERT INTO gefuehle (datum, gWert) "
+        "VALUES('2019.10.3', 3)");
+    db.execute("INSERT INTO gefuehle (datum, gWert) "
+        "VALUES('2019.10.4', 4)");
+    db.execute("INSERT INTO gefuehle (datum, gWert) "
+        "VALUES('2019.10.5', 5)");
+    db.execute("INSERT INTO gefuehle (datum, gWert) "
+        "VALUES('2019.10.6', 3)");
+    db.execute("INSERT INTO gefuehle (datum, gWert) "
+        "VALUES('2019.10.7', 5)");
+    db.execute("INSERT INTO gefuehle (datum, gWert) "
+        "VALUES('2019.10.8', 2)");
+
+    db.execute("INSERT INTO produktivitaet (datum, pWert) "
+        "VALUES('2019.10.1', 1)");
+    db.execute("INSERT INTO produktivitaet (datum, pWert) "
+        "VALUES('2019.10.2', 2)");
+    db.execute("INSERT INTO produktivitaet (datum, pWert) "
+        "VALUES('2019.10.3', 3)");
+    db.execute("INSERT INTO produktivitaet (datum, pWert) "
+        "VALUES('2019.10.4', 4)");
+    db.execute("INSERT INTO produktivitaet (datum, pWert) "
+        "VALUES('2019.10.5', 5)");
+    db.execute("INSERT INTO produktivitaet (datum, pWert) "
+        "VALUES('2019.10.6', 3)");
+    db.execute("INSERT INTO produktivitaet (datum, pWert) "
+        "VALUES('2019.10.7', 5)");
+    db.execute("INSERT INTO produktivitaet (datum, pWert) "
+        "VALUES('2019.10.8', 2)");*/
   }
 }
