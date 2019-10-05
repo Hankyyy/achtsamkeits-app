@@ -102,14 +102,25 @@ class _KalenderScreenState extends State<KalenderScreen> {
                 future: af.aufgabenNotDone(),
                 builder: (context, snapshot) {
 
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    print(snapshot.error);
+                    return Center(
+                      child: Text("Trage deine Gefühle ein!"),
+                    );
+                  }
 
                   _events = snapshot.data;
-                  //_selectedEvents = _events[DateTime.now()] ?? [];
+                  _selectedEvents = _events[DateTime.now()] ?? [];
 
 
                   return TableCalendar(
                     calendarController: _calendarController,
-                    //events: _events,
+                    events: _events,
                     locale: 'de_DE',
                     startingDayOfWeek: StartingDayOfWeek.monday,
                     availableCalendarFormats: const {

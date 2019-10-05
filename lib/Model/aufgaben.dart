@@ -44,8 +44,8 @@ class Aufgaben {
 
   Future<List<Aufgaben>> aufgabenMS(String titel) async {
     final Database db = await DB.instance.initDB();
-    List<Map<String, dynamic>> map = await db
-        .query('aufgaben', where: "meilenstein_id =?", whereArgs: [titel], orderBy: "datum ASC");
+    List<Map<String, dynamic>> map = await db.query('aufgaben',
+        where: "meilenstein_id =?", whereArgs: [titel], orderBy: "datum ASC");
     return List.generate(
       map.length,
       (i) {
@@ -61,11 +61,13 @@ class Aufgaben {
 
   Future<List<Aufgaben>> aufgabenMSdone(String titel) async {
     final Database db = await DB.instance.initDB();
-    List<Map<String, dynamic>> map = await db
-        .query('aufgaben', where: "meilenstein_id =? AND erledigt = 1", whereArgs: [titel], orderBy: "datum ASC");
+    List<Map<String, dynamic>> map = await db.query('aufgaben',
+        where: "meilenstein_id =? AND erledigt = 1",
+        whereArgs: [titel],
+        orderBy: "datum ASC");
     return List.generate(
       map.length,
-          (i) {
+      (i) {
         return Aufgaben(
           titel: map[i]["titel"],
           erledigt: map[i]["erledigt"],
@@ -78,11 +80,13 @@ class Aufgaben {
 
   Future<List<Aufgaben>> aufgabenMSnotdone(String titel) async {
     final Database db = await DB.instance.initDB();
-    List<Map<String, dynamic>> map = await db
-        .query('aufgaben', where: "meilenstein_id =? AND erledigt = 0", whereArgs: [titel], orderBy: "datum ASC");
+    List<Map<String, dynamic>> map = await db.query('aufgaben',
+        where: "meilenstein_id =? AND erledigt = 0",
+        whereArgs: [titel],
+        orderBy: "datum ASC");
     return List.generate(
       map.length,
-          (i) {
+      (i) {
         return Aufgaben(
           titel: map[i]["titel"],
           erledigt: map[i]["erledigt"],
@@ -95,11 +99,11 @@ class Aufgaben {
 
   Future<List<Aufgaben>> aufgabenDatumDone(String datum) async {
     final Database db = await DB.instance.initDB();
-    List<Map<String, dynamic>> map = await db
-        .query('aufgaben', where: "datum = ? AND erledigt = 1", whereArgs: [datum]);
+    List<Map<String, dynamic>> map = await db.query('aufgaben',
+        where: "datum = ? AND erledigt = 1", whereArgs: [datum]);
     return List.generate(
       map.length,
-          (i) {
+      (i) {
         return Aufgaben(
           titel: map[i]["titel"],
           erledigt: map[i]["erledigt"],
@@ -112,11 +116,11 @@ class Aufgaben {
 
   Future<List<Aufgaben>> aufgabenDatumNotdone(String datum) async {
     final Database db = await DB.instance.initDB();
-    List<Map<String, dynamic>> map = await db
-        .query('aufgaben', where: "datum =? AND erledigt = 0", whereArgs: [datum]);
+    List<Map<String, dynamic>> map = await db.query('aufgaben',
+        where: "datum =? AND erledigt = 0", whereArgs: [datum]);
     return List.generate(
       map.length,
-          (i) {
+      (i) {
         return Aufgaben(
           titel: map[i]["titel"],
           erledigt: map[i]["erledigt"],
@@ -127,16 +131,16 @@ class Aufgaben {
     );
   }
 
-  Future<void> checkAF(String titel, String meilenstein_id, int erledigt) async {
+  Future<void> checkAF(
+      String titel, String meilenstein_id, int erledigt) async {
     final Database db = await DB.instance.initDB();
-    if(erledigt == 0){
+    if (erledigt == 0) {
       await db.rawUpdate('''
     UPDATE aufgaben
     SET erledigt = ?
     WHERE titel = ? AND meilenstein_id = ?
     ''', [1, titel, meilenstein_id]);
-    }
-    else {
+    } else {
       await db.rawUpdate('''
     UPDATE aufgaben
     SET erledigt = ?
@@ -148,10 +152,10 @@ class Aufgaben {
   Future<Map<DateTime, List<Aufgaben>>> aufgabenNotDone() async {
     final Database db = await DB.instance.initDB();
     List<Map<String, dynamic>> map =
-    await db.query('aufgaben', where: "erledigt = 1", orderBy: "datum ASC");
+        await db.query('aufgaben', where: "erledigt = 0", orderBy: "datum ASC");
     List l = List.generate(
       map.length,
-          (i) {
+      (i) {
         return Aufgaben(
           titel: map[i]["titel"],
           erledigt: map[i]["erledigt"],
@@ -160,36 +164,44 @@ class Aufgaben {
         );
       },
     );
-
+    print(l);
     Aufgaben a = Aufgaben();
     List<DateTime> daten = List();
+    print(l.length);
+    var date;
     for (int i = 0; i < l.length; i++) {
-      if (!l.contains(DateTime.parse(l[i].datum))) {
-        //m[DateTime.parse(l[i].datum)] =
-        //await a.aufgabenDatumNotdone(l[i].datum);
-        l.add(DateTime.parse(l[i].datum));
-      }
+      date = datumTrenner(l[i].datum);
+      print(date);
+      daten.add(
+          DateTime(int.parse(date[0]), int.parse(date[1]), int.parse(date[2])));
+      print("test1");
     }
-
+    print("test2");
     List<List<Aufgaben>> afg = List(l.length);
-    for(int i = 0; i < l.length; i++){
+    for (int i = 0; i < l.length; i++) {
       afg[i] = await a.aufgabenDatumNotdone(l[i].datum);
     }
 
     Map<DateTime, List<Aufgaben>> m = Map.fromIterables(daten, afg);
+
     return m;
   }
 
   Future<void> deleteAF(String titel) async {
-
     final Database db = await DB.instance.initDB();
-    await db.rawDelete('DELETE FROM aufgaben WHERE meilenstein_id = ?', [titel]);
+    await db
+        .rawDelete('DELETE FROM aufgaben WHERE meilenstein_id = ?', [titel]);
   }
 
   Future<void> deleteAFS(String titel, String meilenstein_id) async {
-
     final Database db = await DB.instance.initDB();
-    await db.rawDelete('DELETE FROM aufgaben WHERE meilenstein_id = ? AND titel = ?', [meilenstein_id, titel]);
+    await db.rawDelete(
+        'DELETE FROM aufgaben WHERE meilenstein_id = ? AND titel = ?',
+        [meilenstein_id, titel]);
   }
+}
 
+List<String> datumTrenner(String datum) {
+  var res = datum.split(".");
+  return res;
 }
