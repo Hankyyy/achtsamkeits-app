@@ -50,7 +50,7 @@ class Produktivitaet {
         await db.rawQuery("SELECT * FROM produktivitaet "
             "ORDER BY datum DESC "
             "LIMIT 7");
-    return List.generate(
+    List l = List.generate(
       maps.length,
       (i) {
         return Produktivitaet(
@@ -59,6 +59,12 @@ class Produktivitaet {
         );
       },
     );
+
+    List<Produktivitaet> res = List(l.length);
+    for(int i=0; i<l.length; i++){
+      res[i] = l[l.length-i-1];
+    }
+    return res;
   }
 
   Future<int> getProduktivitaetHeute() async {

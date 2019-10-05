@@ -53,7 +53,7 @@ class Gefuehle {
         await db.rawQuery("SELECT * FROM gefuehle "
             "ORDER BY datum DESC "
             "LIMIT 7");
-    return List.generate(
+    List l = List.generate(
       maps.length,
       (i) {
         return Gefuehle(
@@ -62,6 +62,12 @@ class Gefuehle {
         );
       },
     );
+
+    List<Gefuehle> res = List(l.length);
+    for(int i=0; i<l.length; i++){
+      res[i] = l[l.length-i-1];
+    }
+    return res;
   }
 
   Future<int> getGefuehlHeute() async {
