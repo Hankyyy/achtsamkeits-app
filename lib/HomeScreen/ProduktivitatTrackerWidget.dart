@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:ape_of_mind/Model/gefuehle.dart';
+import 'package:ape_of_mind/Model/produktivitaet.dart';
 
-enum GefuhlOptionen {
-  sehrschlecht,
-  schlecht,
-  normal,
-  gut,
-  sehrgut,
-  test,
-}
+enum ProduktivitatOptionen { sehrgut, gut, normal, schlecht, sehrschlecht, test }
 
-class GefuhlTrackerWidget extends StatefulWidget {
-  GefuhlTrackerWidget({Key key}) : super(key: key);
+class ProduktivitatTrackerWidget extends StatefulWidget {
+  ProduktivitatTrackerWidget({Key key}) : super(key: key);
 
   @override
-  State createState() => GefuhlTrackerWidgetState();
+  State createState() => ProduktivitatTrackerWidgetState();
 }
 
-class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
+class ProduktivitatTrackerWidgetState
+    extends State<ProduktivitatTrackerWidget> {
   var gefuhlsWidgets = <Widget>[
     GefuhlFrageWidget(),
     LetztenSieben(),
@@ -41,12 +35,12 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
                   children: <Widget>[
                     ListTile(
                       leading: Icon(
-                        Icons.insert_emoticon,
+                        Icons.border_color,
                         color: Theme.of(context).textTheme.title.color,
-                        size: 37.5,
+                        size: 32.5,
                       ),
                       title: Text(
-                        "Wie geht es dir Heute?",
+                        "Wie produktiv\nwarst du Heute?",
                         style: Theme.of(context).textTheme.title,
                       ),
                       trailing: IconButton(
@@ -55,7 +49,7 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
                           size: 25.0,
                           color: Theme.of(context).textTheme.title.color,
                         ),
-                        tooltip: "Gefühlsstatistiken",
+                        tooltip: "Produktivitätsstatistiken",
                         onPressed: () {
                           Navigator.pushNamed(
                               context, "/TrackerKalenderScreen");
@@ -66,8 +60,7 @@ class GefuhlTrackerWidgetState extends State<GefuhlTrackerWidget> {
                       child: TabBarView(children: gefuhlsWidgets),
                     ),
                     TabPageSelector(
-                      selectedColor: Theme.of(context).textTheme.title.color,
-                    ),
+                        selectedColor: Theme.of(context).textTheme.title.color),
                     SizedBox(
                       height: 20,
                     ),
@@ -88,42 +81,42 @@ class GefuhlFrageWidget extends StatefulWidget {
 }
 
 class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
-  GefuhlOptionen _gefuhle;
-  Gefuehle gefFuture = Gefuehle();
+  ProduktivitatOptionen _produktivitat;
+  Produktivitaet proFuture = Produktivitaet();
 
-  GefuhlOptionen getGroupValue(int i) {
+  ProduktivitatOptionen getGroupValue(int i) {
     switch (i) {
       case 1:
-        return GefuhlOptionen.sehrschlecht;
+        return ProduktivitatOptionen.sehrschlecht;
         break;
       case 2:
-        return GefuhlOptionen.schlecht;
+        return ProduktivitatOptionen.schlecht;
         break;
       case 3:
-        return GefuhlOptionen.normal;
+        return ProduktivitatOptionen.normal;
         break;
       case 4:
-        return GefuhlOptionen.gut;
+        return ProduktivitatOptionen.gut;
         break;
       case 5:
-        return GefuhlOptionen.sehrgut;
+        return ProduktivitatOptionen.sehrgut;
         break;
       default:
-        return GefuhlOptionen.test;
+        return ProduktivitatOptionen.test;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: gefFuture.getGefuehlHeute(),
+        future: proFuture.getProduktivitaetHeute(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Column(
               children: <Widget>[
                 RadioListTile(
                   title: Text(
-                    'Sehr Gut',
+                    'Sehr Produktiv',
                     style: Theme.of(context).textTheme.body2,
                   ),
                   value: 1,
@@ -140,7 +133,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 RadioListTile(
                   title: Text(
-                    'Gut',
+                    'Produktiv',
                     style: Theme.of(context).textTheme.body2,
                   ),
                   value: 1,
@@ -174,7 +167,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 RadioListTile(
                   title: Text(
-                    'Schlecht',
+                    'Wenig Produktiv',
                     style: Theme.of(context).textTheme.body2,
                   ),
                   value: 1,
@@ -191,7 +184,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                 ),
                 RadioListTile(
                   title: Text(
-                    'Sehr Schlecht',
+                    'Gar Nicht Produktiv',
                     style: Theme.of(context).textTheme.body2,
                   ),
                   value: 1,
@@ -210,7 +203,6 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
             );
           }
           if (snapshot.hasError) {
-            print(snapshot.error);
             return Center(
               child: Text("Error!"),
             );
@@ -218,13 +210,11 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
 
           return Column(
             children: <Widget>[
-              RadioListTile(
-                title: Text(
-                  'Sehr Gut',
-                  style: Theme.of(context).textTheme.body2,
-                ),
+              RadioListTile<ProduktivitatOptionen>(
+                title: Text('Sehr Produktiv',
+                    style: Theme.of(context).textTheme.body2),
                 activeColor: Theme.of(context).primaryColor,
-                value: GefuhlOptionen.sehrgut,
+                value: ProduktivitatOptionen.sehrgut,
                 groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
@@ -234,29 +224,27 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0))),
                 ),
-                onChanged: (GefuhlOptionen value) {
-                  setState(
-                    () {
-                      Gefuehle g = Gefuehle();
-                      g.datum = DateTime.now().year.toString() +
-                          "." +
-                          DateTime.now().month.toString() +
-                          "." +
-                          DateTime.now().day.toString();
-                      g.gWert = 5;
-                      g.insertGefuehle(g);
-                      _gefuhle = value;
-                    },
-                  );
+                onChanged: (ProduktivitatOptionen value) {
+                  setState(() {
+                    Produktivitaet p = new Produktivitaet();
+                    p.datum = DateTime.now().year.toString() +
+                        "." +
+                        DateTime.now().month.toString() +
+                        "." +
+                        DateTime.now().day.toString();
+                    p.pWert = 5;
+                    p.insertProduktivitaet(p);
+                    _produktivitat = value;
+                  });
                 },
               ),
-              RadioListTile(
+              RadioListTile<ProduktivitatOptionen>(
                 title: Text(
-                  'Gut',
+                  'Produktiv',
                   style: Theme.of(context).textTheme.body2,
                 ),
                 activeColor: Theme.of(context).primaryColor,
-                value: GefuhlOptionen.gut,
+                value: ProduktivitatOptionen.gut,
                 groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
@@ -266,29 +254,27 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0))),
                 ),
-                onChanged: (GefuhlOptionen value) {
-                  setState(
-                    () {
-                      Gefuehle g = new Gefuehle();
-                      g.datum = DateTime.now().year.toString() +
-                          "." +
-                          DateTime.now().month.toString() +
-                          "." +
-                          DateTime.now().day.toString();
-                      g.gWert = 4;
-                      g.insertGefuehle(g);
-                      _gefuhle = value;
-                    },
-                  );
+                onChanged: (ProduktivitatOptionen value) {
+                  setState(() {
+                    Produktivitaet p = new Produktivitaet();
+                    p.datum = DateTime.now().year.toString() +
+                        "." +
+                        DateTime.now().month.toString() +
+                        "." +
+                        DateTime.now().day.toString();
+                    p.pWert = 4;
+                    p.insertProduktivitaet(p);
+                    _produktivitat = value;
+                  });
                 },
               ),
-              RadioListTile(
+              RadioListTile<ProduktivitatOptionen>(
                 title: Text(
                   'Normal',
                   style: Theme.of(context).textTheme.body2,
                 ),
                 activeColor: Theme.of(context).primaryColor,
-                value: GefuhlOptionen.normal,
+                value: ProduktivitatOptionen.normal,
                 groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
@@ -298,29 +284,27 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0))),
                 ),
-                onChanged: (GefuhlOptionen value) {
-                  setState(
-                    () {
-                      Gefuehle g = new Gefuehle();
-                      g.datum = DateTime.now().year.toString() +
-                          "." +
-                          DateTime.now().month.toString() +
-                          "." +
-                          DateTime.now().day.toString();
-                      g.gWert = 3;
-                      g.insertGefuehle(g);
-                      _gefuhle = value;
-                    },
-                  );
+                onChanged: (ProduktivitatOptionen value) {
+                  setState(() {
+                    Produktivitaet p = new Produktivitaet();
+                    p.datum = DateTime.now().year.toString() +
+                        "." +
+                        DateTime.now().month.toString() +
+                        "." +
+                        DateTime.now().day.toString();
+                    p.pWert = 3;
+                    p.insertProduktivitaet(p);
+                    _produktivitat = value;
+                  });
                 },
               ),
-              RadioListTile(
+              RadioListTile<ProduktivitatOptionen>(
                 title: Text(
-                  'Schlecht',
+                  'Wenig Produktiv',
                   style: Theme.of(context).textTheme.body2,
                 ),
                 activeColor: Theme.of(context).primaryColor,
-                value: GefuhlOptionen.schlecht,
+                value: ProduktivitatOptionen.schlecht,
                 groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
@@ -330,29 +314,27 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0))),
                 ),
-                onChanged: (GefuhlOptionen value) {
-                  setState(
-                    () {
-                      Gefuehle g = new Gefuehle();
-                      g.datum = DateTime.now().year.toString() +
-                          "." +
-                          DateTime.now().month.toString() +
-                          "." +
-                          DateTime.now().day.toString();
-                      g.gWert = 2;
-                      g.insertGefuehle(g);
-                      _gefuhle = value;
-                    },
-                  );
+                onChanged: (ProduktivitatOptionen value) {
+                  setState(() {
+                    Produktivitaet p = new Produktivitaet();
+                    p.datum = DateTime.now().year.toString() +
+                        "." +
+                        DateTime.now().month.toString() +
+                        "." +
+                        DateTime.now().day.toString();
+                    p.pWert = 2;
+                    p.insertProduktivitaet(p);
+                    _produktivitat = value;
+                  });
                 },
               ),
-              RadioListTile(
+              RadioListTile<ProduktivitatOptionen>(
                 title: Text(
-                  'Sehr Schlecht',
+                  'Gar Nicht Produktiv',
                   style: Theme.of(context).textTheme.body2,
                 ),
                 activeColor: Theme.of(context).primaryColor,
-                value: GefuhlOptionen.sehrschlecht,
+                value: ProduktivitatOptionen.sehrschlecht,
                 groupValue: getGroupValue(snapshot.data),
                 secondary: Container(
                   height: 30.0,
@@ -362,20 +344,18 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0))),
                 ),
-                onChanged: (GefuhlOptionen value) {
-                  setState(
-                    () {
-                      Gefuehle g = new Gefuehle();
-                      g.datum = DateTime.now().year.toString() +
-                          "." +
-                          DateTime.now().month.toString() +
-                          "." +
-                          DateTime.now().day.toString();
-                      g.gWert = 1;
-                      g.insertGefuehle(g);
-                      _gefuhle = value;
-                    },
-                  );
+                onChanged: (ProduktivitatOptionen value) {
+                  setState(() {
+                    Produktivitaet p = new Produktivitaet();
+                    p.datum = DateTime.now().year.toString() +
+                        "." +
+                        DateTime.now().month.toString() +
+                        "." +
+                        DateTime.now().day.toString();
+                    p.pWert = 1;
+                    p.insertProduktivitaet(p);
+                    _produktivitat = value;
+                  });
                 },
               ),
             ],
@@ -388,14 +368,14 @@ class LetztenSieben extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  Gefuehle gefuehl = Gefuehle();
+  Produktivitaet produktivitaet = Produktivitaet();
 
   LetztenSieben({this.seriesList, this.animate});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: gefuehl.getGefuehleSort(),
+      future: produktivitaet.getProduktivitaetSort(),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return Center(
@@ -404,19 +384,19 @@ class LetztenSieben extends StatelessWidget {
         }
         if (snapshot.hasError) {
           return Center(
-            child: Text("Trage deine Gefühle ein!"),
+            child: Text("Trage deine Produktivität ein!"),
           );
         }
-        List<Gefuehle> gef = snapshot.data ?? [];
+        List<Produktivitaet> pro = snapshot.data ?? [];
 
         return charts.BarChart(
           [
-            charts.Series<gefTemp, String>(
-              id: 'Gefühle',
+            charts.Series<proTemp, String>(
+              id: 'Produktivität',
               colorFn: (_, __) => charts.MaterialPalette.gray.shadeDefault,
-              domainFn: (gefTemp sales, _) => sales.date,
-              measureFn: (gefTemp sales, _) => sales.sales,
-              data: getList(gef),
+              domainFn: (proTemp sales, _) => sales.date,
+              measureFn: (proTemp sales, _) => sales.sales,
+              data: getList(pro),
             )
           ],
           animate: animate,
@@ -431,25 +411,29 @@ class LetztenSieben extends StatelessWidget {
     );
   }
 
-  List<gefTemp> getList(var gef) {
-    List<gefTemp> eintrage = [];
+  List<proTemp> getList(var gef) {
+    List<proTemp> eintrage = [];
     for (int i = 0; i < gef.length; i++) {
-      eintrage.add(gefTemp(nurTagMonat(gef[i].datum), gef[i].gWert));
+      eintrage.add(proTemp(nurTagMonat(gef[i].datum), gef[i].pWert));
     }
 
     return eintrage;
   }
-
+  
   String nurTagMonat(String datum){
     var getrennt = datum.split(".");
     return getrennt[2] + "." + getrennt[1] + ".";
   }
+  
 }
 
+
+
+
 /// Sample ordinal data type.
-class gefTemp {
+class proTemp {
   final String date;
   final int sales;
 
-  gefTemp(this.date, this.sales);
+  proTemp(this.date, this.sales);
 }

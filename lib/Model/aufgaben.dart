@@ -145,6 +145,32 @@ class Aufgaben {
     }
   }
 
+  Future<Map<DateTime, List<Aufgaben>>> aufgabenNotDone() async {
+    final Database db = await DB.instance.initDB();
+    List<Map<String, dynamic>> map =
+    await db.query('aufgaben', where: "erledigt = 1", orderBy: "datum ASC");
+    List l = List.generate(
+      map.length,
+          (i) {
+        return Aufgaben(
+          titel: map[i]["titel"],
+          erledigt: map[i]["erledigt"],
+          datum: map[i]["datum"],
+          meilenstein_id: map[i]["meilenstein_id"],
+        );
+      },
+    );
+    Map<DateTime, List<Aufgaben>> m = Map();
+    Aufgaben a = Aufgaben();
+    for (int i = 0; i < l.length; i++) {
+      if (!m.containsKey(DateTime.parse(l[i].datum))) {
+        m[DateTime.parse(l[i].datum)] =
+        await a.aufgabenDatumNotdone(l[i].datum);
+      }
+    }
+    return m;
+  }
+
   Future<void> deleteAF(String titel) async {
 
     final Database db = await DB.instance.initDB();

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart';
 
@@ -66,7 +68,7 @@ class _UbungenPlayScreenState extends State<UbungenPlayScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AutoSizeText(
           ubung.title,
           style: TextStyle(
               fontSize: 30.0, color: Theme.of(context).textTheme.title.color),

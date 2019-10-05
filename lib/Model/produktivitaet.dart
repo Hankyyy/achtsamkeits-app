@@ -35,7 +35,7 @@ class Produktivitaet {
   //liefert alle Einträge
   Future<List<Produktivitaet>> getProduktivitaet() async {
     final Database db = await DB.instance.initDB();
-    final List<Map<String, dynamic>> maps = await db.query('produktivitaet', orderBy: "datum DESCf");
+    final List<Map<String, dynamic>> maps = await db.query('produktivitaet', orderBy: "datum DESC");
     return List.generate(maps.length, (i) {
       return Produktivitaet(
         pWert: maps[i]['pWert'],
@@ -50,7 +50,7 @@ class Produktivitaet {
         await db.rawQuery("SELECT * FROM produktivitaet "
             "ORDER BY datum DESC "
             "LIMIT 7");
-    return List.generate(
+    List l = List.generate(
       maps.length,
       (i) {
         return Produktivitaet(
@@ -59,23 +59,33 @@ class Produktivitaet {
         );
       },
     );
+
+    List<Produktivitaet> res = List(l.length);
+    for(int i=0; i<l.length; i++){
+      res[i] = l[l.length-i-1];
+    }
+    return res;
   }
 
-  Future<List<Produktivitaet>> getProduktivitaetHeute() async {
+  Future<int> getProduktivitaetHeute() async {
     final Database db = await DB.instance.initDB();
     String date = DateTime.now().year.toString() + "." +
         DateTime.now().month.toString() + "." +
         DateTime.now().day.toString();
     final List<Map<String, dynamic>> maps = await db.query('produktivitaet', where: "datum = ?", whereArgs: [date]);
-    return List.generate(
+    List l = List.generate(
       maps.length,
           (i) {
         return Produktivitaet(
-          pWert: maps[i]['gWert'],
+          pWert: maps[i]['pWert'],
           datum: maps[i]['datum'],
         );
       },
     );
+    if(!(l.length < 1)){
+      return l[0].pWert;
+    }
+    return 7;
   }
 
 }

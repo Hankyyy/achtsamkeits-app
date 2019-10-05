@@ -47,6 +47,7 @@ class _ZielCardState extends State<ZielCard> {
       return 75;
   }
 
+
   @override
   void initState() {
     super.initState();
@@ -78,11 +79,11 @@ class _ZielCardState extends State<ZielCard> {
                       height: 10.0,
                     ),
                     Text(
-                      "Erledigen bis: " + meilenstein.datum,
+                      "Erledigen bis: " + datumDrehen(meilenstein.datum),
                       style: Theme.of(context).textTheme.body2,
                     ),
                     Text(
-                      "Deadline: " + meilenstein.deadline,
+                      "Deadline: " + datumDrehen(meilenstein.deadline),
                       style: Theme.of(context).textTheme.body2,
                     ),
                   ],
@@ -103,7 +104,7 @@ class _ZielCardState extends State<ZielCard> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    EditMeilensteinScreen(meilenstein.titel)));
+                                    EditMeilensteinScreen(meilenstein)));
                       },
                     ),
                     IconButton(
@@ -216,7 +217,7 @@ class _ZielCardState extends State<ZielCard> {
                             style: Theme.of(context).textTheme.body2,
                           ),
                           subtitle: Text(
-                            "Erledigen bis: " + snapshot.data[index].datum,
+                            "Erledigen bis: " + datumDrehen(snapshot.data[index].datum),
                             style: Theme.of(context).textTheme.subtitle,
                           ),
                         ),
@@ -314,4 +315,9 @@ class _ZielCardState extends State<ZielCard> {
       );
   }
 
+}
+
+String datumDrehen(String datum){
+  var getrennt = datum.split(".");
+  return getrennt[2] + "." + getrennt[1] + "." + getrennt[0];
 }

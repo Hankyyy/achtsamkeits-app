@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ape_of_mind/Model/meilenstein.dart';
 
+import 'package:auto_size_text/auto_size_text.dart';
+
 class AddMeilensteinScreen extends StatefulWidget {
   @override
   _AddMeilensteinScreenState createState() => _AddMeilensteinScreenState();
@@ -42,7 +44,7 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AutoSizeText(
           'Meilenstein hinzufügen',
           style: TextStyle(
               fontSize: 30.0, color: Theme.of(context).textTheme.title.color),
@@ -106,11 +108,11 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                             onPressed: () => _selectDate(context),
                             highlightedBorderColor:
                                 Theme.of(context).primaryColor,
-                            child: Text("${selectedDate.year.toString()}" +
+                            child: Text("${selectedDate.day.toString()}" +
                                 "."
                                     "${selectedDate.month.toString()}" +
                                 "."
-                                    "${selectedDate.day.toString()}"),
+                                    "${selectedDate.year.toString()}"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                           ),
@@ -131,11 +133,11 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                             onPressed: () => _deadlineDate(context),
                             highlightedBorderColor:
                                 Theme.of(context).primaryColor,
-                            child: Text("${deadlineDate.year.toString()}" +
+                            child: Text("${deadlineDate.day.toString()}" +
                                 "."
                                     "${deadlineDate.month.toString()}" +
                                 "."
-                                    "${deadlineDate.day.toString()}"),
+                                    "${deadlineDate.year.toString()}"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                           ),

@@ -132,9 +132,6 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
         case 7:
           return "Blaugrau";
           break;
-        case 7:
-          return "Blaugrau";
-          break;
         case 8:
           return "Darktheme";
           break;
@@ -169,15 +166,41 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
           ExpansionTile(
             title: Text(
               "Design",
-              //style: aABlackBold,
+              style: Theme.of(context).textTheme.title,
             ),
             children: <Widget>[
               FutureBuilder<int>(
                 future: theme.getThemeInt(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                      child: CircularProgressIndicator(),
+                    return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 9,
+                      itemBuilder: (context, index) {
+                        return Center(
+                          child: RadioListTile(
+                            title: Text(
+                              getTitle(index),
+                              style: Theme.of(context).textTheme.body2,
+                            ),
+                            value: index,
+                            groupValue: selectedColor,
+                            activeColor: Theme.of(context).primaryColor,
+                            secondary: Container(
+                              height: 30.0,
+                              width: 100.0,
+                              decoration: BoxDecoration(
+                                  color: getColor(themes[index].primaryColor),
+                                  borderRadius: BorderRadius.all(
+                                      const Radius.circular(10.0))),
+                            ),
+                            onChanged: (value) {
+                              handleChange(value);
+                            },
+                          ),
+                        );
+                      },
                     );
                   }
                   if (snapshot.hasError) {
@@ -238,7 +261,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             child: ListTile(
               title: Text(
                 "Benachrichtigungen",
-                //style: aABlackBold,
+                style: Theme.of(context).textTheme.title,
               ),
             ),
           ),
@@ -258,7 +281,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             ),
             title: Text(
               "Tracker",
-              //style: aABlackReg,
+              style: Theme.of(context).textTheme.body2,
             ),
           ),
           SwitchListTile(
@@ -277,7 +300,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             ),
             title: Text(
               "Termine",
-              //style: aABlackReg,
+              style: Theme.of(context).textTheme.body2,
             ),
           ),
           SwitchListTile(
@@ -296,7 +319,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             ),
             title: Text(
               "Lernen",
-              //style: aABlackReg,
+              style: Theme.of(context).textTheme.body2,
             ),
           ),
         ],

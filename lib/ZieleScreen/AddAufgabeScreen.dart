@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ape_of_mind/Model/aufgaben.dart';
 
+import 'package:auto_size_text/auto_size_text.dart';
+
 class AddAufgabeScreen extends StatefulWidget {
   final String meilensteinTitle;
 
@@ -37,7 +39,7 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AutoSizeText(
           'Aufgabe hinzufügen',
           style: TextStyle(
               fontSize: 30.0, color: Theme.of(context).textTheme.title.color),
@@ -74,14 +76,20 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
                             'Meilenstein:',
                             style: Theme.of(context).textTheme.body2,
                           ),
-                          Text(
-                            meilensteinTitle,
-                            style: Theme.of(context).textTheme.title,
+                          Container(
+                            width: MediaQuery.of(context).size.width/2,
+                            child: Text(
+                              meilensteinTitle,
+                              style: Theme.of(context).textTheme.title,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 5,
+                            ),
                           ),
                         ],
                       ),
@@ -115,11 +123,11 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                             onPressed: () => _selectDate(context),
                             highlightedBorderColor:
                                 Theme.of(context).primaryColor,
-                            child: Text("${selectedDate.year.toString()}" +
+                            child: Text("${selectedDate.day.toString()}" +
                                 "."
                                     "${selectedDate.month.toString()}" +
                                 "."
-                                    "${selectedDate.day.toString()}"),
+                                    "${selectedDate.year.toString()}"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                           ),

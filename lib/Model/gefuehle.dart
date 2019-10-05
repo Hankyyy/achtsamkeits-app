@@ -53,7 +53,7 @@ class Gefuehle {
         await db.rawQuery("SELECT * FROM gefuehle "
             "ORDER BY datum DESC "
             "LIMIT 7");
-    return List.generate(
+    List l = List.generate(
       maps.length,
       (i) {
         return Gefuehle(
@@ -62,15 +62,21 @@ class Gefuehle {
         );
       },
     );
+
+    List<Gefuehle> res = List(l.length);
+    for(int i=0; i<l.length; i++){
+      res[i] = l[l.length-i-1];
+    }
+    return res;
   }
 
-  Future<List<Gefuehle>> getGefuehlHeute() async {
+  Future<int> getGefuehlHeute() async {
     final Database db = await DB.instance.initDB();
     String date = DateTime.now().year.toString() + "." +
         DateTime.now().month.toString() + "." +
         DateTime.now().day.toString();
     final List<Map<String, dynamic>> maps = await db.query('gefuehle', where: "datum = ?", whereArgs: [date]);
-    return List.generate(
+    List l = List.generate(
       maps.length,
           (i) {
         return Gefuehle(
@@ -79,6 +85,10 @@ class Gefuehle {
         );
       },
     );
+    if(!(l.length < 1)){
+      return l[0].gWert;
+    }
+    return 7;
   }
 
 }
