@@ -151,7 +151,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
     }
 
     Color getColor(Color color) {
-      if (color==Colors.white)
+      if (color == Colors.white)
         return Colors.grey[850];
       else
         return color;
@@ -163,92 +163,89 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       ),
       child: Column(
         children: <Widget>[
-          ExpansionTile(
+          ListTile(
             title: Text(
               "Design",
               style: Theme.of(context).textTheme.title,
             ),
-            children: <Widget>[
-              FutureBuilder<int>(
-                future: theme.getThemeInt(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done) {
-                    return ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 9,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: RadioListTile(
-                            title: Text(
-                              getTitle(index),
-                              style: Theme.of(context).textTheme.body2,
-                            ),
-                            value: index,
-                            groupValue: selectedColor,
-                            activeColor: Theme.of(context).primaryColor,
-                            secondary: Container(
-                              height: 30.0,
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                  color: getColor(themes[index].primaryColor),
-                                  borderRadius: BorderRadius.all(
-                                      const Radius.circular(10.0))),
-                            ),
-                            onChanged: (value) {
-                              handleChange(value);
-                            },
-                          ),
-                        );
-                      },
-                    );
-                  }
-                  if (snapshot.hasError) {
+          ),
+          FutureBuilder<int>(
+            future: theme.getThemeInt(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 9,
+                  itemBuilder: (context, index) {
                     return Center(
-                      child: Text("Error!"),
-                    );
-                  }
-
-                  selectedColor = snapshot.data;
-
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: themes.length,
-                    itemBuilder: (context, index) {
-                      return Center(
-                        child: RadioListTile(
-                          title: Text(
-                            getTitle(index),
-                            style: Theme.of(context).textTheme.body2,
-                          ),
-                          value: index,
-                          groupValue: selectedColor,
-                          activeColor: Theme.of(context).primaryColor,
-                          secondary: Container(
-                            height: 30.0,
-                            width: 100.0,
-                            decoration: BoxDecoration(
-                                color: getColor(themes[index].primaryColor),
-                                borderRadius: BorderRadius.all(
-                                    const Radius.circular(10.0))),
-                          ),
-                          onChanged: (value) {
-                            handleChange(value);
-                          },
+                      child: RadioListTile(
+                        title: Text(
+                          getTitle(index),
+                          style: Theme.of(context).textTheme.body2,
                         ),
-                      );
-                    },
+                        value: index,
+                        groupValue: selectedColor,
+                        activeColor: Theme.of(context).primaryColor,
+                        secondary: Container(
+                          height: 30.0,
+                          width: 100.0,
+                          decoration: BoxDecoration(
+                              color: getColor(themes[index].primaryColor),
+                              borderRadius: BorderRadius.all(
+                                  const Radius.circular(10.0))),
+                        ),
+                        onChanged: (value) {
+                          handleChange(value);
+                        },
+                      ),
+                    );
+                  },
+                );
+              }
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error!"),
+                );
+              }
+
+              selectedColor = snapshot.data;
+
+              return ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: themes.length,
+                itemBuilder: (context, index) {
+                  return Center(
+                    child: RadioListTile(
+                      title: Text(
+                        getTitle(index),
+                        style: Theme.of(context).textTheme.body2,
+                      ),
+                      value: index,
+                      groupValue: selectedColor,
+                      activeColor: Theme.of(context).primaryColor,
+                      secondary: Container(
+                        height: 30.0,
+                        width: 100.0,
+                        decoration: BoxDecoration(
+                            color: getColor(themes[index].primaryColor),
+                            borderRadius:
+                                BorderRadius.all(const Radius.circular(10.0))),
+                      ),
+                      onChanged: (value) {
+                        handleChange(value);
+                      },
+                    ),
                   );
                 },
-              ),
-            ],
+              );
+            },
           ),
         ],
       ),
     );
   }
-
 
   Widget BenachrichtigungenCard() {
     return Card(
@@ -257,12 +254,10 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       ),
       child: Column(
         children: <Widget>[
-          Container(
-            child: ListTile(
-              title: Text(
-                "Benachrichtigungen",
-                style: Theme.of(context).textTheme.title,
-              ),
+          ListTile(
+            title: Text(
+              "Benachrichtigungen",
+              style: Theme.of(context).textTheme.title,
             ),
           ),
           SwitchListTile(
