@@ -196,6 +196,10 @@ TextTheme textTheme = TextTheme(
     color: Colors.black,
     fontSize: 16.0,
   ),
+  subhead: TextStyle(
+    color: Colors.black,
+    fontSize: 16.0,
+  ),
   button: TextStyle(
     color: Colors.black,
     fontSize: 14.0,
@@ -240,6 +244,10 @@ TextTheme darkTextTheme = TextTheme(
     //fontWeight: FontWeight.bold,
   ),
   body2: TextStyle(
+    color: Colors.white,
+    fontSize: 16.0,
+  ),
+  subhead: TextStyle(
     color: Colors.white,
     fontSize: 16.0,
   ),
@@ -298,7 +306,7 @@ TextTheme darkAccentTextTheme = TextTheme(
 
 
 /*
-
+charts.MaterialPalette.gray.shadeDefault,
 
 
  */

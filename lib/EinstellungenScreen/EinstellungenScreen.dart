@@ -24,7 +24,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Einstellungen',
+          'Design',
           style: TextStyle(
               fontSize: 30.0, color: Theme.of(context).textTheme.title.color),
         ),
@@ -45,10 +45,12 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       body: ListView(
         padding: EdgeInsets.only(right: 12.5, left: 12.5, bottom: 12.5),
         children: <Widget>[
+          /*
           BenachrichtigungenCard(),
           SizedBox(
             height: 10,
           ),
+          */
           designCard(context),
         ],
       ),
@@ -163,12 +165,14 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       ),
       child: Column(
         children: <Widget>[
+          /*
           ListTile(
             title: Text(
               "Design",
               style: Theme.of(context).textTheme.title,
             ),
           ),
+          */
           FutureBuilder<int>(
             future: theme.getThemeInt(),
             builder: (context, snapshot) {
@@ -295,25 +299,6 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
             ),
             title: Text(
               "Termine",
-              style: Theme.of(context).textTheme.body2,
-            ),
-          ),
-          SwitchListTile(
-            value: k,
-            activeColor: Theme.of(context).primaryColor,
-            onChanged: (bool newValue) {
-              setState(
-                () {
-                  k = newValue;
-                },
-              );
-            },
-            secondary: Icon(
-              Icons.bookmark,
-              color: Theme.of(context).primaryColor,
-            ),
-            title: Text(
-              "Lernen",
               style: Theme.of(context).textTheme.body2,
             ),
           ),

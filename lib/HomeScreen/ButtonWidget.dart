@@ -85,7 +85,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(
-                  Icons.settings,
+                  Icons.color_lens,
                   size: _quButtonIconSize,
                   color: Theme.of(context).primaryColor,
                 ),
@@ -93,9 +93,9 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                   padding: EdgeInsets.only(top: 5.0),
                 ),
                 Text(
-                  "Einstellungen",
+                  "Design",
                   style: Theme.of(context).textTheme.button,
-                )
+                ),
               ],
             ),
             onPressed: () {

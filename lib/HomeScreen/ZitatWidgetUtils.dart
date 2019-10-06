@@ -153,5 +153,23 @@ List<Zitat> zitatList() {
           "Ungewohnte Situationen können bedrohlich wirken. Du siehst dich um und es ist unheimlich und anders. Aber ihnen in's Gesicht zu sehen, sich ihnen zu stellen wie ein Stier, daran wachsen wir Menschen.",
       autor: "Rick Sanchez",
     ),
+    Zitat(
+      id: 25,
+      inhalt:
+      "Eine halbe Stunde Meditation ist absolut notwendig, außer, wenn man sehr beschäftigt ist, dann braucht man eine ganze Stunde.",
+      autor: "Franz von Sales",
+    ),
+    Zitat(
+      id: 25,
+      inhalt:
+      "Das Leben ist kein Problem, das es zu lösen, sondern eine Wirklichkeit, die es zu erfahren gilt.",
+      autor: "Buddha",
+    ),
+    Zitat(
+      id: 25,
+      inhalt:
+      "Meditation macht aus uns niemand anderen, sondern den, der wir immer gewesen sind.",
+      autor: "Carl Friedrich von Weizsäcker",
+    ),
   ];
 }
