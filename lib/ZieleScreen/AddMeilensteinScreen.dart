@@ -188,16 +188,57 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
               onPressed: () async {
                 var ms = new Meilenstein_db();
                 ms.titel = msTitel.text;
-                ms.datum = ("${selectedDate.year.toString()}" +
-                    "."
-                        "${selectedDate.month.toString()}" +
-                    "."
-                        "${selectedDate.day.toString()}");
-                ms.deadline = ("${deadlineDate.year.toString()}" +
-                    "."
-                        "${deadlineDate.month.toString()}" +
-                    "."
-                        "${deadlineDate.day.toString()}");
+                if (selectedDate.day < 10 && selectedDate.month < 10) {
+                  ms.datum = ("${selectedDate.year.toString()}" +
+                      ".0"
+                          "${selectedDate.month.toString()}" +
+                      ".0"
+                          "${selectedDate.day.toString()}");
+                } else if(selectedDate.day < 10) {
+                  ms.datum = ("${selectedDate.year.toString()}" +
+                      "."
+                          "${selectedDate.month.toString()}" +
+                      ".0"
+                          "${selectedDate.day.toString()}");
+                } else if(selectedDate.month < 10) {
+                  ms.datum = ("${selectedDate.year.toString()}" +
+                      ".0"
+                          "${selectedDate.month.toString()}" +
+                      "."
+                          "${selectedDate.day.toString()}");
+                } else {
+                  ms.datum = ("${selectedDate.year.toString()}" +
+                      "."
+                          "${selectedDate.month.toString()}" +
+                      "."
+                          "${selectedDate.day.toString()}");
+                }
+
+                if (deadlineDate.day < 10 && deadlineDate.month < 10) {
+                  ms.deadline = ("${deadlineDate.year.toString()}" +
+                      ".0"
+                          "${deadlineDate.month.toString()}" +
+                      ".0"
+                          "${deadlineDate.day.toString()}");
+                } else if(deadlineDate.day < 10) {
+                  ms.deadline = ("${deadlineDate.year.toString()}" +
+                      "."
+                          "${deadlineDate.month.toString()}" +
+                      ".0"
+                          "${deadlineDate.day.toString()}");
+                } else if(deadlineDate.month < 10) {
+                  ms.deadline = ("${deadlineDate.year.toString()}" +
+                      ".0"
+                          "${deadlineDate.month.toString()}" +
+                      "."
+                          "${deadlineDate.day.toString()}");
+                } else {
+                  ms.deadline = ("${deadlineDate.year.toString()}" +
+                      "."
+                          "${deadlineDate.month.toString()}" +
+                      "."
+                          "${deadlineDate.day.toString()}");
+                }
                 ms.notizen = msNotiz.text;
                 await ms.insertMeilenstein(ms);
                 Navigator.pop(context);
