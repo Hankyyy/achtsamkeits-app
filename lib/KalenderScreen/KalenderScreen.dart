@@ -17,11 +17,13 @@ class _KalenderScreenState extends State<KalenderScreen> {
   final CalendarController _calendarController = CalendarController();
   final Aufgaben af = Aufgaben();
 
-  String datum = "${DateTime.now().year.toString()}" +
+  String datum;
+
+  /*= "${DateTime.now().year.toString()}" +
       "."
           "${DateTime.now().month.toString()}" +
       "."
-          "${DateTime.now().day.toString()}";
+          "${DateTime.now().day.toString()}";*/
 
   double _getPadding(int i, int length) {
     if (i != length - 1)
@@ -40,6 +42,32 @@ class _KalenderScreenState extends State<KalenderScreen> {
               "${day.month.toString()}" +
           "."
               "${day.day.toString()}";
+
+      if (day.day < 10 && day.month < 10) {
+        datum = ("${day.year.toString()}" +
+            ".0"
+                "${day.month.toString()}" +
+            ".0"
+                "${day.day.toString()}");
+      } else if (day.day < 10) {
+        datum = ("${day.year.toString()}" +
+            "."
+                "${day.month.toString()}" +
+            ".0"
+                "${day.day.toString()}");
+      } else if (day.month < 10) {
+        datum = ("${day.year.toString()}" +
+            ".0"
+                "${day.month.toString()}" +
+            "."
+                "${day.day.toString()}");
+      } else {
+        datum = ("${day.year.toString()}" +
+            "."
+                "${day.month.toString()}" +
+            "."
+                "${day.day.toString()}");
+      }
     });
   }
 
@@ -52,6 +80,31 @@ class _KalenderScreenState extends State<KalenderScreen> {
   void initState() {
     super.initState();
     initializeDateFormatting('de_DE');
+    if (DateTime.now().day < 10 && DateTime.now().month < 10) {
+      datum = ("${DateTime.now().year.toString()}" +
+          ".0"
+              "${DateTime.now().month.toString()}" +
+          ".0"
+              "${DateTime.now().day.toString()}");
+    } else if (DateTime.now().day < 10) {
+      datum = ("${DateTime.now().year.toString()}" +
+          "."
+              "${DateTime.now().month.toString()}" +
+          ".0"
+              "${DateTime.now().day.toString()}");
+    } else if (DateTime.now().month < 10) {
+      datum = ("${DateTime.now().year.toString()}" +
+          ".0"
+              "${DateTime.now().month.toString()}" +
+          "."
+              "${DateTime.now().day.toString()}");
+    } else {
+      datum = ("${DateTime.now().year.toString()}" +
+          "."
+              "${DateTime.now().month.toString()}" +
+          "."
+              "${DateTime.now().day.toString()}");
+    }
   }
 
   @override
@@ -205,8 +258,8 @@ class _KalenderScreenState extends State<KalenderScreen> {
                               padding: EdgeInsets.only(
                                   left: 12.5,
                                   right: 12.5,
-                                  bottom:
-                                      _getPadding(index, snapshot2.data.length)),
+                                  bottom: _getPadding(
+                                      index, snapshot2.data.length)),
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -219,7 +272,8 @@ class _KalenderScreenState extends State<KalenderScreen> {
                                       () {
                                         changeCheck(
                                             snapshot2.data[index].titel,
-                                            snapshot2.data[index].meilenstein_id,
+                                            snapshot2
+                                                .data[index].meilenstein_id,
                                             snapshot2.data[index].erledigt);
                                       },
                                     );
