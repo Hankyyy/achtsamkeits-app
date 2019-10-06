@@ -23,6 +23,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
       "."
           "${DateTime.now().day.toString()}";
 
+
   double _getPadding(int i, int length) {
     if (i != length - 1)
       return 0;
@@ -52,7 +53,6 @@ class _KalenderScreenState extends State<KalenderScreen> {
   void initState() {
     super.initState();
     initializeDateFormatting('de_DE');
-
   }
 
   @override
@@ -101,10 +101,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
               ),
               child: FutureBuilder(
                 future: af.aufgabenNotDone(),
-                initialData: null,
                 builder: (context, snapshot) {
-                  _events = snapshot.data;
-                  _selectedEvents = _events[_selectedDay] ?? [];
 
                   if (snapshot.data == null) {
                     return Container();
@@ -112,6 +109,10 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   if (snapshot.hasError)
                     return Text('Error: ${snapshot.error}');
                   if (snapshot.hasData) {
+
+                    _events = snapshot.data;
+                    _selectedEvents = _events[_selectedDay] ?? [];
+
                     _events = snapshot.data;
                     return TableCalendar(
                       calendarController: _calendarController,
@@ -193,6 +194,7 @@ class _KalenderScreenState extends State<KalenderScreen> {
               FutureBuilder<List<Aufgaben>>(
                 future: af.aufgabenDatumNotdone(datum),
                 builder: (context, snapshot) {
+
                   if (snapshot.connectionState != ConnectionState.done) {
                     return Container();
                   }
