@@ -41,7 +41,7 @@ class _LernTimerScreenState extends State<LernTimerScreen>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Lerntimer',
+          'Lern Timer',
           style: TextStyle(
               fontSize: 30.0, color: Theme.of(context).textTheme.title.color),
         ),
