@@ -164,19 +164,15 @@ class Aufgaben {
         );
       },
     );
-    print(l);
     Aufgaben a = Aufgaben();
     List<DateTime> daten = List();
-    print(l.length);
     var date;
     for (int i = 0; i < l.length; i++) {
       date = datumTrenner(l[i].datum);
       //print(date);
       daten.add(
           DateTime(int.parse(date[0]), int.parse(date[1]), int.parse(date[2])));
-      print("test1");
     }
-    print("test2");
     List<List<Aufgaben>> afg = List(l.length);
     for (int i = 0; i < l.length; i++) {
       afg[i] = await a.aufgabenDatumNotdone(l[i].datum);

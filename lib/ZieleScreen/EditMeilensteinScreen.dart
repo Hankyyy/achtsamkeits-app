@@ -66,9 +66,13 @@ class _EditMeilensteinScreenState extends State<EditMeilensteinScreen> {
     msNotiz = TextEditingController();
     msNotiz.text = meilenstein.notizen;
     var date;
-
-    //selectedDate = DateTime.parse(meilenstein.datum);
-    //deadlineDate = DateTime.parse(meilenstein.deadline);
+    //DateTime(int.parse(date[0]), int.parse(date[1]), int.parse(date[2]))
+    String datum = meilenstein.datum;
+    String deadline = meilenstein.deadline;
+    var datumG = datum.split(".");
+    var deadlineG = deadline.split(".");
+    selectedDate = DateTime(int.parse(datumG[0]), int.parse(datumG[1]), int.parse(datumG[2]));
+    deadlineDate = DateTime(int.parse(deadlineG[0]), int.parse(deadlineG[1]), int.parse(deadlineG[2]));
     super.initState();
   }
 
