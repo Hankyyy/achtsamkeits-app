@@ -149,7 +149,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     height: 30.0,
                     width: 100.0,
                     decoration: BoxDecoration(
-                        color: Colors.lightGreen[400],
+                        color: Colors.lime,
                         borderRadius:
                         BorderRadius.all(const Radius.circular(10.0))),
                   ),
@@ -183,7 +183,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     height: 30.0,
                     width: 100.0,
                     decoration: BoxDecoration(
-                        color: Colors.orange,
+                        color: Colors.deepOrange[200],
                         borderRadius:
                         BorderRadius.all(const Radius.circular(10.0))),
                   ),
@@ -262,7 +262,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   height: 30.0,
                   width: 100.0,
                   decoration: BoxDecoration(
-                      color: Colors.lightGreen[400],
+                      color: Colors.lime,
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0))),
                 ),
@@ -326,7 +326,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                   height: 30.0,
                   width: 100.0,
                   decoration: BoxDecoration(
-                      color: Colors.orange,
+                      color: Colors.deepOrange[200],
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0))),
                 ),
@@ -413,7 +413,9 @@ class LetztenSieben extends StatelessWidget {
           [
             charts.Series<gefTemp, String>(
               id: 'Gefühle',
-              colorFn: (_, __) => charts.MaterialPalette.gray.shadeDefault,
+              measureUpperBoundFn: (gefTemp sales, int) => 5,
+              measureLowerBoundFn: (gefTemp sales, int) => 5,
+              colorFn: (gefTemp sales, __) => getColor(sales.sales),
               domainFn: (gefTemp sales, _) => sales.date,
               measureFn: (gefTemp sales, _) => sales.sales,
               data: getList(gef),
@@ -429,6 +431,22 @@ class LetztenSieben extends StatelessWidget {
         );
       },
     );
+  }
+
+  charts.Color getColor(int i) {
+
+    switch(i){
+
+      case 0: return charts.MaterialPalette.white; break;
+      case 1: return charts.MaterialPalette.red.shadeDefault; break;
+      case 2: return charts.MaterialPalette.deepOrange.shadeDefault.lighter; break;
+      case 3: return charts.MaterialPalette.yellow.shadeDefault; break;
+      case 4: return charts.MaterialPalette.lime.shadeDefault; break;
+      case 5: return charts.MaterialPalette.green.shadeDefault; break;
+
+    }
+
+
   }
 
   List<gefTemp> getList(var gef) {

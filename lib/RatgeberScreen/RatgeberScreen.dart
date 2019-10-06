@@ -51,7 +51,7 @@ class _RatgeberScreenState extends State<RatgeberScreen> {
                     padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
                     child: Text(
                       ratgeberList()[index].inhalt,
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.subhead,
                     ),
                   ),
                 ],

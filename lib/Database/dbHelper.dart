@@ -69,8 +69,8 @@ class DB {
         ")");
 
     db.execute("CREATE TABLE theme ("
-    "id INTEGER NOT NULL"
-    ")");
+        "id INTEGER NOT NULL"
+        ")");
   }
 
   Future<void> setupEintraegeDefault(Database db) async {
@@ -82,40 +82,40 @@ class DB {
         "VALUES(0) ");
 
     //testwerte
-    /*
+/*
     db.execute("INSERT INTO gefuehle (datum, gWert) "
-        "VALUES('2019.10.1', 1)");
+        "VALUES('2019.10.1', 4)");
     db.execute("INSERT INTO gefuehle (datum, gWert) "
-        "VALUES('2019.10.2', 2)");
+        "VALUES('2019.10.2', 3)");
     db.execute("INSERT INTO gefuehle (datum, gWert) "
         "VALUES('2019.10.3', 3)");
     db.execute("INSERT INTO gefuehle (datum, gWert) "
         "VALUES('2019.10.4', 4)");
     db.execute("INSERT INTO gefuehle (datum, gWert) "
-        "VALUES('2019.10.5', 5)");
+        "VALUES('2019.10.5', 1)");
     db.execute("INSERT INTO gefuehle (datum, gWert) "
         "VALUES('2019.10.6', 3)");
     db.execute("INSERT INTO gefuehle (datum, gWert) "
-        "VALUES('2019.10.7', 5)");
+        "VALUES('2019.10.7', 2)");
     db.execute("INSERT INTO gefuehle (datum, gWert) "
-        "VALUES('2019.10.8', 2)");
+        "VALUES('2019.10.8', 4)");
 
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
-        "VALUES('2019.10.1', 1)");
+        "VALUES('2019.10.1', 5)");
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
-        "VALUES('2019.10.2', 2)");
+        "VALUES('2019.10.2', 5)");
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
         "VALUES('2019.10.3', 3)");
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
-        "VALUES('2019.10.4', 4)");
+        "VALUES('2019.10.4', 1)");
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
-        "VALUES('2019.10.5', 5)");
+        "VALUES('2019.10.5', 2)");
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
-        "VALUES('2019.10.6', 3)");
+        "VALUES('2019.10.6', 1)");
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
-        "VALUES('2019.10.7', 5)");
+        "VALUES('2019.10.7', 4)");
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
-        "VALUES('2019.10.8', 2)");
-        */
+        "VALUES('2019.10.8', 3)");
+*/
   }
 }

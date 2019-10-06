@@ -188,11 +188,11 @@ Color getColor(int wert) {
     case 5:
       return Colors.green;
     case 4:
-      return Colors.lightGreen[400];
+      return Colors.lime;
     case 3:
       return Colors.yellow;
     case 2:
-      return Colors.orange;
+      return Colors.deepOrange[200];
     case 1:
       return Colors.red;
   }
