@@ -419,6 +419,7 @@ class LetztenSieben extends StatelessWidget {
               domainFn: (gefTemp sales, _) => sales.date,
               measureFn: (gefTemp sales, _) => sales.sales,
               data: getList(gef),
+
             )
           ],
           animate: animate,

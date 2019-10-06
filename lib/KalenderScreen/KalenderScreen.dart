@@ -185,51 +185,51 @@ class _KalenderScreenState extends State<KalenderScreen> {
                   children: <Widget>[
                     FutureBuilder<List<Aufgaben>>(
                       future: af.aufgabenDatumNotdone(datum),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState != ConnectionState.done) {
+                      builder: (context, snapshot2) {
+                        if (snapshot2.connectionState != ConnectionState.done) {
                           return Container();
                         }
-                        if (snapshot.hasError) {
+                        if (snapshot2.hasError) {
                           return Center(
                             child: Text("Error!"),
                           );
                         }
-                        List<Aufgaben> aufgaben = snapshot.data ?? [];
+                        List<Aufgaben> aufgaben = snapshot2.data ?? [];
                         Aufgaben af = Aufgaben();
                         return ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: snapshot.data.length,
+                          itemCount: snapshot2.data.length,
                           itemBuilder: (context, index) {
                             return Container(
                               padding: EdgeInsets.only(
                                   left: 12.5,
                                   right: 12.5,
                                   bottom:
-                                      _getPadding(index, snapshot.data.length)),
+                                      _getPadding(index, snapshot2.data.length)),
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: CheckboxListTile(
                                   value:
-                                      isChecked(snapshot.data[index].erledigt),
+                                      isChecked(snapshot2.data[index].erledigt),
                                   onChanged: (bool value) {
                                     setState(
                                       () {
                                         changeCheck(
-                                            snapshot.data[index].titel,
-                                            snapshot.data[index].meilenstein_id,
-                                            snapshot.data[index].erledigt);
+                                            snapshot2.data[index].titel,
+                                            snapshot2.data[index].meilenstein_id,
+                                            snapshot2.data[index].erledigt);
                                       },
                                     );
                                   },
                                   title: Text(
-                                    snapshot.data[index].titel,
+                                    snapshot2.data[index].titel,
                                     style: Theme.of(context).textTheme.body2,
                                   ),
                                   subtitle: Text(
-                                    snapshot.data[index].meilenstein_id,
+                                    snapshot2.data[index].meilenstein_id,
                                     style: Theme.of(context).textTheme.subtitle,
                                   ),
                                 ),
@@ -241,18 +241,18 @@ class _KalenderScreenState extends State<KalenderScreen> {
                     ),
                     FutureBuilder<List<Aufgaben>>(
                       future: af.aufgabenDatumDone(datum),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState != ConnectionState.done) {
+                      builder: (context, snapshot3) {
+                        if (snapshot3.connectionState != ConnectionState.done) {
                           return Container();
                         }
-                        if (snapshot.hasError) {
+                        if (snapshot3.hasError) {
                           return Center(
                             child: Text("Error!"),
                           );
                         }
-                        List<Aufgaben> aufgaben = snapshot.data ?? [];
+                        List<Aufgaben> aufgaben = snapshot3.data ?? [];
                         Aufgaben af = Aufgaben();
-                        return getErledigteAufgaben(snapshot);
+                        return getErledigteAufgaben(snapshot3);
                       },
                     ),
                   ],
