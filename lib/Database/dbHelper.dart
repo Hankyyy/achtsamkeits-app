@@ -82,7 +82,8 @@ class DB {
         "VALUES(0) ");
 
     //testwerte
-    /*db.execute("INSERT INTO gefuehle (datum, gWert) "
+    /*
+    db.execute("INSERT INTO gefuehle (datum, gWert) "
         "VALUES('2019.10.1', 1)");
     db.execute("INSERT INTO gefuehle (datum, gWert) "
         "VALUES('2019.10.2', 2)");
@@ -114,6 +115,7 @@ class DB {
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
         "VALUES('2019.10.7', 5)");
     db.execute("INSERT INTO produktivitaet (datum, pWert) "
-        "VALUES('2019.10.8', 2)");*/
+        "VALUES('2019.10.8', 2)");
+        */
   }
 }

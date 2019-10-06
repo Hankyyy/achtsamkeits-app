@@ -193,10 +193,7 @@ class _LernTimerScreenState extends State<LernTimerScreen>
           child: FractionallySizedBox(
             widthFactor: 1.1,
             child: Card(
-              shape: CircleBorder(
-                side:
-                    BorderSide(color: Theme.of(context).primaryColor, width: 1),
-              ),
+              shape: CircleBorder(),
               child: Padding(
                 padding: EdgeInsets.all(75),
                 child: DurationPicker(
