@@ -83,7 +83,7 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                             style: Theme.of(context).textTheme.body2,
                           ),
                           Container(
-                            width: MediaQuery.of(context).size.width/2,
+                            width: MediaQuery.of(context).size.width / 2,
                             child: Text(
                               meilensteinTitle,
                               style: Theme.of(context).textTheme.title,
@@ -162,11 +162,31 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
               onPressed: () async {
                 var af = new Aufgaben();
                 af.titel = afTitel.text;
-                af.datum = ("${selectedDate.year.toString()}" +
-                    "."
-                        "${selectedDate.month.toString()}" +
-                    "."
-                        "${selectedDate.day.toString()}");
+                if (selectedDate.day < 10 && selectedDate.month < 10) {
+                  af.datum = ("${selectedDate.year.toString()}" +
+                      ".0"
+                          "${selectedDate.month.toString()}" +
+                      ".0"
+                          "${selectedDate.day.toString()}");
+                } else if(selectedDate.day < 10) {
+                  af.datum = ("${selectedDate.year.toString()}" +
+                      "."
+                          "${selectedDate.month.toString()}" +
+                      ".0"
+                          "${selectedDate.day.toString()}");
+                } else if(selectedDate.month < 10) {
+                  af.datum = ("${selectedDate.year.toString()}" +
+                      ".0"
+                          "${selectedDate.month.toString()}" +
+                      "."
+                          "${selectedDate.day.toString()}");
+                } else {
+                  af.datum = ("${selectedDate.year.toString()}" +
+                      "."
+                          "${selectedDate.month.toString()}" +
+                      "."
+                          "${selectedDate.day.toString()}");
+                }
                 af.erledigt = 0;
                 af.meilenstein_id = meilensteinTitle;
                 await af.insertAufgabe(af);

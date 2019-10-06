@@ -45,7 +45,7 @@ class Aufgaben {
   Future<List<Aufgaben>> aufgabenMS(String titel) async {
     final Database db = await DB.instance.initDB();
     List<Map<String, dynamic>> map = await db.query('aufgaben',
-        where: "meilenstein_id =?", whereArgs: [titel], orderBy: "datum ASC");
+        where: "meilenstein_id =?", whereArgs: [titel], orderBy: "titel ASC");
     return List.generate(
       map.length,
       (i) {
@@ -64,7 +64,7 @@ class Aufgaben {
     List<Map<String, dynamic>> map = await db.query('aufgaben',
         where: "meilenstein_id =? AND erledigt = 1",
         whereArgs: [titel],
-        orderBy: "datum ASC");
+        orderBy: "titel ASC");
     return List.generate(
       map.length,
       (i) {
