@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:ape_of_mind/Theme/Theme.dart';
 
@@ -13,7 +14,6 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
   bool i = true;
   bool j = true;
   bool k = true;
-  bool darkModeValue = false;
 
   ApeTheme theme = ApeTheme();
 
@@ -65,7 +65,6 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
         () {
           selectedColor = i;
           themeValue = i;
-          darkModeValue = false;
           switch (i) {
             case 0:
               DynamicTheme.of(context).setThemeData(grun);

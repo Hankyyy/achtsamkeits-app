@@ -76,7 +76,7 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Text(
                             'Meilenstein:',
@@ -89,6 +89,7 @@ class _AddAufgabeScreenState extends State<AddAufgabeScreen> {
                               style: Theme.of(context).textTheme.title,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 5,
+                              textAlign: TextAlign.end,
                             ),
                           ),
                         ],

@@ -42,7 +42,7 @@ class APE extends StatelessWidget {
           data: (brightness) => getTheme(i),
           themedWidgetBuilder: (context, theme) {
             return MaterialApp(
-              locale: Locale("de"),
+              locale: const Locale('de', 'DE'),
               title: 'Ape of Mind',
               theme: theme,
               home: BottomNavBarWidget(),

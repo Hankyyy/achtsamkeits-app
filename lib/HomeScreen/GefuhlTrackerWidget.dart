@@ -134,7 +134,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius:
-                        BorderRadius.all(const Radius.circular(10.0))),
+                            BorderRadius.all(const Radius.circular(10.0))),
                   ),
                   onChanged: null,
                 ),
@@ -151,7 +151,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     decoration: BoxDecoration(
                         color: Colors.lime,
                         borderRadius:
-                        BorderRadius.all(const Radius.circular(10.0))),
+                            BorderRadius.all(const Radius.circular(10.0))),
                   ),
                   onChanged: null,
                 ),
@@ -168,7 +168,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     decoration: BoxDecoration(
                         color: Colors.yellow,
                         borderRadius:
-                        BorderRadius.all(const Radius.circular(10.0))),
+                            BorderRadius.all(const Radius.circular(10.0))),
                   ),
                   onChanged: null,
                 ),
@@ -185,7 +185,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     decoration: BoxDecoration(
                         color: Colors.deepOrange[200],
                         borderRadius:
-                        BorderRadius.all(const Radius.circular(10.0))),
+                            BorderRadius.all(const Radius.circular(10.0))),
                   ),
                   onChanged: null,
                 ),
@@ -202,7 +202,7 @@ class GefuhlFrageWidgetState extends State<GefuhlFrageWidget> {
                     decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius:
-                        BorderRadius.all(const Radius.circular(10.0))),
+                            BorderRadius.all(const Radius.circular(10.0))),
                   ),
                   onChanged: null,
                 ),
@@ -421,32 +421,41 @@ class LetztenSieben extends StatelessWidget {
               data: getList(gef),
             )
           ],
+          animationDuration: Duration(milliseconds: 200),
           animate: animate,
           defaultRenderer: charts.BarRendererConfig(
-              // By default, bar renderer will draw rounded bars with a constant
-              // radius of 100.
-              // To not have any rounded corners, use [NoCornerStrategy]
-              // To change the radius of the bars, use [ConstCornerStrategy]
-              cornerStrategy: const charts.ConstCornerStrategy(20)),
+            // By default, bar renderer will draw rounded bars with a constant
+            // radius of 100.
+            // To not have any rounded corners, use [NoCornerStrategy]
+            // To change the radius of the bars, use [ConstCornerStrategy]
+            cornerStrategy: const charts.ConstCornerStrategy(20),
+          ),
         );
       },
     );
   }
 
   charts.Color getColor(int i) {
-
-    switch(i){
-
-      case 0: return charts.MaterialPalette.white; break;
-      case 1: return charts.MaterialPalette.red.shadeDefault; break;
-      case 2: return charts.MaterialPalette.deepOrange.shadeDefault.lighter; break;
-      case 3: return charts.MaterialPalette.yellow.shadeDefault; break;
-      case 4: return charts.MaterialPalette.lime.shadeDefault; break;
-      case 5: return charts.MaterialPalette.green.shadeDefault; break;
-
+    switch (i) {
+      case 0:
+        return charts.MaterialPalette.white;
+        break;
+      case 1:
+        return charts.MaterialPalette.red.shadeDefault;
+        break;
+      case 2:
+        return charts.MaterialPalette.deepOrange.shadeDefault.lighter;
+        break;
+      case 3:
+        return charts.MaterialPalette.yellow.shadeDefault;
+        break;
+      case 4:
+        return charts.MaterialPalette.lime.shadeDefault;
+        break;
+      case 5:
+        return charts.MaterialPalette.green.shadeDefault;
+        break;
     }
-
-
   }
 
   List<gefTemp> getList(var gef) {
@@ -458,7 +467,7 @@ class LetztenSieben extends StatelessWidget {
     return eintrage;
   }
 
-  String nurTagMonat(String datum){
+  String nurTagMonat(String datum) {
     var getrennt = datum.split(".");
     return getrennt[2] + "." + getrennt[1] + ".";
   }

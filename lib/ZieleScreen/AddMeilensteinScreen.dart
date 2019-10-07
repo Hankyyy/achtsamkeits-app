@@ -16,10 +16,12 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
@@ -28,10 +30,11 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
 
   Future<Null> _deadlineDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: deadlineDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+      context: context,
+      initialDate: deadlineDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
     if (picked != null && picked != deadlineDate)
       setState(
         () {
@@ -194,13 +197,13 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                           "${selectedDate.month.toString()}" +
                       ".0"
                           "${selectedDate.day.toString()}");
-                } else if(selectedDate.day < 10) {
+                } else if (selectedDate.day < 10) {
                   ms.datum = ("${selectedDate.year.toString()}" +
                       "."
                           "${selectedDate.month.toString()}" +
                       ".0"
                           "${selectedDate.day.toString()}");
-                } else if(selectedDate.month < 10) {
+                } else if (selectedDate.month < 10) {
                   ms.datum = ("${selectedDate.year.toString()}" +
                       ".0"
                           "${selectedDate.month.toString()}" +
@@ -220,13 +223,13 @@ class _AddMeilensteinScreenState extends State<AddMeilensteinScreen> {
                           "${deadlineDate.month.toString()}" +
                       ".0"
                           "${deadlineDate.day.toString()}");
-                } else if(deadlineDate.day < 10) {
+                } else if (deadlineDate.day < 10) {
                   ms.deadline = ("${deadlineDate.year.toString()}" +
                       "."
                           "${deadlineDate.month.toString()}" +
                       ".0"
                           "${deadlineDate.day.toString()}");
-                } else if(deadlineDate.month < 10) {
+                } else if (deadlineDate.month < 10) {
                   ms.deadline = ("${deadlineDate.year.toString()}" +
                       ".0"
                           "${deadlineDate.month.toString()}" +

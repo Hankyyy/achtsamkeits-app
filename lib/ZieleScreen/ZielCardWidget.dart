@@ -180,7 +180,6 @@ class _ZielCardState extends State<ZielCard> {
                       progressColor: Theme.of(context).primaryColor,
                       percent: erledigt.length /
                           (unErledigt.length + erledigt.length),
-
                       animateFromLastPercent: true,
                     );
                   },
